@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  
+  <mapper namespace="com.movieChart.mapper.UsersMapper">
+  
+  	<resultMap type="com.movieChart.domain.UsersDTO" id="usersMap">
+	    <id property="username" column="username"/>
+	    <result property="username" column="username"/>
+	    <result property="password" column="password"/>
+	    <result property="regDate" column="regDate"/>
+	    <result property="email" column="email"/>
+	    <result property="nickname" column="nickname"/>
+	    <collection property="authList" resultMap="authMap"/>
+	</resultMap>
+	
+	<resultMap type="com.movieChart.domain.AuthoritiesDTO" id="authMap">
+	    <id property="username" column="username"/>
+	    <result property="username" column="username"/>
+	    <result property="authority" column="authority"/>
+	</resultMap>
+	
+  <insert id="insertUser">
+  insert users (username, password, nickname, userCode, email,regDate)
+  values (#{username}, #{password}, #{nickname}, #{userCode},#{email},#{regDate})
+  </insert>
+  <select id="selectUsername" resultType="String">
+  select username from users where password=#{password}
+  </select>
+  <select id="read" resultMap="usersMap">
+  select u.username, password, nickname, userCode, email, authority,enabled, regDate
+  from users u left join authorities a 
+  on u.username = a.username
+  where u.username=#{username}
+  </select>
+  
+  </mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- security-conxtex.xml (시큐리티 관련설정) -->
+	
+	<!-- 시큐리티에 필요한 객체 생성  -->
+	<bean id="customAccessDenied" 
+	      class="com.movieChart.security.CustomAccessDeniedHandler"/>
+	
+	<bean id="customLoginSuccess"
+	  class="com.movieChart.security.CustomLoginSuccessHandler" />
+	
+<!-- 	<bean id="customNoPassword"  -->
+<!-- 	   class="com.movieChart.security.CustomNoPasswordEncoder"/> -->
+	   
+	<bean id="bcryptPasswordEncoder"
+	     class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />   
+	
+	<bean id="customUserDetailsService"
+		class="com.movieChart.security.CustomUserDetailsService"></bean>
+	   
+	
+	<security:http>
+		
+		<security:intercept-url pattern="/all" access="permitAll" />
+		<security:intercept-url pattern="/member" access="permitAll" />
+		<security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/boards/*" access="hasRole('ROLE_MEMBER')" />
+		<security:intercept-url pattern="/main" access="permitAll" />
+		<security:intercept-url pattern="/join" access="permitAll" />
+		<!-- 시큐리티 로그인페이지(기본값) -->
+<!-- 		<security:form-login/> -->
+		<security:form-login login-page="/login" 
+		       authentication-success-handler-ref="customLoginSuccess" />
+		
+		<!-- 로그아웃  -->
+		<security:logout logout-url="/logout" invalidate-session="true" />
+		
+		
+		<!-- 에러발생(접근권한) 처리 페이지 -->
+		<security:access-denied-handler error-page="/accessErr" />
+		
+		<security:access-denied-handler ref="customAccessDenied"/>
+		
+	</security:http>
+
+    <!-- 인증 매니저 -->
+    <security:authentication-manager>
+	  <security:authentication-provider
+	  		user-service-ref="customUserDetailsService">	  
+<!-- 	  	 <security:jdbc-user-service  -->
+<!-- 	  	    data-source-ref="dataSource" -->
+<!-- 	  	    users-by-username-query="select username,password from users where username=?"  -->
+<!-- 	  	    authorities-by-username-query="select username,role from authorities where username=?"	  	  -->
+<!-- 	  	 />	   -->
+	  
+	  
+	  	 <security:password-encoder ref="bcryptPasswordEncoder"/>	
+	  
+	  </security:authentication-provider>    	
+    	
+    </security:authentication-manager>
+
+</beans>

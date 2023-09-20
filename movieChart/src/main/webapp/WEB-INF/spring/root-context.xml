@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- HikariCP - 설정정보 -->
+	<bean id="hikariConfig"
+			class="com.zaxxer.hikari.HikariConfig">
+			<property name="driverClassName" 
+						value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+			<property name="jdbcUrl"
+						value="jdbc:log4jdbc:mysql://localhost:3306/movie" />
+			<property name="username"
+						value="root" />
+			<property name="password"
+						value="1234" />
+	</bean>
+	<!-- HikariCP - 설정정보 -->
+	
+	<!-- HikariCP - DataSource : 커넥션풀 활용 디비연결정보 객체 -->
+	<bean id="dataSource"
+			class="com.zaxxer.hikari.HikariDataSource"
+			destroy-method="close">
+			<constructor-arg ref="hikariConfig" />
+	
+	</bean>
+<!-- 	SqlSessionFactory : 디비연결,mybatis설정,SQL실행 -->
+	<bean id="sqlSessionFactory"
+	      class="org.mybatis.spring.SqlSessionFactoryBean">
+		  <property name="dataSource" ref="dataSource" />   
+		  <property name="configLocation" 
+		            value="classpath:/mybatis-config.xml" />   
+		  <property name="mapperLocations"
+		  			value="classpath*:mappers/**/*Mapper.xml"></property>
+	
+	</bean>
+	<!-- SqlSessionFactory : 디비연결,mybatis설정,SQL실행 -->
+	
+	<!-- SqlSessionTemplate : 디비연결, mybatis 설정, 매퍼 설정(SQL 실행), 디비 종료 -->
+	<bean id="sqlSession"
+		  class="org.mybatis.spring.SqlSessionTemplate"
+		  destroy-method="clearCache">
+		  <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<!-- SqlSessionTemplate : 디비연결, mybatis 설정, 매퍼 설정(SQL 실행), 디비 종료 -->
+	
+	<!-- HikariCP - DataSource : 커넥션풀 활용 디비연결정보 객체 -->
+	<context:component-scan base-package="com.movieChart.service"/>
+	<context:component-scan base-package="com.movieChart.persistance"/>
+	<context:component-scan base-package="com.movieChart.domain"/>
+	<context:component-scan base-package="com.movieChart.mapper"/>
+	<context:component-scan base-package="com.movieChart.security"/>
+</beans>
