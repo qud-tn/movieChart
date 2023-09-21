@@ -38,39 +38,7 @@
 			dailyBoxOfficeList.append(row);
 		}
 		
-		 $("#boxOfficeForm").submit(function (event) {
-             event.preventDefault(); // 기본 폼 제출 동작을 막음
-
-             // 폼 데이터를 가져와서 객체로 변환
-             var formData = {
-                 targetDt: $("#todayDate").val(),
-                 multiMovieYn: $("select[name='multiMovieYn']").val(),
-                 repNationCd: $("select[name='repNationCd']").val()
-             };
-
-             // AJAX 요청을 보냄
-             $.ajax({
-                 type: "GET",
-                 url: "/getBoxOffice",
-                 data: formData,
-                 dataType: "json",
-                 success: function (data) {
-                     // 서버로부터 받은 데이터를 처리
-                     var resultHtml = "<h2>박스 오피스 조회 결과</h2>";
-                     resultHtml += "<p>날짜: " + data.date + "</p>";
-                     resultHtml += "<p>영화 타입: " + data.multiMovieYn + "</p>";
-                     resultHtml += "<p>국내외 여부: " + data.repNationCd + "</p>";
-                     // 이 부분을 실제 데이터에 맞게 수정
-
-                     $("#boxOfficeResult").html(resultHtml);
-                 },
-                 error: function (xhr, status, error) {
-                     // 오류 처리
-                     console.error(error);
-                     $("#boxOfficeResult").html("<p>오류 발생</p>");
-                 }
-             });
-         });
+		 
 	});
 </script>
 </head>
@@ -104,8 +72,8 @@
 			</thead>
 			<tbody id="dailyBoxOfficeList"></tbody>
 		</table>
-		<form action="/getBoxOffice" method="get">
-			날짜 : <input type="date" name="targetDt" id="todayDate"><br>
+		<form action="" method="get">
+			날짜 : <input type="date" name="targetDt" id="Date"><br>
 			영화 타입 : <select name="multiMovieYn">
 				<option value="">전체</option>
 				<option value="Y">다양성 영화</option>

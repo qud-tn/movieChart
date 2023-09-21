@@ -34,7 +34,7 @@ public class BoxOfficeAPI {
 	        //   - 어제자 다양성 한국영화 10개 조회
 	        HashMap<String, String> paramMap = new HashMap<String, String>();
 	        paramMap.put("key"          , KEY);                        // 발급받은 인증키
-	        paramMap.put("targetDt"     , bdto.getTargetDt().format(DateTimeFormatter.ofPattern("yyyyMMdd")));  // 조회하고자 하는 날짜
+	        paramMap.put("targetDt"     , bdto.getTargetDt().replace("-",""));  // 조회하고자 하는 날짜
 	        paramMap.put("itemPerPage"  , bdto.getItemPerPage());                            // 결과 ROW 의 개수( 최대 10개 )
 	        paramMap.put("multiMovieYn" , bdto.getMultiMovieYn());                             // Y:다양성 영화, N:상업영화, Default:전체
 	        paramMap.put("repNationCd"  , bdto.getRepNationCd());                             // K:한국영화, F:외국영화, Default:전체

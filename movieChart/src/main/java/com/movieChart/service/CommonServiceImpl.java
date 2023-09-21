@@ -19,7 +19,7 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	public JSONObject dailyBoxOffice(BoxOfficeDTO bdto) throws Exception {
 		bdto.setItemPerPage("10");
-		bdto.setTargetDt(LocalDate.now().minusDays(1));
+		bdto.setTargetDt(LocalDate.now().minusDays(1).toString());
 		if(bdto.getMultiMovieYn()==null) {
 			bdto.setMultiMovieYn("");
 		}
