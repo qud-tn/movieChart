@@ -5,25 +5,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.movieChart.controller.CommonController;
 import com.movieChart.domain.BoxOfficeDTO;
 
-
-
-public class BoxOfficeAPI {
+public class MovieKmrbAPI {
 	private static final Logger logger = LoggerFactory.getLogger(BoxOfficeAPI.class);
 	MakeParameter parameterMaker=new MakeParameter();
-	private final String KEY="e6ca6989be100694be874a2031dc55ee";
-	private final String REQUEST_URL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json";
+	private final String KEY="87d7a4f3-a8f3-42e6-9685-991a0fde1e65";
+	private final String REQUEST_URL = "http://api.kcisa.kr/openapi/service/rest/meta14/getKMPC031801";
 	
 	
 	 public JSONObject requestAPI(BoxOfficeDTO bdto ) {
@@ -33,7 +28,7 @@ public class BoxOfficeAPI {
 	        //   - 요청(Request) 인터페이스 Map
 	        //   - 어제자 다양성 한국영화 10개 조회
 	        HashMap<String, String> paramMap = new HashMap<String, String>();
-	        paramMap.put("key"          , KEY);                        // 발급받은 인증키
+	        paramMap.put("serviceKey"          , KEY);                        // 발급받은 인증키
 	        paramMap.put("targetDt"     , bdto.getTargetDt().format(DateTimeFormatter.ofPattern("yyyyMMdd")));  // 조회하고자 하는 날짜
 	        paramMap.put("itemPerPage"  , bdto.getItemPerPage());                            // 결과 ROW 의 개수( 최대 10개 )
 	        paramMap.put("multiMovieYn" , bdto.getMultiMovieYn());                             // Y:다양성 영화, N:상업영화, Default:전체

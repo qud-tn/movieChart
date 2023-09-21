@@ -1,5 +1,7 @@
 package com.movieChart.controller;
 
+import java.time.LocalDate;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -38,8 +40,9 @@ public class CommonController {
 	// http://localhost:8088/main
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public void mainGET(Model model,BoxOfficeDTO bdto) throws Exception {
+		if(bdto.getTargetDt()==LocalDate.now().minusDays(1)) {
 		model.addAttribute("dailyBoxOffice",cService.dailyBoxOffice(bdto));
-		
+		}
 	}
 	
 
