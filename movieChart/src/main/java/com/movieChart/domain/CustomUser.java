@@ -14,9 +14,9 @@ public class CustomUser extends User {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private UsersDTO udto;
+	private UserDTO udto;
 	
-	public UsersDTO getUdto() {
+	public UserDTO getUdto() {
 		return udto;
 	}
 
@@ -24,7 +24,7 @@ public class CustomUser extends User {
 		super(username, password, authorities);
 	}
 	
-	public CustomUser(UsersDTO dto) {
+	public CustomUser(UserDTO dto) {
 		super(dto.getUsername(),dto.getPassword(),dto.getAuthList().stream()
 				.map(auth -> new SimpleGrantedAuthority(auth.getAuthority()))
 					.collect(Collectors.toList()));

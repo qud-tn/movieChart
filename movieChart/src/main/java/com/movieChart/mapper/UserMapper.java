@@ -2,9 +2,9 @@ package com.movieChart.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.movieChart.domain.UsersDTO;
+import com.movieChart.domain.UserDTO;
 
 @Mapper
-public interface UsersMapper {
-	public UsersDTO read(String username);
+public interface UserMapper {
+	public UserDTO read(String username);
 }

@@ -2,14 +2,14 @@ package com.movieChart.domain;
 
 import java.util.List;
 
-public class UsersDTO {
+public class UserDTO {
 	private String username;
 	private String password;
 	private boolean enabled;
 	private String nickname;
-	private int userCode;
+	private int user_id;
 	private String email;
-	private String regDate;
+	private String reg_date;
 	private List<AuthoritiesDTO> authList;
 	
 	public List<AuthoritiesDTO> getAuthList() {
@@ -42,11 +42,11 @@ public class UsersDTO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public int getUserCode() {
-		return userCode;
+	public int getUser_id() {
+		return user_id;
 	}
-	public void setUserCode(int userCode) {
-		this.userCode = userCode;
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 	public String getEmail() {
 		return email;
@@ -54,16 +54,16 @@ public class UsersDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getRegDate() {
-		return regDate;
+	public String getReg_date() {
+		return reg_date;
 	}
-	public void setRegDate(String regDate) {
-		this.regDate = regDate;
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
 	}
 	@Override
 	public String toString() {
 		return "UsersDTO [username=" + username + ", password=" + password + ", enabled=" + enabled + ", nickname="
-				+ nickname + ", userCode=" + userCode + ", email=" + email + ", regDate=" + regDate + "]";
+				+ nickname + ", user_id=" + user_id + ", email=" + email + ", reg_date=" + reg_date + "]";
 	}
 	
 	

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.movieChart.domain.AuthoritiesDTO;
-import com.movieChart.domain.UsersDTO;
+import com.movieChart.domain.UserDTO;
 import com.movieChart.service.UserService;
 
 @Controller
@@ -38,7 +38,7 @@ public class UserController {
 		
 	}
 	@RequestMapping(value="/join", method = RequestMethod.POST)
-	public String joinMemberPOST(UsersDTO userdto,AuthoritiesDTO authdto)throws Exception {
+	public String joinMemberPOST(UserDTO userdto,AuthoritiesDTO authdto)throws Exception {
 		uService.joinMember(userdto, authdto);
 		
 		return "redirect:/main";

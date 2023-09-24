@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.movieChart.domain.UsersDTO;
+import com.movieChart.domain.UserDTO;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -16,12 +16,12 @@ public class UserDAOImpl implements UserDAO {
 	final String NAMESPACE = "com.movieChart.mapper.UsersMapper";
 	
 	@Override
-	public void insertUser(UsersDTO userdto) {
+	public void insertUser(UserDTO userdto) {
 		sqlsession.insert(NAMESPACE+".insertUser",userdto);
 	}
 
 	@Override
-	public String selectUsername(UsersDTO userdto) {
+	public String selectUsername(UserDTO userdto) {
 		return sqlsession.selectOne(NAMESPACE+".selectUsername",userdto);
 	}
 

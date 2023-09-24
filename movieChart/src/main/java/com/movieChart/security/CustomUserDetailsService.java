@@ -10,26 +10,26 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.movieChart.domain.CustomUser;
-import com.movieChart.domain.UsersDTO;
-import com.movieChart.mapper.UsersMapper;
+import com.movieChart.domain.UserDTO;
+import com.movieChart.mapper.UserMapper;
 
 
 @MapperScan("com.movieChart.mapper")
 public class CustomUserDetailsService implements UserDetailsService {
 	private static final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
 	@Inject
-	private UsersMapper usersmapper;
+	private UserMapper usermapper;
 	
 	
 	
-	public void setUsersmapper(UsersMapper usersmapper) {
-		this.usersmapper = usersmapper;
+	public void setUsersmapper(UserMapper usermapper) {
+		this.usermapper = usermapper;
 	}
 
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UsersDTO dto= usersmapper.read(username);
+		UserDTO dto= usermapper.read(username);
 		return dto== null? null:new CustomUser(dto);
 	}
 

@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.movieChart.domain.AuthoritiesDTO;
-import com.movieChart.domain.UsersDTO;
+import com.movieChart.domain.UserDTO;
 import com.movieChart.persistance.AuthoritiesDAO;
 import com.movieChart.persistance.UserDAO;
 
@@ -32,25 +32,25 @@ public class UserServiceImpl implements UserService{
 
 	
 	@Override
-	public void joinMember(UsersDTO userdto, AuthoritiesDTO authDTO) {
+	public void joinMember(UserDTO userdto, AuthoritiesDTO authDTO) {
 		Random random = new Random();
 		
 		int min = 10000000;  
         int max = 99999999;  
         int randomNumber = random.nextInt(max - min + 1) + min;
         
-        userdto.setUserCode(randomNumber);
+        userdto.setUser_id(randomNumber);
 		
         userdto.setPassword(passwordEncoder.encode(userdto.getPassword()));
         
-        userdto.setRegDate(LocalDate.now().toString());
+        userdto.setReg_date(LocalDate.now().toString());
         
         uDao.insertUser(userdto);
 		aDao.insertAuth(authDTO);
 	}
 
 	@Override
-	public String login(UsersDTO userdto) {
+	public String login(UserDTO userdto) {
 		String id=uDao.selectUsername(userdto);
 		
 		return id;

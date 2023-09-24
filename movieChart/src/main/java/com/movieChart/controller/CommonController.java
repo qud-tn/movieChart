@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.movieChart.domain.AuthoritiesDTO;
 import com.movieChart.domain.BoxOfficeDTO;
-import com.movieChart.domain.UsersDTO;
+import com.movieChart.domain.UserDTO;
 import com.movieChart.service.CommonService;
 import com.movieChart.service.UserService;
 

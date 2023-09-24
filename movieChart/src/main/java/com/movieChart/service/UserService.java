@@ -3,10 +3,10 @@ package com.movieChart.service;
 import javax.servlet.http.HttpSession;
 
 import com.movieChart.domain.AuthoritiesDTO;
-import com.movieChart.domain.UsersDTO;
+import com.movieChart.domain.UserDTO;
 
 public interface UserService {
-	public void joinMember(UsersDTO userdto,AuthoritiesDTO authDTO);
+	public void joinMember(UserDTO userdto,AuthoritiesDTO authDTO);
 
-	public String login(UsersDTO userdto);
+	public String login(UserDTO userdto);
 }

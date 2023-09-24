@@ -4,13 +4,13 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
   
-  <mapper namespace="com.movieChart.mapper.UsersMapper">
+  <mapper namespace="com.movieChart.mapper.UserMapper">
   
-  	<resultMap type="com.movieChart.domain.UsersDTO" id="usersMap">
+  	<resultMap type="com.movieChart.domain.UserDTO" id="userMap">
 	    <id property="username" column="username"/>
 	    <result property="username" column="username"/>
 	    <result property="password" column="password"/>
-	    <result property="regDate" column="regDate"/>
+	    <result property="reg_date" column="reg_date"/>
 	    <result property="email" column="email"/>
 	    <result property="nickname" column="nickname"/>
 	    <collection property="authList" resultMap="authMap"/>
@@ -23,14 +23,14 @@
 	</resultMap>
 	
   <insert id="insertUser">
-  insert users (username, password, nickname, userCode, email,regDate)
-  values (#{username}, #{password}, #{nickname}, #{userCode},#{email},#{regDate})
+  insert users (username, password, nickname, user_id, email,reg_date)
+  values (#{username}, #{password}, #{nickname}, #{user_id},#{email},#{reg_date})
   </insert>
   <select id="selectUsername" resultType="String">
   select username from users where password=#{password}
   </select>
-  <select id="read" resultMap="usersMap">
-  select u.username, password, nickname, userCode, email, authority,enabled, regDate
+  <select id="read" resultMap="userMap">
+  select u.username, password, nickname, user_id, email, authority,enabled, reg_date
   from users u left join authorities a 
   on u.username = a.username
   where u.username=#{username}

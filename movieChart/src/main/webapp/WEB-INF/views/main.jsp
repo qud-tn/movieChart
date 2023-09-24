@@ -5,8 +5,7 @@
 	prefix="sec"%>
 <html>
 <head>
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
 <title>무비차트</title>
 <script>
 	$(function() {
@@ -54,9 +53,9 @@
 			<br>
 		</sec:authorize>
 		<sec:authorize access="isAnonymous()">
-			<input type="button" value="회원가입" onclick="location.href='/join'">
+			<input type="button" value="회원가입" onclick="location.href='/member/join'">
 			<br>
-			<input type="button" value="로그인" onclick="location.href='/login'">
+			<input type="button" value="로그인" onclick="location.href='/member/login'">
 			<br>
 		</sec:authorize>
 	</div>
@@ -87,5 +86,6 @@
 			<input type="submit" value="상세 검색">
 		</form>
 	</div>
+	<a href="board/list">자유게시판</a>
 </body>
 </html>
