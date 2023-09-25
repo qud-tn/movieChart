@@ -1,5 +1,7 @@
 package com.movieChart.persistance;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,5 +19,15 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	public void insertBoard(BoardDTO bdto) throws Exception {
 		sqlsession.insert(NAMESPACE+".insertBoard", bdto);
+	}
+
+	@Override
+	public List<BoardDTO> selectBoardList() throws Exception {
+		return sqlsession.selectList(NAMESPACE+".selectBoardList");
+	}
+
+	@Override
+	public BoardDTO selectBoard(Integer board_id) {
+		return sqlsession.selectOne(NAMESPACE+".selectBoard",board_id);
 	}
 }

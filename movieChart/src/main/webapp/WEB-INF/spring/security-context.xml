@@ -26,13 +26,12 @@
 	
 	<security:http>
 		
-		<security:intercept-url pattern="/all" access="permitAll" />
-		<security:intercept-url pattern="/member/*" access="permitAll" />
-		<security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/member/join" access="permitAll" />
+		<security:intercept-url pattern="/member/write" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/board/list" access="permitAll" />
 		<security:intercept-url pattern="/board/write" access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/main" access="permitAll" />
-		<security:intercept-url pattern="/join" access="permitAll" />
 		<!-- 시큐리티 로그인페이지(기본값) -->
 <!-- 		<security:form-login/> -->
 		<security:form-login login-page="/member/login" 

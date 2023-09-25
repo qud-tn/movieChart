@@ -8,6 +8,22 @@ public class BoardDTO {
 	private String username;
 	private String nickname;
 	private int board_no;
+	private String write_date;
+	private int view_cnt;
+	
+	
+	public int getView_cnt() {
+		return view_cnt;
+	}
+	public void setView_cnt(int view_cnt) {
+		this.view_cnt = view_cnt;
+	}
+	public String getWrite_date() {
+		return write_date;
+	}
+	public void setWrite_date(String write_date) {
+		this.write_date = write_date;
+	}
 	public int getBoard_id() {
 		return board_id;
 	}

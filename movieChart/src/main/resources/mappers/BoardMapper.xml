@@ -9,4 +9,16 @@
   	insert board (title,content,category,username,board_no) 
   	values(#{title},#{content},#{category},#{username},#{board_no})
   	</insert>
+  	<select id="selectBoardList" resultType="com.movieChart.domain.BoardDTO">
+  	select title, category, nickname, board_no, board_id ,write_date
+  	from board b join users u
+  	on u.username=b.username
+  	where deleted_dt is null;
+  	</select>
+  	<select id="selectBoard" resultType="com.movieChart.domain.BoardDTO">
+  	select title, content, category, nickname, board_no, board_id,write_date
+  	from board b join users u
+  	on u.username=b.username
+  	where deleted_dt is null and board_id=#{board_id};
+  	</select>
   </mapper>

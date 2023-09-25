@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
@@ -7,14 +7,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글쓰기</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<h1>글쓰기</h1>
-	<form action="" method="post">
-		<table>
+	<table>
 			<tr>
-				<td><input type="text" name="title" placeholder="제목을 입력하세요"><br>
+				<td>
 				</td>
 				<td><select name="category">
 						<sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -31,9 +29,5 @@
 				</td>
 			</tr>
 		</table>
-		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-		<input type="hidden" name="username" value='<sec:authentication property="principal.udto.username" />'>
-		<input type="submit" value="글쓰기">
-	</form>
 </body>
 </html>

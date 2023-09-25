@@ -13,9 +13,29 @@
 <body>
 	<h1>자유게시판</h1>
 	<table border="1">
+		<thead>
 		<tr>
-			<td></td>
+			<td>#</td>
+			<td>카테고리</td>
+			<td>제목</td>
+			<td>글쓴이</td>
+			<td>날짜</td>
+			<td>조회수</td>
 		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<c:forEach var="boardlist" items="${boardList}">
+			<td>${boardlist.board_id }</td>
+			<td>${boardlist.category }</td>
+			<td><a href="${boardlist.board_id}">${boardlist.title }</a></td>
+			<td>${boardlist.nickname }</td>
+			<td>${boardlist.write_date }</td>
+			<td>${boardlist.write_date }</td>
+			</c:forEach>
+		</tr>
+		
+		</tbody>
 	</table>
 	<sec:authorize access="isAuthenticated()">
 		<a href="/board/write">글쓰기</a>
