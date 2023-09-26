@@ -9,5 +9,7 @@ public interface BoardDAO {
 
 	public List<BoardDTO> selectBoardList() throws Exception;
 
-	public BoardDTO selectBoard(Integer board_id);
+	public BoardDTO selectBoard(Integer board_id) throws Exception;
+
+	public List<BoardDTO> selectBoardAround(Integer board_id) throws Exception;
 }

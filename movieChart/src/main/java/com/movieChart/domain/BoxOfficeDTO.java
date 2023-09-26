@@ -1,6 +1,5 @@
 package com.movieChart.domain;
 
-import java.time.LocalDate;
 
 public class BoxOfficeDTO {
 	private String targetDt;       // 조회하고자 하는 날짜

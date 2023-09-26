@@ -27,7 +27,11 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public BoardDTO selectBoard(Integer board_id) {
+	public BoardDTO selectBoard(Integer board_id) throws Exception {
 		return sqlsession.selectOne(NAMESPACE+".selectBoard",board_id);
+	}
+	@Override
+	public List<BoardDTO> selectBoardAround(Integer board_id) throws Exception {
+		return sqlsession.selectList(NAMESPACE+".selectBoardAround",board_id);
 	}
 }

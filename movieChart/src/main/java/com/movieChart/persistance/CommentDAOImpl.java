@@ -15,7 +15,7 @@ public class CommentDAOImpl implements CommentDAO{
 	private final String NAMESPACE="com.movieChart.mapper.CommentMapper";
 	
 	@Override
-	public void insertComment(CommentDTO cdto) {
+	public void insertComment(CommentDTO cdto) throws Exception {
 		
 	}
 	

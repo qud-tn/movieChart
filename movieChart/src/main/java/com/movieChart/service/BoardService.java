@@ -9,5 +9,7 @@ public interface BoardService {
 
 	public List<BoardDTO> getBoardList() throws Exception;
 
-	public BoardDTO readBoardContent(Integer board_id);
+	public BoardDTO readBoardContent(Integer board_id)throws Exception;
+
+	public List<BoardDTO> readBoardAround(Integer board_id) throws Exception;
 }

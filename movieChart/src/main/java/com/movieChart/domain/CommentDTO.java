@@ -3,9 +3,9 @@ package com.movieChart.domain;
 public class CommentDTO {
 	private String nickname;
 	private String comment;
-	private int score;
+	private Integer score;
 	private String datetime;
-	private int movieCode;
+	private Integer movieCode;
 	public String getNickname() {
 		return nickname;
 	}
@@ -18,10 +18,10 @@ public class CommentDTO {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	public int getScore() {
+	public Integer getScore() {
 		return score;
 	}
-	public void setScore(int score) {
+	public void setScore(Integer score) {
 		this.score = score;
 	}
 	public String getDatetime() {
@@ -30,10 +30,10 @@ public class CommentDTO {
 	public void setDatetime(String datetime) {
 		this.datetime = datetime;
 	}
-	public int getMovieCode() {
+	public Integer getMovieCode() {
 		return movieCode;
 	}
-	public void setMovieCode(int movieCode) {
+	public void setMovieCode(Integer movieCode) {
 		this.movieCode = movieCode;
 	}
 	@Override

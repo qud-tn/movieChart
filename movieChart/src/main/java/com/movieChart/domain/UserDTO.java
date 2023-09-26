@@ -7,7 +7,7 @@ public class UserDTO {
 	private String password;
 	private boolean enabled;
 	private String nickname;
-	private int user_id;
+	private Integer user_id;
 	private String email;
 	private String reg_date;
 	private List<AuthoritiesDTO> authList;
@@ -42,10 +42,10 @@ public class UserDTO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public int getUser_id() {
+	public Integer getUser_id() {
 		return user_id;
 	}
-	public void setUser_id(int user_id) {
+	public void setUser_id(Integer user_id) {
 		this.user_id = user_id;
 	}
 	public String getEmail() {

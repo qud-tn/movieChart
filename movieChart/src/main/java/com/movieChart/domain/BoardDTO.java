@@ -1,21 +1,21 @@
 package com.movieChart.domain;
 
 public class BoardDTO {
-	private int board_id;
+	private Integer board_id;
 	private String title;
 	private String content;
 	private String category;
 	private String username;
 	private String nickname;
-	private int board_no;
+	private Integer board_no;
 	private String write_date;
-	private int view_cnt;
+	private Integer view_cnt;
 	
 	
-	public int getView_cnt() {
+	public Integer getView_cnt() {
 		return view_cnt;
 	}
-	public void setView_cnt(int view_cnt) {
+	public void setView_cnt(Integer view_cnt) {
 		this.view_cnt = view_cnt;
 	}
 	public String getWrite_date() {
@@ -24,10 +24,10 @@ public class BoardDTO {
 	public void setWrite_date(String write_date) {
 		this.write_date = write_date;
 	}
-	public int getBoard_id() {
+	public Integer getBoard_id() {
 		return board_id;
 	}
-	public void setBoard_id(int board_id) {
+	public void setBoard_id(Integer board_id) {
 		this.board_id = board_id;
 	}
 	public String getTitle() {
@@ -60,10 +60,10 @@ public class BoardDTO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public int getBoard_no() {
+	public Integer getBoard_no() {
 		return board_no;
 	}
-	public void setBoard_no(int board_no) {
+	public void setBoard_no(Integer board_no) {
 		this.board_no = board_no;
 	}
 	@Override

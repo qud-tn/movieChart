@@ -21,18 +21,22 @@ public class BoardController {
 	public void boardListGET(Model model ) throws Exception {
 		model.addAttribute("boardList" ,bService.getBoardList());
 	}
+	
 	@RequestMapping(value="/write",method = RequestMethod.GET)
 	public void writeGET() throws Exception {
 		
 	}
+	
 	@RequestMapping(value="/write",method = RequestMethod.POST)
 	public String writePOST(BoardDTO bdto) throws Exception {
 		bService.writeBoard(bdto);
 		return "redirect:/board/list";
 	}
+	
 	@RequestMapping(value="/{board_id}",method=RequestMethod.GET)
-	public String readBoardGET(Model model, @PathVariable("board_id") Integer board_id, BoardDTO bdto) {
+	public String readBoardGET(Model model, @PathVariable("board_id") Integer board_id, BoardDTO bdto) throws Exception {
 		model.addAttribute("boardContent",bService.readBoardContent(board_id));
-		return "/board/detail";
+		model.addAttribute("boardAround",bService.readBoardAround(board_id));
+		return "/board/view";
 	}
 }

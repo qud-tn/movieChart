@@ -25,8 +25,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardDTO readBoardContent(Integer board_id) {
+	public BoardDTO readBoardContent(Integer board_id) throws Exception {
 		return bdao.selectBoard(board_id);
+	}
+	@Override
+	public List<BoardDTO> readBoardAround(Integer board_id) throws Exception {
+		return bdao.selectBoardAround(board_id);
 	}
 
 }

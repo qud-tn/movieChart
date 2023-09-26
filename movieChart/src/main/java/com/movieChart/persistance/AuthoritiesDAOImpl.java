@@ -16,7 +16,7 @@ public class AuthoritiesDAOImpl implements AuthoritiesDAO {
 	private final String NAMESPACE = "com.movieChart.mapper.AuthoritiesMapper";
 	
 	@Override
-	public void insertAuth(AuthoritiesDTO authDTO) {
+	public void insertAuth(AuthoritiesDTO authDTO) throws Exception {
 		sqlsession.insert(NAMESPACE+".insertAuth",authDTO);
 		
 	}

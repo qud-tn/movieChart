@@ -4,6 +4,6 @@ import com.movieChart.domain.CommentDTO;
 
 public interface CommentDAO {
 
-	public void insertComment(CommentDTO cdto);
+	public void insertComment(CommentDTO cdto) throws Exception;
 
 }

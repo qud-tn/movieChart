@@ -15,7 +15,7 @@ public class CommentServiceImlp implements CommentService {
 	private CommentDAO cdao;
 
 	@Override
-	public void postComment(CommentDTO cdto) {
+	public void postComment(CommentDTO cdto) throws Exception {
 		cdao.insertComment(cdto);
 		
 	}
