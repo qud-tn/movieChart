@@ -23,9 +23,10 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public String selectUsername(UserDTO userdto) throws Exception {
-		return sqlsession.selectOne(NAMESPACE+".selectUsername",userdto);
+	public String selectUsername(UserDTO udto) throws Exception {
+		return sqlsession.selectOne(NAMESPACE+".selectUsername",udto);
 	}
+	
 	@Override
 	public List<Integer> selectUserIdAll() throws Exception {
 		return sqlsession.selectList(NAMESPACE+".selectUserIdAll");

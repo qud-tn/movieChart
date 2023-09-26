@@ -35,12 +35,6 @@ public class UserServiceImpl implements UserService {
 		aDao.insertAuth(authdto);
 	}
 
-	@Override
-	public String login(UserDTO userdto) throws Exception {
-		String id = uDao.selectUsername(userdto);
-		return id;
-	}
-
 	public Integer buildUserId() {
 		Random random = new Random();
 
@@ -61,5 +55,12 @@ public class UserServiceImpl implements UserService {
 			return userId;
 		}
 		
+	}
+
+	@Override
+	public boolean checkUsername(String username) throws Exception {
+		UserDTO udto = new UserDTO();
+		udto.setUsername(username);
+		return uDao.selectUsername(udto) != null;
 	}
 }

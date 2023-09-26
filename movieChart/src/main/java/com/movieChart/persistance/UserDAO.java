@@ -8,8 +8,8 @@ public interface UserDAO {
 
 	public void insertUser(UserDTO userdto)throws Exception;
 
-	public String selectUsername(UserDTO userdto) throws Exception;
-
 	public List<Integer> selectUserIdAll() throws Exception;
+
+	public String selectUsername(UserDTO udto) throws Exception;
 
 }

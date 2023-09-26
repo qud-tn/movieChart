@@ -9,7 +9,7 @@
 <title>회원가입</title>
 <script type="text/javascript">
 	$(function() {
-		function passwordChk(){
+		function checkPassword(){
 			 var password = document.getElementById("password").value;
 		     var passwordChk = document.getElementById("passwordChk").value;
 		     var errorLabel = document.getElementById("passwordError");
@@ -23,7 +23,28 @@
 		     }
 		}
 		
-		$("#passwordChk").on("input", passwordChk);
+		$("#passwordChk").on("input", checkPassword);
+		
+		function checkUsername() {
+		    var username = document.getElementById("username").value;
+		    $("#CheckUsernameResult").empty();
+		    $.ajax({
+		        url: "/member/" + username,
+		        method: "GET",
+		        success: function (data) {
+		            if (data) {
+		                $("#CheckUsernameResult").html("이미 사용 중인 아이디 입니다");
+		            } else {
+		                $("#CheckUsernameResult").html("사용하실 수 있는 아이디 입니다");
+		            }
+		        },
+		        error: function (xhr, status, error) {
+		            console.error("AJAX 오류: " + status, error);
+		        }
+		    });
+		}
+		
+		$("#usernameChk").on("click", checkUsername);
 	});
 </script>
 </head>
@@ -33,7 +54,9 @@
 		<table>
 			<tr>
 				<td>아이디:</td>
-				<td><input type="text" name="username"></td>
+				<td><input type="text" name="username" id="username">
+				<input type="button" id="usernameChk" value="중복 조회"> </td>
+				<td><span id="CheckUsernameResult" style="color: red;"></span></td>
 			</tr>
 			<tr>
 				<td>비밀번호:</td>
