@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
 		aDao.insertAuth(authdto);
 	}
 
-	public Integer buildUserId() {
+	private Integer buildUserId() {
 		Random random = new Random();
 
 		int min = 10000000;
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
 		return randomNumber;
 	}
 
-	public Integer checkUserId(Integer userId) throws Exception {
+	private Integer checkUserId(Integer userId) throws Exception {
 		List<Integer> userIdList = uDao.selectUserIdAll();
 		
 		if (userIdList.contains(userId)) {
@@ -58,9 +58,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean checkUsername(String username) throws Exception {
-		UserDTO udto = new UserDTO();
-		udto.setUsername(username);
+	public boolean checkUsername(UserDTO udto) throws Exception {
 		return uDao.selectUsername(udto) != null;
+	}
+
+	@Override
+	public boolean checkNickname(String nickname) throws Exception {
+		return uDao.selectNickname(nickname) != null;
 	}
 }

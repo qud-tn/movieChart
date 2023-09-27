@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOcTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -9,71 +9,119 @@
 <title>회원가입</title>
 <script type="text/javascript">
 	$(function() {
-		function checkPassword(){
-			 var password = document.getElementById("password").value;
-		     var passwordChk = document.getElementById("passwordChk").value;
-		     var errorLabel = document.getElementById("passwordError");
-		
-		     if (password === passwordChk) {
-		         // 비밀번호와 비밀번호 확인이 일치할 때
-		         errorLabel.innerHTML = "";
-		     } else {
-		         // 비밀번호와 비밀번호 확인이 일치하지 않을 때
-		         errorLabel.innerHTML = "비밀번호가 일치하지 않습니다.";
-		     }
+		var password = $("#password").val();
+		function checkPasswordLength() {
+			if (password.length < 8) {
+				$("#checkPasswordLength").html("비밀번호는 8자리 이상이여야 합니다");
+			} else {
+				$("#checkPasswordLength").html("");
+			}
 		}
-		
-		$("#passwordChk").on("input", checkPassword);
-		
+
+		$("#password").on("input", checkPasswordLength);
+
+		function checkPassword() {
+			var passwordchk = $("#passwordchk").val();
+
+			if (password !== passwordchk) {
+				$("#checkPasswordResult").html("비밀번호가 일치하지 않습니다.");
+			}else{
+				$("#checkPasswordResult").html("");
+			}
+		}
+
+		$("#passwordchk").on("change", checkPassword);
+
 		function checkUsername() {
-		    var username = document.getElementById("username").value;
-		    $("#CheckUsernameResult").empty();
-		    $.ajax({
-		        url: "/member/" + username,
-		        method: "GET",
-		        success: function (data) {
-		            if (data) {
-		                $("#CheckUsernameResult").html("이미 사용 중인 아이디 입니다");
-		            } else {
-		                $("#CheckUsernameResult").html("사용하실 수 있는 아이디 입니다");
-		            }
-		        },
-		        error: function (xhr, status, error) {
-		            console.error("AJAX 오류: " + status, error);
-		        }
-		    });
+			var username = document.getElementById("username").value;
+			$.ajax({
+				url : "/member/username/" + username,
+				method : "GET",
+				success : function(data) {
+					if (data) {
+						$("#checkUsernameResult").html("이미 사용 중인 아이디 입니다");
+					} else {
+						$("#checkUsernameResult").html("사용하실 수 있는 아이디 입니다");
+					}
+				},
+				error : function(xhr, status, error) {
+					console.error("AJAX 오류: " + status, error);
+				}
+			});
 		}
-		
-		$("#usernameChk").on("click", checkUsername);
+
+		$("#usernamechk").on("click", checkUsername);
+
+		function checkNickname() {
+			var nickname = document.getElementById("nickname").value;
+			$.ajax({
+				url : "/member/nickname/" + nickname,
+				method : "GET",
+				success : function(data) {
+					if (data) {
+						$("#checkNicknameResult").html(
+								"이미 사용 중인 닉네임 입니다 닉네임은 추후에 바꿀 수 있습니다");
+					} else {
+						$("#checkNicknameResult").html(
+								"사용하실 수 있는 닉네임 입니다 닉네임은 추후에 바꿀 수 있습니다");
+					}
+				},
+				error : function(xhr, status, error) {
+					console.error("AJAX 오류: " + status, error);
+				}
+			});
+		}
+
+		$("#nicknamechk").on("click", checkNickname);
+
+		function checkform() {
+			var passwordchk = document.getElementById("checkPasswordResult").innerText;
+			var nicknamechk = document.getElementById("checkNicknameResult").innerText;
+			var usernamechk = document.getElementById("checkUsernameResult").innerText;
+
+			if (!nicknamechk.includes("하실") || !usernamechk.includes("하실")
+					|| passwordchk !== "") {
+				alert("비밀번호 확인 및 중복 체크 오류");
+				event.preventDefault();
+			}
+		}
+
+		$("#submitForm").on("submit", checkform);
 	});
 </script>
 </head>
 <body>
 	<h1>회원가입</h1>
-	<form action="" method="post">
+	<form action="" method="post" id="submitForm">
 		<table>
 			<tr>
 				<td>아이디:</td>
-				<td><input type="text" name="username" id="username">
-				<input type="button" id="usernameChk" value="중복 조회"> </td>
-				<td><span id="CheckUsernameResult" style="color: red;"></span></td>
+				<td><input type="text" name="username" id="username"
+					required="required"> <input type="button" id="usernamechk"
+					value="중복 조회"></td>
+				<td><span id="checkUsernameResult" style="color: red;"></span></td>
 			</tr>
 			<tr>
 				<td>비밀번호:</td>
-				<td><input type="password" id="password"></td>
+				<td><input type="password" id="password" required="required"></td>
+				<td><span id="checkPasswordLength" style="color: red;"></span></td>
 			</tr>
 			<tr>
 				<td>비밀번호 확인:</td>
-				<td><input type="password" name="password" id="passwordChk"></td>
-				<td><span id="passwordError" style="color: red;"></span></td>
+				<td><input type="password" name="password" id="passwordchk"
+					required="required"></td>
+				<td><span id="checkPasswordResult" style="color: red;"></span></td>
 			</tr>
 			<tr>
 				<td>닉네임:</td>
-				<td><input type="text" name="nickname"></td>
+				<td><input type="text" name="nickname" id="nickname"
+					required="required"> <input type="button" id="nicknamechk"
+					value="중복 조회"></td>
+				<td><span id="checkNicknameResult" style="color: red;"></span></td>
 			</tr>
 			<tr>
 				<td>이메일:</td>
-				<td><input type="email" name="email"></td>
+				<td><input type="email" name="email" required="required"></td>
 			</tr>
 		</table>
 		<input type="submit" value="회원가입"> <input type="hidden"

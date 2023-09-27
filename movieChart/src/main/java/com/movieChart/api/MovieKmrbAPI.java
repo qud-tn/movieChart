@@ -16,7 +16,7 @@ import com.movieChart.domain.BoxOfficeDTO;
 
 public class MovieKmrbAPI {
 	private static final Logger logger = LoggerFactory.getLogger(BoxOfficeAPI.class);
-	MakeParameter parameterMaker=new MakeParameter();
+	QueryStringMaker queryStringMaker=new QueryStringMaker();
 	private final String KEY="87d7a4f3-a8f3-42e6-9685-991a0fde1e65";
 	private final String REQUEST_URL = "http://api.kcisa.kr/openapi/service/rest/meta14/getKMPC031801";
 	
@@ -36,7 +36,7 @@ public class MovieKmrbAPI {
 	 
 	        try {
 	            // Request URL 연결 객체 생성
-	            URL requestURL = new URL(REQUEST_URL+"?"+parameterMaker.makeParameter(paramMap));
+	            URL requestURL = new URL(REQUEST_URL+"?"+queryStringMaker.makeQueryString(paramMap));
 	            HttpURLConnection conn = (HttpURLConnection) requestURL.openConnection();
 	            logger.warn(requestURL.toString());
 	            // GET 방식으로 요청

@@ -14,6 +14,7 @@
 		console.log(parsed_dBox);
 		var dailyBoxOfficeList = $("#dailyBoxOfficeList");
 		var range = parsed_dBox.showRange;
+		
 		function dateFMT(range) {
 			var dateArray = range.split("~");
 			var startDate = dateArray[0];
@@ -32,6 +33,12 @@
 						+ "월 " + startDate.slice(6) + "일";
 			}
 		}
+		
+		function checkOtherOptions(){
+			
+		}
+		
+		
 		$("#historyOfBoxOffice").html(dateFMT(range) + "자 박스오피스 순위");
 
 		for (var i = 0; i < parsed_dBox.dailyBoxOfficeList.length; i++) {

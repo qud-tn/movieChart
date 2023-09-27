@@ -2,8 +2,8 @@ package com.movieChart.api;
 
 import java.util.HashMap;
 
-public class MakeParameter {
-	 public String makeParameter(HashMap<String, String> paramMap) {
+public class QueryStringMaker {
+	 public String makeQueryString(HashMap<String, String> paramMap) {
 	        StringBuilder sb = new StringBuilder();
 	 
 	        paramMap.entrySet().forEach(( entry )->{

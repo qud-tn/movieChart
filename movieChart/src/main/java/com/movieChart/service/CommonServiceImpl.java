@@ -37,6 +37,9 @@ public class CommonServiceImpl implements CommonService {
 		if(bdto.getRepNationCd()==null) {
 			bdto.setRepNationCd("");
 		}
+		if(bdto.getTargetDt()==null||bdto.getTargetDt().equals("")) {
+			bdto.setTargetDt(LocalDate.now().minusDays(1).toString());
+		}
 		return bapi.requestAPI(bdto);
 	}
 

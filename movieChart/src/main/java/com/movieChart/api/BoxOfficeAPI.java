@@ -21,7 +21,7 @@ import com.movieChart.domain.BoxOfficeDTO;
 
 public class BoxOfficeAPI {
 	private static final Logger logger = LoggerFactory.getLogger(BoxOfficeAPI.class);
-	MakeParameter parameterMaker=new MakeParameter();
+	QueryStringMaker queryStringMaker=new QueryStringMaker();
 	private final String KEY="e6ca6989be100694be874a2031dc55ee";
 	private final String REQUEST_URL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json";
 	
@@ -41,7 +41,7 @@ public class BoxOfficeAPI {
 	 
 	        try {
 	            // Request URL 연결 객체 생성
-	            URL requestURL = new URL(REQUEST_URL+"?"+parameterMaker.makeParameter(paramMap));
+	            URL requestURL = new URL(REQUEST_URL+"?"+queryStringMaker.makeQueryString(paramMap));
 	            HttpURLConnection conn = (HttpURLConnection) requestURL.openConnection();
 	            logger.warn(requestURL.toString());
 	            // GET 방식으로 요청

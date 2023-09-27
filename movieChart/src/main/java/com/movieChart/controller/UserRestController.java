@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.movieChart.domain.UserDTO;
 import com.movieChart.service.UserService;
 
 @RestController
@@ -19,10 +20,17 @@ public class UserRestController {
 	@Inject
 	private UserService uService;
 	
-	@GetMapping(value="/{username}")
-	public boolean checkUsername(@PathVariable("username") String username) throws Exception {
-		logger.warn(uService.checkUsername(username)+"");
-		return uService.checkUsername(username);
+	@GetMapping(value="/username/{username}")
+	public boolean checkUsername(@PathVariable("username") String username ,UserDTO udto) throws Exception {
+		udto.setUsername(username);
+		logger.warn(uService.checkUsername(udto)+"");
+		return uService.checkUsername(udto);
+	}
+
+	@GetMapping(value="/nickname/{nickname}")
+	public boolean checkNickname(@PathVariable("nickname") String nickname) throws Exception {
+		logger.warn(uService.checkNickname(nickname)+"");
+		return uService.checkNickname(nickname);
 	}
 	
 }

@@ -13,7 +13,7 @@ import org.json.JSONObject;
 import com.movieChart.domain.MovieListDTO;
 
 public class MovieListAPI {
-	MakeParameter parameterMaker=new MakeParameter();
+	QueryStringMaker queryStringMaker=new QueryStringMaker();
 	
 	private final String KEY="e6ca6989be100694be874a2031dc55ee";
 	private final String REQUEST_URL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList..json";
@@ -36,7 +36,7 @@ public class MovieListAPI {
 	 
 	        try {
 	            // Request URL 연결 객체 생성
-	            URL requestURL = new URL(REQUEST_URL+"?"+parameterMaker.makeParameter(paramMap));
+	            URL requestURL = new URL(REQUEST_URL+"?"+queryStringMaker.makeQueryString(paramMap));
 	            HttpURLConnection conn = (HttpURLConnection) requestURL.openConnection();
 	 
 	            // GET 방식으로 요청

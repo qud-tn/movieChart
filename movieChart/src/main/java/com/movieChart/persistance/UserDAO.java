@@ -12,4 +12,6 @@ public interface UserDAO {
 
 	public String selectUsername(UserDTO udto) throws Exception;
 
+	public String selectNickname(String nickname) throws Exception;
+
 }
