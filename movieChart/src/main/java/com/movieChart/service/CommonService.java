@@ -6,8 +6,8 @@ import org.json.JSONObject;
 import com.movieChart.domain.BoxOfficeDTO;
 
 public interface CommonService {
-	public JSONObject dailyBoxOffice(BoxOfficeDTO bdto) throws Exception;
+	public String dailyBoxOffice(BoxOfficeDTO bdto) throws Exception;
 
-	public JSONObject searchBoxOffice(BoxOfficeDTO bdto) throws Exception;
+	public String searchBoxOffice(BoxOfficeDTO bdto) throws Exception;
 
 }

@@ -39,4 +39,8 @@ public class BoardController {
 		model.addAttribute("boardAround",bService.readBoardAround(board_id));
 		return "/board/view";
 	}
+	@RequestMapping(value="edit/{board_id}",method=RequestMethod.GET)
+	public void editBoardGET(Model model, @PathVariable("board_id") Integer board_id, BoardDTO bdto) throws Exception {
+	
+	}
 }

@@ -18,7 +18,7 @@ public class MovieListAPI {
 	private final String KEY="e6ca6989be100694be874a2031dc55ee";
 	private final String REQUEST_URL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList..json";
 	
-	 public JSONArray requestAPI(MovieListDTO mdto  ) {
+	 public String requestAPI(MovieListDTO mdto  ) {
 		 	
 		 
 	        // 변수 설정
@@ -65,7 +65,7 @@ public class MovieListAPI {
 	            // 박스오피스 목록 출력
 	            JSONArray dailyBoxOfficeList = boxOfficeResult.getJSONArray("dailyBoxOfficeList");
 	           
-	            return dailyBoxOfficeList;
+	            return dailyBoxOfficeList.toString();
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	            return null;

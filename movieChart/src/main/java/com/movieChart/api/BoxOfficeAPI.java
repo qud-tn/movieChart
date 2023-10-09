@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.movieChart.controller.CommonController;
 import com.movieChart.domain.BoxOfficeDTO;
 
@@ -26,7 +27,7 @@ public class BoxOfficeAPI {
 	private final String REQUEST_URL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json";
 	
 	
-	 public JSONObject requestAPI(BoxOfficeDTO bdto ) {
+	 public String requestAPI(BoxOfficeDTO bdto ) {
 		 	
 		 
 	        // 변수 설정
@@ -62,8 +63,8 @@ public class BoxOfficeAPI {
 	 
 	            // 데이터 추출
 	            JSONObject boxOfficeResult = responseBody.getJSONObject("boxOfficeResult");
-	 
-	            return boxOfficeResult;
+	            
+	            return boxOfficeResult.toString();
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	            return null;

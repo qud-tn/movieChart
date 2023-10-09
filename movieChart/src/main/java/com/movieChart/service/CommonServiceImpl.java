@@ -17,7 +17,7 @@ public class CommonServiceImpl implements CommonService {
 	private BoxOfficeAPI bapi= new BoxOfficeAPI();
 	
 	@Override
-	public JSONObject dailyBoxOffice(BoxOfficeDTO bdto) throws Exception {
+	public String dailyBoxOffice(BoxOfficeDTO bdto) throws Exception {
 		bdto.setItemPerPage("10");
 		bdto.setTargetDt(LocalDate.now().minusDays(1).toString());
 		if(bdto.getMultiMovieYn()==null) {
@@ -29,7 +29,7 @@ public class CommonServiceImpl implements CommonService {
 		return bapi.requestAPI(bdto);
 	}
 	@Override
-	public JSONObject searchBoxOffice(BoxOfficeDTO bdto) throws Exception{
+	public String searchBoxOffice(BoxOfficeDTO bdto) throws Exception{
 		bdto.setItemPerPage("10");
 		if(bdto.getMultiMovieYn()==null) {
 			bdto.setMultiMovieYn("");

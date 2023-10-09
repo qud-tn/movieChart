@@ -25,7 +25,7 @@ public class BoardRestController {
 	private BoardService bService;
 	
 	@GetMapping(value="/{board_id}/GET")
-	public ResponseEntity<JSONObject> boardreplyGET(@PathVariable("board_id") Integer board_id) throws Exception {
+	public ResponseEntity<String> boardreplyGET(@PathVariable("board_id") Integer board_id) throws Exception {
 		return null;
 	}
 		

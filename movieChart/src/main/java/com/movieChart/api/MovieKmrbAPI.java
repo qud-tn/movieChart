@@ -21,7 +21,7 @@ public class MovieKmrbAPI {
 	private final String REQUEST_URL = "http://api.kcisa.kr/openapi/service/rest/meta14/getKMPC031801";
 	
 	
-	 public JSONObject requestAPI(BoxOfficeDTO bdto ) {
+	 public String requestAPI(BoxOfficeDTO bdto ) {
 		 	
 		 
 	        // 변수 설정
@@ -58,7 +58,7 @@ public class MovieKmrbAPI {
 	            // 데이터 추출
 	            JSONObject boxOfficeResult = responseBody.getJSONObject("boxOfficeResult");
 	 
-	            return boxOfficeResult;
+	            return boxOfficeResult.toString();
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	            return null;
