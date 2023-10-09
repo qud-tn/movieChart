@@ -9,17 +9,18 @@ import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.movieChart.domain.MovieListDTO;
 
 public class MovieListAPI {
+	private static final Logger logger= LoggerFactory.getLogger(MovieListAPI.class);
 	QueryStringMaker queryStringMaker=new QueryStringMaker();
-	
 	private final String KEY="e6ca6989be100694be874a2031dc55ee";
 	private final String REQUEST_URL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList..json";
-	
-	 public String requestAPI(MovieListDTO mdto  ) {
-		 	
+	 
+	public String requestAPI(MovieListDTO mdto  ) {
 		 
 	        // 변수 설정
 	        //   - 요청(Request) 인터페이스 Map
@@ -38,7 +39,8 @@ public class MovieListAPI {
 	            // Request URL 연결 객체 생성
 	            URL requestURL = new URL(REQUEST_URL+"?"+queryStringMaker.makeQueryString(paramMap));
 	            HttpURLConnection conn = (HttpURLConnection) requestURL.openConnection();
-	 
+	            logger.debug(requestURL.toString());
+	            
 	            // GET 방식으로 요청
 	            conn.setRequestMethod("GET");
 	            conn.setDoInput(true);
@@ -58,17 +60,13 @@ public class MovieListAPI {
 	            // 데이터 추출
 	            JSONObject boxOfficeResult = responseBody.getJSONObject("boxOfficeResult");
 	 
-	            // 박스오피스 주제 출력
-	            String boxofficeType = boxOfficeResult.getString("boxofficeType");
-	            System.out.println(boxofficeType);
-	 
 	            // 박스오피스 목록 출력
 	            JSONArray dailyBoxOfficeList = boxOfficeResult.getJSONArray("dailyBoxOfficeList");
 	           
 	            return dailyBoxOfficeList.toString();
 	        } catch (IOException e) {
 	            e.printStackTrace();
-	            return null;
+	            return "api 서버 오류";
 	        }
 }
 }

@@ -38,7 +38,7 @@ public class MovieKmrbAPI {
 	            // Request URL 연결 객체 생성
 	            URL requestURL = new URL(REQUEST_URL+"?"+queryStringMaker.makeQueryString(paramMap));
 	            HttpURLConnection conn = (HttpURLConnection) requestURL.openConnection();
-	            logger.warn(requestURL.toString());
+	            logger.debug(requestURL.toString());
 	            // GET 방식으로 요청
 	            conn.setRequestMethod("GET");
 	            conn.setDoInput(true);
@@ -61,7 +61,7 @@ public class MovieKmrbAPI {
 	            return boxOfficeResult.toString();
 	        } catch (IOException e) {
 	            e.printStackTrace();
-	            return null;
+	            return "api 서버 오류";
 	        }
 	    }
 }
