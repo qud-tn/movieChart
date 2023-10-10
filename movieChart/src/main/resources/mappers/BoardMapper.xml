@@ -28,7 +28,7 @@
   	select title, category, nickname, board_id , write_date
   	from board b join users u
   	on u.username=b.username
-  	where board_id = (
+  	where board_id in (
     select max(board_id) 
     from board 
     where deleted_dt is null and board_id <![CDATA[ < ]]> #{board_id}
