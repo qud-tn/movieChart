@@ -28,7 +28,15 @@
   	select title, category, nickname, board_id , write_date
   	from board b join users u
   	on u.username=b.username
-  	where deleted_dt is null and board_id in (#{board_id}+1, #{board_id}-1);
+  	where board_id = (
+    select max(board_id) 
+    from board 
+    where deleted_dt is null and board_id <![CDATA[ < ]]> #{board_id}
+    union
+    select min(board_id) 
+    from board 
+    where deleted_dt is null and board_id <![CDATA[ > ]]> #{board_id}
+    )
   	</select>
   	
   	<update id="updateBoard">
