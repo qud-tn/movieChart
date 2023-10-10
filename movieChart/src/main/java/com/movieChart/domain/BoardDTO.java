@@ -1,5 +1,7 @@
 package com.movieChart.domain;
 
+import java.util.HashMap;
+
 public class BoardDTO {
 	private Integer board_id;
 	private String title;
@@ -7,10 +9,21 @@ public class BoardDTO {
 	private String category;
 	private String username;
 	private String nickname;
-	private Integer board_no;
 	private String write_date;
 	private Integer view_cnt;
 	
+	   public HashMap<String, Object> toHashMap() {
+	        HashMap<String, Object> BoardMap = new HashMap<>();
+	        BoardMap.put("board_id", this.getBoard_id());
+	        BoardMap.put("title", this.getTitle());
+	        BoardMap.put("content", this.getContent());
+	        BoardMap.put("category", this.getCategory());
+	        BoardMap.put("username", this.getUsername());
+	        BoardMap.put("nickname", this.getNickname());
+	        BoardMap.put("write_date", this.getWrite_date());
+	        BoardMap.put("view_cnt", this.getView_cnt());
+	        return BoardMap;
+	    }
 	
 	public Integer getView_cnt() {
 		return view_cnt;
@@ -60,16 +73,11 @@ public class BoardDTO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public Integer getBoard_no() {
-		return board_no;
-	}
-	public void setBoard_no(Integer board_no) {
-		this.board_no = board_no;
-	}
+	
 	@Override
 	public String toString() {
 		return "BoardDTO [board_id=" + board_id + ", title=" + title + ", content=" + content + ", category=" + category
-				+ ", username=" + username + ", nickname=" + nickname + ", board_no=" + board_no + "]";
+				+ ", username=" + username + ", nickname=" + nickname + "]";
 	}
 	
 	

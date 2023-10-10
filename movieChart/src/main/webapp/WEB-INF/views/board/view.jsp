@@ -14,7 +14,7 @@
 		<thead>
 		<sec:authorize access="isAuthenticated() && authentication.principal.username == '${boardContent.username}'">
 		<tr>
-			<td>글 수정</td>
+			<td><input type="button" value="글 수정" onclick="location.href='edit'"></td>
 			<td>글 삭제</td>
 		</tr>
 		</sec:authorize>
@@ -31,13 +31,13 @@
 		</tr>
 		</tbody>
 		<tfoot>
-		<c:forEach var="board" items="${boardAround}" varStatus="loopStatus">
+		<c:forEach var="board" items="${boardContent.SurroundingList}">
 				<tr>
-			<c:if test="${loopStatus.index == 0}">
-					<td>이전글</td>
+			<c:if test="${board.board_id > boardContent.board_id}">
+					<td>이전글
 			</c:if>
-			<c:if test="${loopStatus.index == 1}">
-					<td>다음글</td>
+			<c:if test="${board.board_id < boardContent.board_id}">
+					<td>다음글
 			</c:if>					
 					<td>${board.category}</td>
 					<td><a href="${board.board_id}">${board.title}</a></td>

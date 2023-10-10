@@ -14,25 +14,27 @@
 	<form action="" method="post">
 		<table>
 			<tr>
-				<td><input type="text" name="title" placeholder="제목을 입력하세요"><br>
+				<td><input type="text" name="title"
+					value=${boardContent.title } placeholder="제목을 입력하세요"><br>
 				</td>
 				<td><select name="category">
 						<sec:authorize access="hasRole('ROLE_ADMIN')">
-							<option>공지사항</option>
-							<option>이벤트</option>
+							<option ${boardContent.category == '공지사항' ? 'selected' : ''}>공지사항</option>
+							<option ${boardContent.category == '이벤트' ? 'selected' : ''}>이벤트</option>
 						</sec:authorize>
-							<option>잡담</option>
-							<option>리뷰/감상문</option>
-							<option>질문</option>
+						<option ${boardContent.category == '잡담' ? 'selected' : ''}>잡담</option>
+						<option ${boardContent.category == '리뷰/감상문' ? 'selected' : ''}>리뷰/감상문</option>
+						<option ${boardContent.category == '질문' ? 'selected' : ''}>질문</option>
 				</select></td>
 			</tr>
 			<tr>
-				<td><textarea rows="10" cols="50" name="content"></textarea><br>
+				<td><textarea rows="10" cols="50" name="content">${boardContent.content }</textarea><br>
 				</td>
 			</tr>
 		</table>
-		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-		<input type="hidden" name="username" value='<sec:authentication property="principal.udto.username" />'>
+		<input type="hidden" name="${_csrf.parameterName }"
+			value="${_csrf.token }"> <input type="hidden" name="username"
+			value='<sec:authentication property="principal.udto.username" />'>
 		<input type="submit" value="글 수정하기">
 	</form>
 </body>

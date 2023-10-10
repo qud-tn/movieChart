@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,15 +19,24 @@ import com.movieChart.service.BoardService;
 import com.movieChart.service.CommonService;
 
 @RestController
-@RequestMapping(value="/board/*")
+@RequestMapping(value = "/board/*")
 public class BoardRestController {
 
 	@Inject
 	private BoardService bService;
-	
-	@GetMapping(value="/{board_id}/GET")
+
+	@GetMapping(value = "/{board_id}/reply")
 	public ResponseEntity<String> boardreplyGET(@PathVariable("board_id") Integer board_id) throws Exception {
 		return null;
 	}
-		
+
+	@PutMapping(value = "/{board_id}")
+	public ResponseEntity<String> softDeleteBoard(@PathVariable("board_id") Integer board_id) throws Exception {
+		Integer result = bService.softDeleteBoard(board_id);
+		if (result == 1) {
+			return ResponseEntity.ok().body("삭제 성공");
+		} else {
+			return ResponseEntity.badRequest().body("삭제 오류");
+		}
+	}
 }

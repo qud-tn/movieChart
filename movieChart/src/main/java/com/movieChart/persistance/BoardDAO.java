@@ -11,5 +11,9 @@ public interface BoardDAO {
 
 	public BoardDTO selectBoard(Integer board_id) throws Exception;
 
-	public List<BoardDTO> selectBoardAround(Integer board_id) throws Exception;
+	public List<BoardDTO> selectSurroundingBoard(Integer board_id) throws Exception;
+
+	public void updateBoard(BoardDTO bdto) throws Exception;
+	
+	public Integer softDeleteBoard(Integer board_id) throws Exception;
 }

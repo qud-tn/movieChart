@@ -36,11 +36,18 @@ public class BoardController {
 	@RequestMapping(value="/{board_id}",method=RequestMethod.GET)
 	public String readBoardGET(Model model, @PathVariable("board_id") Integer board_id, BoardDTO bdto) throws Exception {
 		model.addAttribute("boardContent",bService.readBoardContent(board_id));
-		model.addAttribute("boardAround",bService.readBoardAround(board_id));
 		return "/board/view";
 	}
+	
 	@RequestMapping(value="edit/{board_id}",method=RequestMethod.GET)
 	public void editBoardGET(Model model, @PathVariable("board_id") Integer board_id, BoardDTO bdto) throws Exception {
-	
+		model.addAttribute("boardContent",bService.readBoardContent(board_id));
+	}
+
+	@RequestMapping(value="edit/{board_id}",method=RequestMethod.POST)
+	public String editBoardPOST(Model model, @PathVariable("board_id") Integer board_id, BoardDTO bdto) throws Exception {
+		bdto.setBoard_id(board_id);
+		bService.modifyBoard(bdto);
+		return "redirect:/board/list";
 	}
 }

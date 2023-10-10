@@ -17,6 +17,7 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	private final String NAMESPACE = "com.movieChart.mapper.BoardMapper";
 	
+	@Override
 	public void insertBoard(BoardDTO bdto) throws Exception {
 		sqlsession.insert(NAMESPACE+".insertBoard", bdto);
 	}
@@ -30,8 +31,19 @@ public class BoardDAOImpl implements BoardDAO {
 	public BoardDTO selectBoard(Integer board_id) throws Exception {
 		return sqlsession.selectOne(NAMESPACE+".selectBoard",board_id);
 	}
+	
 	@Override
-	public List<BoardDTO> selectBoardAround(Integer board_id) throws Exception {
-		return sqlsession.selectList(NAMESPACE+".selectBoardAround",board_id);
+	public List<BoardDTO> selectSurroundingBoard(Integer board_id) throws Exception {
+		return sqlsession.selectList(NAMESPACE+".selectSurroundingBoard",board_id);
+	}
+
+	@Override
+	public void updateBoard(BoardDTO bdto) throws Exception {
+		sqlsession.update(NAMESPACE+".updateBoard", bdto);
+	}
+
+	@Override
+	public Integer softDeleteBoard(Integer board_id) throws Exception {
+		return sqlsession.update(NAMESPACE+".softDeleteBoard", board_id);
 	}
 }

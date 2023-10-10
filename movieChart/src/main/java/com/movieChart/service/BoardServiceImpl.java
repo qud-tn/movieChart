@@ -1,5 +1,6 @@
 package com.movieChart.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,7 +14,7 @@ import com.movieChart.persistance.BoardDAO;
 public class BoardServiceImpl implements BoardService {
 	@Inject
 	private BoardDAO bdao;
-	
+
 	@Override
 	public void writeBoard(BoardDTO bdto) throws Exception {
 		bdao.insertBoard(bdto);
@@ -25,12 +26,22 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardDTO readBoardContent(Integer board_id) throws Exception {
-		return bdao.selectBoard(board_id);
+	public HashMap<String, Object> readBoardContent(Integer board_id) throws Exception {
+		HashMap<String, Object> boardMap = bdao.selectBoard(board_id).toHashMap();
+		List<BoardDTO> SurroundingList = bdao.selectSurroundingBoard(board_id);
+		boardMap.put("SurroundingList", SurroundingList);
+		
+		return boardMap;
 	}
+
 	@Override
-	public List<BoardDTO> readBoardAround(Integer board_id) throws Exception {
-		return bdao.selectBoardAround(board_id);
+	public void modifyBoard(BoardDTO bdto) throws Exception {
+		bdao.updateBoard(bdto);
+	}
+
+	@Override
+	public Integer softDeleteBoard(Integer board_id) throws Exception {
+		return bdao.softDeleteBoard(board_id);
 	}
 
 }
