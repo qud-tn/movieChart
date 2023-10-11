@@ -5,17 +5,17 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.movieChart.domain.CommentDTO;
+import com.movieChart.domain.ReviewDTO;
 
 @Repository
-public class CommentDAOImpl implements CommentDAO{
+public class ReviewDAOImpl implements ReviewDAO{
 	@Inject
 	private SqlSession sqlsession;
 	
-	private final String NAMESPACE="com.movieChart.mapper.CommentMapper";
+	private final String NAMESPACE="com.movieChart.mapper.ReviewMapper";
 	
 	@Override
-	public void insertComment(CommentDTO cdto) throws Exception {
+	public void insertComment(ReviewDTO cdto) throws Exception {
 		
 	}
 	

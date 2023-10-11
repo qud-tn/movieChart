@@ -3,6 +3,6 @@ package com.movieChart.controller;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class CommentController {
+public class ReviewController {
 	
 }

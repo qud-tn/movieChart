@@ -1,5 +1,7 @@
 package com.movieChart.controller;
 
+import java.util.HashMap;
+
 import javax.inject.Inject;
 
 import org.json.JSONObject;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.movieChart.domain.BoxOfficeDTO;
+import com.movieChart.domain.ReplyDTO;
 import com.movieChart.service.BoardService;
 import com.movieChart.service.CommonService;
 
@@ -24,11 +27,6 @@ public class BoardRestController {
 
 	@Inject
 	private BoardService bService;
-
-	@GetMapping(value = "/{board_id}/reply")
-	public ResponseEntity<String> boardreplyGET(@PathVariable("board_id") Integer board_id) throws Exception {
-		return null;
-	}
 
 	@PutMapping(value = "/{board_id}")
 	public ResponseEntity<String> softDeleteBoard(@PathVariable("board_id") Integer board_id) throws Exception {

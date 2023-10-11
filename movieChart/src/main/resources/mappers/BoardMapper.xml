@@ -14,7 +14,8 @@
   	select title, category, nickname, board_id ,write_date
   	from board b join users u
   	on u.username=b.username
-  	where deleted_dt is null;
+  	where deleted_dt is null
+  	order by board_id desc;
   	</select>
   	
   	<select id="selectBoard" resultType="com.movieChart.domain.BoardDTO">
