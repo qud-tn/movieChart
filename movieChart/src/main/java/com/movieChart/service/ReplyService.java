@@ -11,4 +11,8 @@ public interface ReplyService {
 
 	public Integer writeReply(ReplyDTO rpdto) throws Exception;
 
+	public Integer modifyReply(ReplyDTO rpdto) throws Exception;
+	
+	public Integer softDeleteReply(ReplyDTO rpdto) throws Exception;
+
 }

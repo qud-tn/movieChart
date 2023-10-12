@@ -24,4 +24,14 @@ public class ReplyDAOImpl implements ReplyDAO{
 	public List<ReplyDTO> selectReplys(Integer board_id) throws Exception {
 		return sqlsession.selectList(NAMESPACE+".selectReplys",board_id);
 	}
+
+	@Override
+	public Integer updateReply(ReplyDTO rpdto) throws Exception {
+		return sqlsession.update(NAMESPACE+".updateReply",rpdto);
+	}
+
+	@Override
+	public Integer softDeleteReply(ReplyDTO rpdto) throws Exception {
+		return sqlsession.update(NAMESPACE+".softDeleteReply",rpdto);
+	}
 }

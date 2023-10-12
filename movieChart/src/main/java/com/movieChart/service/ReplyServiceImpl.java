@@ -25,4 +25,14 @@ public class ReplyServiceImpl implements ReplyService {
 		return rpdao.insertReply(rpdto);
 	}
 
+	@Override
+	public Integer modifyReply(ReplyDTO rpdto) throws Exception {
+		return rpdao.updateReply(rpdto);
+	}
+
+	@Override
+	public Integer softDeleteReply(ReplyDTO rpdto) throws Exception {
+		return rpdao.softDeleteReply(rpdto);
+	}
+
 }

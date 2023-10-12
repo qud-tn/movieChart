@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,7 @@ public class ReplyRestController {
 	@Autowired
 	private ReplyService rpService;
 
-	@GetMapping(value = "/{board_id}/replys")
+	@GetMapping(value = "/{board_id}/replys", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<String> getBoardReply(@PathVariable("board_id") Integer board_id) throws Exception {
 		List<ReplyDTO> resultMap = rpService.findReplys(board_id);
 		if (!resultMap.isEmpty()) {
@@ -51,12 +52,28 @@ public class ReplyRestController {
 	@PutMapping(value="/{board_id}/reply/{reply_id}")
 	public ResponseEntity<String> putBoardReply(@PathVariable("board_id") int board_id, 
 			@PathVariable("reply_id") int reply_id, ReplyDTO rpdto) throws Exception{
-		return null;
+		rpdto.setBoard_id(board_id);
+		rpdto.setReply_id(reply_id);
+		Integer result = rpService.modifyReply(rpdto);
+		
+		if (result == 1) {
+			return ResponseEntity.ok().body("답글 수정 성공");
+		} else {
+			return ResponseEntity.badRequest().body("답글 수정 실패");
+		}
 	}
 
 	@DeleteMapping(value="/{board_id}/reply/{reply_id}")
 	public ResponseEntity<String> deleteBoardReply(@PathVariable("board_id") int board_id, 
 			@PathVariable("reply_id") int reply_id, ReplyDTO rpdto) throws Exception{
-		return null;
+		rpdto.setBoard_id(board_id);
+		rpdto.setReply_id(reply_id);
+		Integer result = rpService.softDeleteReply(rpdto);
+		
+		if (result == 1) {
+			return ResponseEntity.ok().body("답글 삭제 성공");
+		} else {
+			return ResponseEntity.badRequest().body("답글 삭제 실패");
+		}
 	}
 }

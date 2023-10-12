@@ -28,7 +28,7 @@ public class BoardRestController {
 	@Inject
 	private BoardService bService;
 
-	@PutMapping(value = "/{board_id}")
+	@DeleteMapping(value = "/{board_id}")
 	public ResponseEntity<String> softDeleteBoard(@PathVariable("board_id") Integer board_id) throws Exception {
 		Integer result = bService.softDeleteBoard(board_id);
 		if (result == 1) {

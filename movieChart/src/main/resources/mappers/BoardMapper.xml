@@ -6,51 +6,51 @@
   
   <mapper namespace="com.movieChart.mapper.BoardMapper">
   	<insert id="insertBoard">
-  	insert board (title,content,category,username) 
-  	values(#{title},#{content},#{category},#{username})
+  		insert board (title,content,category,username) 
+  		values(#{title},#{content},#{category},#{username})
   	</insert>
   	
   	<select id="selectBoardList" resultType="com.movieChart.domain.BoardDTO">
-  	select title, category, nickname, board_id ,write_date
-  	from board b join users u
-  	on u.username=b.username
-  	where deleted_dt is null
-  	order by board_id desc;
+	  	select title, category, nickname, board_id ,write_date
+	  	from board b join users u
+	  	on u.username=b.username
+	  	where deleted_dt is null
+	  	order by board_id desc;
   	</select>
   	
   	<select id="selectBoard" resultType="com.movieChart.domain.BoardDTO">
-  	select title, content, category, nickname, board_id, write_date, b.username
-  	from board b join users u
-  	on u.username=b.username
-  	where deleted_dt is null and board_id=#{board_id};
+	  	select title, content, category, nickname, board_id, write_date, b.username
+	  	from board b join users u
+	  	on u.username=b.username
+	  	where deleted_dt is null and board_id=#{board_id};
   	</select>
   	
   	<select id="selectSurroundingBoard" resultType="com.movieChart.domain.BoardDTO">
-  	select title, category, nickname, board_id , write_date
-  	from board b join users u
-  	on u.username=b.username
-  	where board_id in (
-    select max(board_id) 
-    from board 
-    where deleted_dt is null and board_id <![CDATA[ < ]]> #{board_id}
-    union
-    select min(board_id) 
-    from board 
-    where deleted_dt is null and board_id <![CDATA[ > ]]> #{board_id}
-    )
+	  	select title, category, nickname, board_id , write_date
+	  	from board b join users u
+	  	on u.username=b.username
+	  	where board_id in (
+	    select max(board_id) 
+	    from board 
+	    where deleted_dt is null and board_id <![CDATA[ < ]]> #{board_id}
+	    union
+	    select min(board_id) 
+	    from board 
+	    where deleted_dt is null and board_id <![CDATA[ > ]]> #{board_id}
+	    )
   	</select>
   	
   	<update id="updateBoard">
-  	update board 
-  	set title=#{title},
-  	category=#{category},
-  	content=#{content},
-  	where board_id=#{board_id} 
+	  	update board 
+	  	set title=#{title},
+	  	category=#{category},
+	  	content=#{content},
+	  	where board_id=#{board_id} 
   	</update>
   	
   	<update id="softDeleteBoard">
-  	update board
-  	set deleted_dt=now()
-  	where board_id=#{board_id}
+	  	update board
+	  	set deleted_dt=now()
+	  	where board_id=#{board_id}
   	</update>
   </mapper>

@@ -19,4 +19,16 @@
 		from reply
 		where board_id=#{board_id} and deleted_dt is null
 	</select>
+	
+	<update id="updateReply">
+		update reply
+		set reply=#{reply}
+		where board_id=#{board_id} and reply_id= #{reply_id}
+	</update>
+	
+	<update id="softDeleteReply">
+		update reply
+		set deleted_dt = now()
+		where board_id=#{board_id} and reply_id = #{reply_id}
+	</update>
   </mapper>
