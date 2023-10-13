@@ -64,7 +64,7 @@ public class ReplyRestController {
 	}
 
 	@DeleteMapping(value="/{board_id}/reply/{reply_id}")
-	public ResponseEntity<String> deleteBoardReply(@PathVariable("board_id") int board_id, 
+	public ResponseEntity<String> softDeleteBoardReply(@PathVariable("board_id") int board_id, 
 			@PathVariable("reply_id") int reply_id, ReplyDTO rpdto) throws Exception{
 		rpdto.setBoard_id(board_id);
 		rpdto.setReply_id(reply_id);

@@ -73,4 +73,10 @@
 		from users
 		where nickname = #{nickname}
 	</select>
+
+	<select id="selectEmail" resultType="String">
+		select email
+		from users
+		where email = #{email}
+	</select>
 </mapper>

@@ -36,6 +36,11 @@ public class UserDAOImpl implements UserDAO {
 	public List<Integer> selectUserIdAll() throws Exception {
 		return sqlsession.selectList(NAMESPACE+".selectUserIdAll");
 	}
+
+	@Override
+	public String selectEmail(String email) throws Exception {
+		return sqlsession.selectOne(NAMESPACE+".selectEmail",email);
+	}
 	
 	
 

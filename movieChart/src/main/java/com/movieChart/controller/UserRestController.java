@@ -21,17 +21,24 @@ public class UserRestController {
 	private UserService uService;
 	
 	@GetMapping(value="/username/{username}")
-	public boolean checkUsername(@PathVariable("username") String username ,UserDTO udto) throws Exception {
+	public boolean getUsername(@PathVariable("username") String username ,UserDTO udto) throws Exception {
 		udto.setUsername(username);
-		logger.debug(uService.checkUsername(udto)+"");
-		return uService.checkUsername(udto);
+		logger.debug(uService.findUsername(udto)+"");
+		return uService.findUsername(udto);
 	}
 
 	@GetMapping(value="/nickname/{nickname}")
-	public boolean checkNickname(@PathVariable("nickname") String nickname,UserDTO udto) throws Exception {
+	public boolean getNickname(@PathVariable("nickname") String nickname,UserDTO udto) throws Exception {
 		udto.setNickname(nickname);
-		logger.debug(uService.checkNickname(nickname)+"");
-		return uService.checkNickname(nickname);
+		logger.debug(uService.findNickname(nickname)+"");
+		return uService.findNickname(nickname);
+	}
+
+	@GetMapping(value="/email/{email}")
+	public boolean getEmail(@PathVariable("email") String email,UserDTO udto) throws Exception {
+		udto.setEmail(email);
+		logger.debug(uService.findEmail(email)+"");
+		return uService.findEmail(email);
 	}
 	
 }

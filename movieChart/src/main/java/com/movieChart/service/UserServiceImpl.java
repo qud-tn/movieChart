@@ -58,12 +58,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean checkUsername(UserDTO udto) throws Exception {
+	public boolean findUsername(UserDTO udto) throws Exception {
 		return uDao.selectUsername(udto) != null;
 	}
 
 	@Override
-	public boolean checkNickname(String nickname) throws Exception {
+	public boolean findNickname(String nickname) throws Exception {
 		return uDao.selectNickname(nickname) != null;
+	}
+
+	@Override
+	public boolean findEmail(String email) throws Exception {
+		return uDao.selectEmail(email) != null;
 	}
 }

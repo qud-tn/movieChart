@@ -14,4 +14,6 @@ public interface UserDAO {
 
 	public String selectNickname(String nickname) throws Exception;
 
+	public String selectEmail(String email) throws Exception;
+
 }
