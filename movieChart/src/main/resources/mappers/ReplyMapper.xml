@@ -12,6 +12,7 @@
   		(select COALESCE(MAX(reply_id), 0) + 1
   		from reply
   		where board_id=#{board_id}))
+  		where board_id=#{board_id}
   	</insert>
 	
 	<select id="selectReplys">

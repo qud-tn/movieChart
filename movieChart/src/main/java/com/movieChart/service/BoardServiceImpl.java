@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.movieChart.domain.BoardDTO;
+import com.movieChart.domain.PageDTO;
 import com.movieChart.persistance.BoardDAO;
 
 @Service
@@ -21,8 +22,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardDTO> getBoardList() throws Exception {
-		return bdao.selectBoardList();
+	public List<BoardDTO> getBoardList(PageDTO pdto) throws Exception {
+		return bdao.selectBoardList(pdto);
 	}
 
 	@Override
@@ -42,6 +43,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Integer softDeleteBoard(Integer board_id) throws Exception {
 		return bdao.softDeleteBoard(board_id);
+	}
+	
+	@Override
+	public void upViewcnt(Integer board_id) throws Exception {
+		bdao.updateViewcntOne(board_id);
+	}
+
+	@Override
+	public int countBoard_id() throws Exception {
+		return bdao.selectCountBoard_id();
 	}
 
 }

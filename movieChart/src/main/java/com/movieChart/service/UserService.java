@@ -12,4 +12,5 @@ public interface UserService {
 	public boolean findNickname(String nickname) throws Exception;
 
 	public boolean findEmail(String email) throws Exception;
+	
 }

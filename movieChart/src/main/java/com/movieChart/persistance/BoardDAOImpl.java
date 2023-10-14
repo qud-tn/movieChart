@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.movieChart.domain.BoardDTO;
+import com.movieChart.domain.PageDTO;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -23,8 +24,8 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardDTO> selectBoardList() throws Exception {
-		return sqlsession.selectList(NAMESPACE+".selectBoardList");
+	public List<BoardDTO> selectBoardList(PageDTO pdto) throws Exception {
+		return sqlsession.selectList(NAMESPACE+".selectBoardList",pdto);
 	}
 
 	@Override
@@ -45,5 +46,15 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public Integer softDeleteBoard(Integer board_id) throws Exception {
 		return sqlsession.update(NAMESPACE+".softDeleteBoard", board_id);
+	}
+
+	@Override
+	public void updateViewcntOne(Integer board_id) throws Exception {
+		sqlsession.update(NAMESPACE+".updateViewcntOne",board_id);
+	}
+
+	@Override
+	public int selectCountBoard_id() throws Exception {
+		return sqlsession.selectOne(NAMESPACE+".selectCountBoard_id");
 	}
 }

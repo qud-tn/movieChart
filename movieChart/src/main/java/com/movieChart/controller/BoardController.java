@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.movieChart.domain.BoardDTO;
+import com.movieChart.domain.PageDTO;
 import com.movieChart.service.BoardService;
 
 @Controller
@@ -18,8 +19,10 @@ public class BoardController {
 	private BoardService bService;
 	
 	@RequestMapping(value="/list",method = RequestMethod.GET)
-	public void boardListGET(Model model ) throws Exception {
-		model.addAttribute("boardList" ,bService.getBoardList());
+	public void boardListGET(Model model, PageDTO pdto ) throws Exception {
+		pdto.setTotalCount(bService.countBoard_id());
+		model.addAttribute("page",pdto);
+		model.addAttribute("boardList" ,bService.getBoardList(pdto));
 	}
 	
 	@RequestMapping(value="/write",method = RequestMethod.GET)
