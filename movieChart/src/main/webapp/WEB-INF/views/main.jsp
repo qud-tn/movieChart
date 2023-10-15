@@ -9,54 +9,63 @@
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
 <title>무비차트</title>
 <script>
-	$(function() {
-		var parsed_dBox = JSON.parse('${dailyBoxOffice}');
-		console.log(parsed_dBox);
+	function dateFMT(range) {
+		var dateArray = range.split("~");
+		var startDate = dateArray[0];
+
+		return startDate.slice(0, 4) + "년 " + startDate.slice(4, 6) + "월 "
+				+ startDate.slice(6) + "일";
+
+	}
+
+	function updateMovieList(boxOfficeResult) {
 		var dailyBoxOfficeList = $("#dailyBoxOfficeList");
-		var range = parsed_dBox.showRange;
-		
-		function dateFMT(range) {
-			var dateArray = range.split("~");
-			var startDate = dateArray[0];
-			var endDate = dateArray[1];
+		dailyBoxOfficeList.empty();
 
-			if (startDate != endDate) {
-				var formattedStartDate = startDate.slice(0, 4) + "년 "
-						+ startDate.slice(4, 6) + "월 " + startDate.slice(6)
-						+ "일";
-				var formattedEndDate = endDate.slice(0, 4) + "년 "
-						+ endDate.slice(4, 6) + "월 " + endDate.slice(6) + "일";
-
-				return formattedStartDate + "~" + formattedEndDate;
-			} else {
-				return startDate.slice(0, 4) + "년 " + startDate.slice(4, 6)
-						+ "월 " + startDate.slice(6) + "일";
-			}
-		}
-		
-		function checkOtherOptions(){
-			
-		}
-		
-		
-		$("#historyOfBoxOffice").html(dateFMT(range) + "자 박스오피스 순위");
-
-		for (var i = 0; i < parsed_dBox.dailyBoxOfficeList.length; i++) {
-			var dbox = parsed_dBox.dailyBoxOfficeList[i];
+		$.each(boxOfficeResult.dailyBoxOfficeList, function(index, dbox) {
 			var row = $("<tr>");
 			row.append("<td>" + dbox.rank + "</td>");
 			row.append("<td>" + dbox.movieNm + "</td>");
 			dailyBoxOfficeList.append(row);
-		}
+		});
+	}
 
+	$(function() {
+		var parsed_dBox = JSON.parse('${dailyBoxOffice}');
+		var range = parsed_dBox.showRange;
+
+		$("#historyOfBoxOffice").html(dateFMT(range) + "자 박스오피스 순위");
+
+		updateMovieList(parsed_dBox);
 	});
+
+	function submitForm() {
+		var formData = $('#boxOfficeForm').serialize();
+		$.ajax({
+			url : '/boxOffice',
+			type : 'GET',
+			data : formData,
+			dataType : 'json',
+			success : function(response) {
+				var range = response.showRange;
+
+				$("#historyOfBoxOffice").html(dateFMT(range) + "자 박스오피스 순위");
+
+				updateMovieList(response);
+			},
+			error : function(error) {
+				console.error(error);
+			}
+		});
+	}
 </script>
 </head>
 <body>
 	<h1>무비차트</h1>
 	<div>
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
-			<input type="button" value="관리자 페이지로" onclick="location.href='admin/dashboard'">
+			<input type="button" value="관리자 페이지로"
+				onclick="location.href='admin/dashboard'">
 		</sec:authorize>
 	</div>
 	<div>
@@ -88,17 +97,17 @@
 			</thead>
 			<tbody id="dailyBoxOfficeList"></tbody>
 		</table>
-		<form action="" method="get">
-			날짜 : <input type="date" name="targetDt" id="Date"><br>
-			영화 타입 : <select name="multiMovieYn">
+		<form id="boxOfficeForm">
+			날짜 : <input type="date" name="targetDt" id="targetDt"><br>
+			영화 타입 : <select name="multiMovieYn" id="multiMovieYn">
 				<option value="">전체</option>
 				<option value="Y">다양성 영화</option>
 				<option value="N">상업 영화</option>
-			</select><br> 국내외 여부 : <select name="repNationCd">
+			</select> <br> 국내외 여부 : <select name="repNationCd" id="repNationCd">
 				<option value="">전체</option>
 				<option value="K">한국 영화</option>
 				<option value="F">외국 영화</option>
-			</select><br> <input type="submit" value="상세 검색">
+			</select> <br> <input type="button" value="상세 검색" onclick="submitForm()">
 		</form>
 	</div>
 	<a href="board/list">자유게시판</a>
