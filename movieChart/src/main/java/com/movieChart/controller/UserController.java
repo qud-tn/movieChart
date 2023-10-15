@@ -32,7 +32,7 @@ public class UserController {
 	public void logout() throws Exception{
 		logger.debug(" logout() 호출 ");
 	}
-	// http://localhost:8088/join
+	// http://localhost:8088/member/join
 	@RequestMapping(value="/join", method = RequestMethod.GET)
 	public void joinMemberGET()throws Exception {
 		

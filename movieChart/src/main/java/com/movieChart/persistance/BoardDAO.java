@@ -21,4 +21,6 @@ public interface BoardDAO {
 	public void updateViewcntOne(Integer board_id) throws Exception;
 	
 	public int selectCountBoard_id() throws Exception;
+
+	public List<BoardDTO> selectDeletedBoards(PageDTO pdto) throws Exception;
 }

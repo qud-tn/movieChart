@@ -62,5 +62,11 @@
 	   from board
 	   where deleted_dt is null
 	</select>
+	
+	<select id="selectDeletedBoards" resultType="com.movieChart.domain.BoardDTO">
+		select *
+		from board
+		where deleted_dt is not null
+	</select>
 
   </mapper>

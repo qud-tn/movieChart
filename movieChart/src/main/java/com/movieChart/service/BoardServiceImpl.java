@@ -66,4 +66,9 @@ public class BoardServiceImpl implements BoardService {
 		return bdao.selectCountBoard_id();
 	}
 
+	@Override
+	public List<BoardDTO> getDeletedBoardList(PageDTO pdto) throws Exception {
+		return bdao.selectDeletedBoards(pdto);
+	}
+
 }

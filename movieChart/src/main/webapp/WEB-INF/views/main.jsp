@@ -56,7 +56,7 @@
 	<h1>무비차트</h1>
 	<div>
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
-			<input type="button" value="관리자 페이지로" onclick="">
+			<input type="button" value="관리자 페이지로" onclick="location.href='admin/dashboard'">
 		</sec:authorize>
 	</div>
 	<div>

@@ -9,8 +9,8 @@
 <title>회원가입</title>
 <script type="text/javascript">
 	$(function() {
-		var password = $("#password").val();
 		function checkPasswordLength() {
+			var password = $("#password").val();
 			if (password.length < 8) {
 				$("#checkPasswordLength").html("비밀번호는 8자리 이상이여야 합니다");
 			} else {
@@ -18,9 +18,10 @@
 			}
 		}
 
-		$("#password").on("input", checkPasswordLength);
+		$("#password").on("change", checkPasswordLength);
 
 		function checkPassword() {
+			var password = $("#password").val();
 			var passwordchk = $("#passwordchk").val();
 
 			if (password !== passwordchk) {
@@ -78,9 +79,9 @@
 			var passwordchk = document.getElementById("checkPasswordResult").innerText;
 			var nicknamechk = document.getElementById("checkNicknameResult").innerText;
 			var usernamechk = document.getElementById("checkUsernameResult").innerText;
-
+			var emailchk = document.getElementById("checkEmailResult").innerText;
 			if (!nicknamechk.includes("하실") || !usernamechk.includes("하실")
-					|| passwordchk !== "") {
+					|| passwordchk !== "" || !emailchk.includes("하실")) {
 				alert("비밀번호 확인 및 중복 체크 오류");
 				event.preventDefault();
 			}
@@ -120,7 +121,7 @@
 				<td>아이디:</td>
 				<td><input type="text" name="username" id="username"
 					required="required"> <input type="button" id="usernamechk"
-					value="중복 조회"></td>
+					value="아이디 중복 조회"></td>
 				<td><span id="checkUsernameResult" style="color: red;"></span></td>
 			</tr>
 			<tr>
@@ -143,7 +144,7 @@
 			</tr>
 			<tr>
 				<td>이메일:</td>
-				<td><input type="email" name="email" required="required">
+				<td><input type="email" name="email" id="email" required="required">
 					<input type="button" id="emailchk" value="이메일 중복 조회"></td>
 				<td><span id="checkEmailResult" style="color: red;"></span></td>
 			</tr>

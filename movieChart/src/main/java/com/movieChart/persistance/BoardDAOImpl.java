@@ -57,4 +57,9 @@ public class BoardDAOImpl implements BoardDAO {
 	public int selectCountBoard_id() throws Exception {
 		return sqlsession.selectOne(NAMESPACE+".selectCountBoard_id");
 	}
+
+	@Override
+	public List<BoardDTO> selectDeletedBoards(PageDTO pdto) throws Exception {
+		return sqlsession.selectList(NAMESPACE+".selectDeletedBoards",pdto);
+	}
 }
