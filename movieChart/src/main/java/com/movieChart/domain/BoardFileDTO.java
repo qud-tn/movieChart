@@ -4,8 +4,7 @@ public class BoardFileDTO {
 	private String uuid;
 	private String uploadPath;
 	private String fileName;
-	private int bno;
-	
+	private int board_id;
 	public String getUuid() {
 		return uuid;
 	}
@@ -24,17 +23,16 @@ public class BoardFileDTO {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	public int getBno() {
-		return bno;
+	public int getBoard_id() {
+		return board_id;
 	}
-	public void setBno(int bno) {
-		this.bno = bno;
+	public void setBoard_id(int board_id) {
+		this.board_id = board_id;
 	}
-	
 	@Override
 	public String toString() {
-		return "BoardFileDTO [uuid=" + uuid + ", uploadPath=" + uploadPath + ", fileName=" + fileName + ", bno=" + bno
-				+ "]";
+		return "BoardFileDTO [uuid=" + uuid + ", uploadPath=" + uploadPath + ", fileName=" + fileName + ", board_id="
+				+ board_id + "]";
 	}
 	
 }

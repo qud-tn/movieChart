@@ -3,6 +3,9 @@ package com.movieChart.service;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import com.movieChart.domain.BoardDTO;
 import com.movieChart.domain.PageDTO;
 
@@ -20,4 +23,5 @@ public interface BoardService {
 	public void upViewcnt(Integer board_id) throws Exception;
 	
 	public int countBoard_id() throws Exception;
+
 }

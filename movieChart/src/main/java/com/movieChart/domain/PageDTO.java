@@ -12,11 +12,6 @@ public class PageDTO {
 	private boolean prev;   // 이전
 	private boolean next;	// 다음
 	
-	private PageDTO pageDTO;
-	
-	public void setPageDTO(PageDTO pageDTO) {
-		this.pageDTO = pageDTO;
-	}
 	
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
@@ -25,13 +20,13 @@ public class PageDTO {
 	
 	public void calculatePage() {
 		endPage 
-		 	= (int)(Math.ceil(pageDTO.getPage()/(double)pageBlock) * pageBlock);
+		 	= (int)(Math.ceil(this.getPage()/(double)pageBlock) * pageBlock);
 		
 		startPage
 		  = (endPage - pageBlock) + 1;
 		
 		int tmpEndPage 
-		= (int)(Math.ceil(totalCount / (double)pageDTO.getPageSize()));
+		= (int)(Math.ceil(totalCount / (double)this.getPageSize()));
 		
 		if(endPage > tmpEndPage) {
 			endPage = tmpEndPage;
@@ -40,7 +35,7 @@ public class PageDTO {
 		//prev = (startPage == 1)? false : true;
 		prev = startPage != 1;
 		
-		next = (endPage * pageDTO.getPageSize() >= totalCount)? false : true;
+		next = (endPage * this.getPageSize() >= totalCount)? false : true;
 	}
 	
 	public PageDTO() {
@@ -106,15 +101,11 @@ public class PageDTO {
 		this.startPage = startPage;
 	}
 
-	public PageDTO getPageDTO() {
-		return pageDTO;
-	}
-
 	@Override
 	public String toString() {
 		return "PageDTO [page=" + page + ", pageSize=" + pageSize + ", pageBlock=" + pageBlock + ", totalCount="
 				+ totalCount + ", startPage=" + startPage + ", endPage=" + endPage + ", prev=" + prev + ", next=" + next
-				+ ", pageDTO=" + pageDTO + "]";
+				+ "]";
 	}
 
 }

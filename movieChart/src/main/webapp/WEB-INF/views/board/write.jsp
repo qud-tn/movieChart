@@ -8,10 +8,45 @@
 <head>
 <meta charset="UTF-8">
 <title>글쓰기</title>
+<script type="text/javascript">
+
+	function checkFiles(data) {
+		var files = data.files;
+		var arrayExt = [ ".gif", ".jpg", ".png" ];
+		var maxSize = 10 * 1024 * 1024; // 10MB
+
+		for (var i = 0; i < files.length; i++) {
+			var file = files[i];
+			var fileSize = file.size;
+			var fileName = file.name;
+			var fileExt = fileName.substring(fileName.lastIndexOf('.'))
+					.toLowerCase();
+
+			if (fileSize > maxSize) {
+				alert('파일 크기가 10MB를 초과합니다: ' + fileName);
+				return false;
+			}
+
+			var isAllowedExtension = false;
+			for (var j = 0; j < arrayExt.length; j++) {
+				if (fileExt === arrayExt[j]) {
+					isAllowedExtension = true;
+					break;
+				}
+			}
+
+			if (!isAllowedExtension) {
+				alert('허용되지 않는 확장자입니다: ' + fileName);
+				return false;
+			}
+		}
+		return true;
+	}
+</script>
 </head>
 <body>
 	<h1>글쓰기</h1>
-	<form action="" method="post">
+	<form action="" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td><input type="text" name="title" placeholder="제목을 입력하세요"><br>
@@ -29,6 +64,9 @@
 			<tr>
 				<td><textarea rows="10" cols="50" name="content"></textarea><br>
 				</td>
+			</tr>
+			<tr>
+				<td><input type="file" name="files" multiple="multiple" onchange="checkFile(this)" >
 			</tr>
 		</table>
 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">

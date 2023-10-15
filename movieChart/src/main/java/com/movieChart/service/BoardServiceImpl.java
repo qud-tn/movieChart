@@ -1,18 +1,29 @@
 package com.movieChart.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.movieChart.controller.BoardRestController;
 import com.movieChart.domain.BoardDTO;
+import com.movieChart.domain.BoardFileDTO;
 import com.movieChart.domain.PageDTO;
 import com.movieChart.persistance.BoardDAO;
 
 @Service
 public class BoardServiceImpl implements BoardService {
+	private static final Logger logger = LoggerFactory.getLogger(BoardServiceImpl.class);
+	
 	@Inject
 	private BoardDAO bdao;
 

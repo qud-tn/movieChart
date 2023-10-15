@@ -62,7 +62,7 @@
 	<select id="selectCountBoard_id" resultType="int">
 	   select count(board_id) 
 	   from board
-	   where deleted_id is null
+	   where deleted_dt is null
 	</select>
 
   </mapper>
