@@ -25,7 +25,7 @@
 
 			if (password !== passwordchk) {
 				$("#checkPasswordResult").html("비밀번호가 일치하지 않습니다.");
-			}else{
+			} else {
 				$("#checkPasswordResult").html("");
 			}
 		}
@@ -87,6 +87,28 @@
 		}
 
 		$("#submitForm").on("submit", checkform);
+
+		function checkEmail() {
+			var email = document.getElementById("email").value;
+			$.ajax({
+				url : "/member/email/" + email,
+				method : "GET",
+				success : function(data) {
+					if (data) {
+						$("#checkEmailResult").html(
+								"이미 등록된 이메일 입니다 사용하실 수 없습니다");
+					} else {
+						$("#checkEmailResult").html("등록하실 수 있는 이메일 입니다");
+					}
+				},
+				error : function(xhr, status, error) {
+					console.error("AJAX 오류: " + status, error);
+				}
+			});
+		}
+
+		$("#emailchk").on("click", checkEmail);
+
 	});
 </script>
 </head>
@@ -116,12 +138,14 @@
 				<td>닉네임:</td>
 				<td><input type="text" name="nickname" id="nickname"
 					required="required"> <input type="button" id="nicknamechk"
-					value="중복 조회"></td>
+					value="닉네임 중복 조회"></td>
 				<td><span id="checkNicknameResult" style="color: red;"></span></td>
 			</tr>
 			<tr>
 				<td>이메일:</td>
-				<td><input type="email" name="email" required="required"></td>
+				<td><input type="email" name="email" required="required">
+					<input type="button" id="emailchk" value="이메일 중복 조회"></td>
+				<td><span id="checkEmailResult" style="color: red;"></span></td>
 			</tr>
 		</table>
 		<input type="submit" value="회원가입"> <input type="hidden"

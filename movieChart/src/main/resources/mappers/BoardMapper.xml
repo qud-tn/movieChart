@@ -11,7 +11,7 @@
   	</insert>
   	
   	<select id="selectBoardList" resultType="com.movieChart.domain.BoardDTO">
-	  	select title, category, nickname, board_id ,write_date
+	  	select title, category, nickname, board_id ,write_date, view_cnt
 	  	from board b join users u
 	  	on u.username=b.username
 	  	where deleted_dt is null
@@ -20,7 +20,7 @@
   	</select>
   	
   	<select id="selectBoard" resultType="com.movieChart.domain.BoardDTO">
-	  	select title, content, category, nickname, board_id, write_date, b.username
+	  	select title, content, category, nickname, board_id, write_date, b.username, view_cnt
 	  	from board b join users u
 	  	on u.username=b.username
 	  	where deleted_dt is null and board_id=#{board_id}
@@ -50,13 +50,11 @@
   	</update>
   	
 	<update id="updateViewcntOne">
-		update board
-		set viewcnt = coalesce(
-		(select max(viewcnt) 
-		from board 
-		where board_id = #{board_id}), 0
-		) + 1
-		where board_id = #{board_id};
+		update board b
+		join (select coalesce(max(view_cnt), 0) as max_viewcnt 
+		from board where board_id = #{board_id}) as self
+		set b.view_cnt = self.max_viewcnt + 1
+		where b.board_id = #{board_id};
 	</update>  	
 	
 	<select id="selectCountBoard_id" resultType="int">

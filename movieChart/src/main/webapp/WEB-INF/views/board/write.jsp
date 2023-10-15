@@ -24,6 +24,7 @@
 
 			if (fileSize > maxSize) {
 				alert('파일 크기가 10MB를 초과합니다: ' + fileName);
+				file.value = '';
 				return false;
 			}
 
@@ -37,6 +38,7 @@
 
 			if (!isAllowedExtension) {
 				alert('허용되지 않는 확장자입니다: ' + fileName);
+				file.value = '';
 				return false;
 			}
 		}
@@ -66,7 +68,8 @@
 				</td>
 			</tr>
 			<tr>
-				<td><input type="file" name="files" multiple="multiple" onchange="checkFile(this)" >
+				<td><input type="file" name="file" multiple="multiple" onchange="checkFiles(this)" 
+				accept='image/jpeg,image/gif,image/png'>
 			</tr>
 		</table>
 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">

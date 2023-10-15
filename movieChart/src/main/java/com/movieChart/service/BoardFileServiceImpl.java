@@ -22,14 +22,14 @@ public class BoardFileServiceImpl implements BoardFileService {
 	private BoardFileDAO bdao;
 	
 	@Override
-	public void uploadFile(List<MultipartFile> fileList) throws Exception {
+	public void uploadFile(MultipartFile[] files) throws Exception {
 		BoardFileDTO bfdto=new BoardFileDTO();
 		final String UPLOADPATH = "D:\\upload";
 		
 		bfdto.setUploadPath(UPLOADPATH);
 		
-		for(int i = 0; i < fileList.size(); i++) {
-	        String originalFileName = fileList.get(i).getOriginalFilename();
+		for(int i = 0; i < files.length; i++) {
+	        String originalFileName = files[i].getOriginalFilename();
 	        String uuid = UUID.randomUUID().toString();
 	        String savedFileName = uuid + "_" + originalFileName;
 	        
@@ -37,13 +37,13 @@ public class BoardFileServiceImpl implements BoardFileService {
 	        bfdto.setUuid(uuid);
 	        
 	        logger.info("파일명: " + savedFileName);
-	        long size = fileList.get(i).getSize();
+	        long size = files[i].getSize();
 	        logger.info("사이즈: " + size);
 
 	        File saveFile = new File(UPLOADPATH + "\\" + savedFileName);
 	        bdao.insertBoardFile(bfdto);
 	        try {
-	        	fileList.get(i).transferTo(saveFile);
+	        	files[i].transferTo(saveFile);
 	        } catch (IllegalStateException e) {
 	            e.printStackTrace();
 	        } catch (IOException e) {

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -40,17 +41,17 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String writePOST(BoardDTO bdto, MultipartHttpServletRequest files) throws Exception {
-		List<MultipartFile> fileList = files.getFiles("files");
+	public String writePOST(BoardDTO bdto, @RequestParam("file") MultipartFile[] files) throws Exception {
 
 		bService.writeBoard(bdto);
-		bfService.uploadFile(fileList);
+		bfService.uploadFile(files);
 		return "redirect:/board/list";
 	}
 
 	@RequestMapping(value = "/{board_id}", method = RequestMethod.GET)
 	public String readBoardGET(Model model, @PathVariable("board_id") Integer board_id, BoardDTO bdto)
 			throws Exception {
+		bService.upViewcnt(board_id);
 		model.addAttribute("boardContent", bService.readBoardContent(board_id));
 		return "/board/view";
 	}

@@ -9,6 +9,7 @@
   		insert into boardfile
   		(board_id, uuid, filename)
   		values
-  		(#{board_id},#{uuid},#{filename})
+  		((select max(board_id)
+  		from board),#{uuid},#{fileName})
   	</insert>
   </mapper>

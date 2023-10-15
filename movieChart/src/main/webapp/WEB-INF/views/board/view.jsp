@@ -21,28 +21,26 @@
 		</thead>
 		<tbody>
 		<tr>
-			<td>${boardContent.title }</td>
-		</tr>
-		<tr>
+			<td colspan="3">${boardContent.title }</td>
+			<td>조회수 : ${boardContent.view_cnt }</td>
 			<td>${boardContent.category }</td>
 		</tr>
 		<tr>
-			<td>${boardContent.content }</td>
+			<td colspan="6">${boardContent.content }</td>
 		</tr>
 		</tbody>
 		<tfoot>
 		<c:forEach var="board" items="${boardContent.SurroundingList}">
 				<tr>
-			<c:if test="${board.board_id > boardContent.board_id}">
+			<c:if test="${board.board_id < boardContent.board_id}">
 					<td>이전글
 			</c:if>
-			<c:if test="${board.board_id < boardContent.board_id}">
+			<c:if test="${board.board_id > boardContent.board_id}">
 					<td>다음글
 			</c:if>					
 					<td>${board.category}</td>
 					<td><a href="${board.board_id}">${board.title}</a></td>
 					<td>${board.nickname}</td>
-					<td>${board.write_date}</td>
 					<td>${board.write_date}</td>
 				</tr>
 		</c:forEach>

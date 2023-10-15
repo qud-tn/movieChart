@@ -32,7 +32,7 @@
 					<td><a href="${boardlist.board_id}">${boardlist.title }</a></td>
 					<td>${boardlist.nickname }</td>
 					<td>${boardlist.write_date }</td>
-					<td>${boardlist.write_date }</td>
+					<td>${boardlist.view_cnt }</td>
 				</tr>
 			</c:forEach>
 
