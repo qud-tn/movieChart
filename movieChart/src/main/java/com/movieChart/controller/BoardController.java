@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -67,5 +69,12 @@ public class BoardController {
 		bdto.setBoard_id(board_id);
 		bService.modifyBoard(bdto);
 		return "redirect:/board/list";
+	}
+	
+	@DeleteMapping(value = "/{board_id}")
+	public String softDeleteBoard(@PathVariable("board_id") Integer board_id) throws Exception {
+		bService.softDeleteBoard(board_id);
+		
+		return "redirct:board/list";
 	}
 }

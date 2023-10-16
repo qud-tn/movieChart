@@ -6,16 +6,13 @@
   
   <mapper namespace="com.movieChart.mapper.ReplyMapper">
   	<insert id="insertReply">
-  		insert into reply
-  		(board_id, reply, username, reply_id)
-  		values (#{board_id}, #{reply}, #{username}, 
-  		(select COALESCE(MAX(reply_id), 0) + 1
-  		from reply
-  		where board_id=#{board_id}))
-  		where board_id=#{board_id}
+  		insert into reply (board_id, reply, username, reply_id)
+		select #{board_id}, #{reply}, #{username}, coalesce(max(reply_id), 0) + 1
+		from reply
+		where board_id = #{board_id}
   	</insert>
 	
-	<select id="selectReplys">
+	<select id="selectReplys" resultType="com.movieChart.domain.ReplyDTO">
 		select reply, username, reply_id, reply_dt
 		from reply
 		where board_id=#{board_id} and deleted_dt is null

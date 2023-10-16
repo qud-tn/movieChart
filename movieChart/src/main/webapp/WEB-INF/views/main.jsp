@@ -63,27 +63,45 @@
 <body>
 	<h1>무비차트</h1>
 	<div>
+		<sec:authorize access="isAuthenticated()">
+		<table>
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
-			<input type="button" value="관리자 페이지로"
+		<tr>
+		<td>
+			<input type="button" value="관리자 페이지"
 				onclick="location.href='admin/dashboard'">
+		</td>
+		</tr>
+		</sec:authorize>
+		<tr>
+		<td>
+			<input type="button" value="마이페이지"
+				onclick="location.href='member/
+				<sec:authentication property="principal.udto.username" />'">
+		</table>
 		</sec:authorize>
 	</div>
 	<div>
-		<sec:authorize access="isAuthenticated()">
-			<sec:authentication property="principal.udto.nickname" />
-(<sec:authentication property="principal.udto.username" />)
- 님 환영합니다.<br>
-			<input type="button" value="로그아웃" onclick="">
-			<br>
-		</sec:authorize>
-		<sec:authorize access="isAnonymous()">
-			<input type="button" value="회원가입"
-				onclick="location.href='/member/join'">
-			<br>
-			<input type="button" value="로그인"
-				onclick="location.href='/member/login'">
-			<br>
-		</sec:authorize>
+		<table border="1">
+			<sec:authorize access="isAuthenticated()">
+				<tr>
+					<td><sec:authentication property="principal.udto.nickname" />
+						(<sec:authentication property="principal.udto.username" />) 님
+						환영합니다.</td>
+				</tr>
+				<tr>
+					<td><input type="button" value="로그아웃" onclick=""></td>
+				</tr>
+			</sec:authorize>
+			<sec:authorize access="isAnonymous()">
+				<tr>
+					<td><input type="button" value="회원가입"
+						onclick="location.href='/member/join'"></td>
+					<td><input type="button" value="로그인"
+						onclick="location.href='/member/login'"></td>
+				</tr>
+			</sec:authorize>
+		</table>
 	</div>
 	<div>
 		<table border="1">
@@ -103,11 +121,13 @@
 				<option value="">전체</option>
 				<option value="Y">다양성 영화</option>
 				<option value="N">상업 영화</option>
-			</select> <br> 국내외 여부 : <select name="repNationCd" id="repNationCd">
+			</select> 
+			<br> 국내외 여부 : <select name="repNationCd" id="repNationCd">
 				<option value="">전체</option>
 				<option value="K">한국 영화</option>
 				<option value="F">외국 영화</option>
-			</select> <br> <input type="button" value="상세 검색" onclick="submitForm()">
+			</select> 
+			<br> <input type="button" value="상세 검색" onclick="submitForm()">
 		</form>
 	</div>
 	<a href="board/list">자유게시판</a>
