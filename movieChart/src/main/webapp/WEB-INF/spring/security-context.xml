@@ -26,6 +26,7 @@
 	
 	<security:http>
 		
+		<security:intercept-url pattern="/movie/*" access="permitAll" />
 		<security:intercept-url pattern="/member/join" access="permitAll" />
 		<security:intercept-url pattern="/member/login" access="permitAll" />
 		<security:intercept-url pattern="/member/*" access="hasRole('ROLE_USER')" />

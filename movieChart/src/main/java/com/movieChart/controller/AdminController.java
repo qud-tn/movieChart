@@ -10,7 +10,7 @@ import com.movieChart.domain.PageDTO;
 import com.movieChart.service.BoardService;
 
 @Controller
-@RequestMapping(value="admin/*")
+@RequestMapping(value="/admin/*")
 public class AdminController {
 	
 	@Autowired

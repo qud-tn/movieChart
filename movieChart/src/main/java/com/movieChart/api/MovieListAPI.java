@@ -25,7 +25,7 @@ public class MovieListAPI {
 	        // 변수 설정
 	        //   - 요청(Request) 인터페이스 Map
 	        //   - 어제자 다양성 한국영화 10개 조회
-	        HashMap<String, String> paramMap = new HashMap<String, String>();
+	        HashMap<String, Object> paramMap = new HashMap<>();
 	        paramMap.put("key"          , KEY);                        // 발급받은 인증키
 	        paramMap.put("curPage"     , mdto.getCurPage());  // 현재 페이지
 	        paramMap.put("itemPerPage"  , mdto.getItemPerPage());                            // 결과 ROW 의 개수( 최대 10개 )

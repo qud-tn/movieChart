@@ -59,8 +59,9 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "edit/{board_id}", method = RequestMethod.GET)
-	public void editBoardGET(Model model, @PathVariable("board_id") Integer board_id, BoardDTO bdto) throws Exception {
+	public String editBoardGET(Model model, @PathVariable("board_id") Integer board_id, BoardDTO bdto) throws Exception {
 		model.addAttribute("boardContent", bService.readBoardContent(board_id));
+		return "/board/edit";
 	}
 
 	@RequestMapping(value = "edit/{board_id}", method = RequestMethod.POST)
@@ -71,7 +72,7 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
-	@DeleteMapping(value = "/{board_id}")
+	@GetMapping(value = "delete/{board_id}")
 	public String softDeleteBoard(@PathVariable("board_id") Integer board_id) throws Exception {
 		bService.softDeleteBoard(board_id);
 		

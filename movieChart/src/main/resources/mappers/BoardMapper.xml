@@ -45,7 +45,7 @@
 	  	update board 
 	  	set title=#{title},
 	  	category=#{category},
-	  	content=#{content},
+	  	content=#{content}
 	  	where board_id=#{board_id} 
   	</update>
   	

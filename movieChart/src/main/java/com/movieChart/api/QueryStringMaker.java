@@ -3,7 +3,7 @@ package com.movieChart.api;
 import java.util.HashMap;
 
 public class QueryStringMaker {
-	 public String makeQueryString(HashMap<String, String> paramMap) {
+	 public String makeQueryString(HashMap<String, Object> paramMap) {
 	        StringBuilder sb = new StringBuilder();
 	 
 	        paramMap.entrySet().forEach(( entry )->{

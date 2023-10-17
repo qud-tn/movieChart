@@ -7,8 +7,17 @@ public class ReplyDTO {
 	private String username;
 	private String reply_dt;
 	private String deleted_dt;
+	private String nickname;
 	
 	
+	
+	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public String getDeleted_dt() {
 		return deleted_dt;
 	}
@@ -49,7 +58,7 @@ public class ReplyDTO {
 	@Override
 	public String toString() {
 		return "ReplyDTO [board_id=" + board_id + ", reply_id=" + reply_id + ", reply=" + reply + ", username="
-				+ username + ", reply_dt=" + reply_dt + ", deleted_dt=" + deleted_dt + "]";
+				+ username + ", reply_dt=" + reply_dt + ", deleted_dt=" + deleted_dt + ", nickname=" + nickname + "]";
 	}
 	
 }

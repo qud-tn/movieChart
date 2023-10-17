@@ -32,9 +32,9 @@
 				</td>
 			</tr>
 		</table>
-		<input type="hidden" name="${_csrf.parameterName }"
-			value="${_csrf.token }"> <input type="hidden" name="username"
-			value='<sec:authentication property="principal.udto.username" />'>
+		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> 
+		<input type="hidden" name="username"
+			value='${pageContext.request.userPrincipal.name}'>
 		<input type="submit" value="글 수정하기">
 	</form>
 </body>

@@ -3,8 +3,10 @@ package com.movieChart.api;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
@@ -13,26 +15,29 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.movieChart.domain.BoxOfficeDTO;
+import com.movieChart.domain.MovieDTO;
 
 public class MovieKmrbAPI {
 	private static final Logger logger = LoggerFactory.getLogger(BoxOfficeAPI.class);
 	QueryStringMaker queryStringMaker=new QueryStringMaker();
-	private final String KEY="87d7a4f3-a8f3-42e6-9685-991a0fde1e65";
-	private final String REQUEST_URL = "http://api.kcisa.kr/openapi/service/rest/meta14/getKMPC031801";
+	private final String KEY="UKW531W841XTM209RM1L";
+	private final String REQUEST_URL = "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp";
 	
 	
-	 public String requestAPI(BoxOfficeDTO bdto ) {
+	 public String requestAPI(MovieDTO mdto ) throws Exception {
 		 	
 		 
 	        // 변수 설정
 	        //   - 요청(Request) 인터페이스 Map
 	        //   - 어제자 다양성 한국영화 10개 조회
-	        HashMap<String, String> paramMap = new HashMap<String, String>();
-	        paramMap.put("serviceKey"          , KEY);                        // 발급받은 인증키
-	        paramMap.put("targetDt"     , bdto.getTargetDt().replace("-",""));  // 조회하고자 하는 날짜
-	        paramMap.put("itemPerPage"  , bdto.getItemPerPage());                            // 결과 ROW 의 개수( 최대 10개 )
-	        paramMap.put("multiMovieYn" , bdto.getMultiMovieYn());                             // Y:다양성 영화, N:상업영화, Default:전체
-	        paramMap.put("repNationCd"  , bdto.getRepNationCd());                             // K:한국영화, F:외국영화, Default:전체
+	        HashMap<String, Object> paramMap = new HashMap<>();
+	        paramMap.put("ServiceKey"          , KEY);                        
+	        paramMap.put("listCount"     , mdto.getListCount());  
+	        paramMap.put("startCount"  , mdto.getStartCount());                           
+	        paramMap.put("query" , URLEncoder.encode(mdto.getQuery(), "UTF-8"));                             
+	        paramMap.put("detail"  , mdto.getDetail());
+	        paramMap.put("sort", mdto.getSort());
+	        paramMap.put("collection", "kmdb_new2");
 	 
 	        try {
 	            // Request URL 연결 객체 생성
@@ -52,13 +57,8 @@ public class MovieKmrbAPI {
 	                response.append(readline);
 	            }
 	 
-	            // JSON 객체로  변환
-	            JSONObject responseBody = new JSONObject(response.toString());
-	 
-	            // 데이터 추출
-	            JSONObject boxOfficeResult = responseBody.getJSONObject("boxOfficeResult");
-	 
-	            return boxOfficeResult.toString();
+	            return response.toString();
+	            
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	            return "api 서버 오류";

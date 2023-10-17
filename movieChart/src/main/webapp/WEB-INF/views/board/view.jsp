@@ -36,14 +36,21 @@
 
 	            response.forEach(function (data) {
 	                var listItem = $("<tr>");
-	                var usernameCell = $("<td>").text("작성자 : "+data.username);
+	                var usernameCell = $("<td>").text("작성자 : "+data.nickname);
 	                var replyCell = $("<td>").text(data.reply);
 	                var dateCell = $("<td>").text("작성 일자 : "+data.reply_dt);
+	                var insertDeleteButton = $("<td>").append($("<input>").attr("type", "button").val("삭제").click(function() {
+	                    deleteConfirm(board_id, data.reply_id);
+	                }));
 
 	                listItem.append(usernameCell);
 	                listItem.append(replyCell);
 	                listItem.append(dateCell);
-	                
+// 	                listItem.append("<td><input type='button' value='수정' onclick='appendTextarea("+data.reply_id+","+data.reply+")'></td>");
+// 	                listItem.append("<td><div id='updateReply'></div></td>");
+	                if('${pageContext.request.userPrincipal.name}'=== data.username){
+	                listItem.append(insertDeleteButton);
+	                }
 	                repliesList.append(listItem);
 	            });
 			},
@@ -62,9 +69,9 @@
 			        reply: content,  
 			        username: '${pageContext.request.userPrincipal.name}'
 			    },
-			dataType : 'json',
 			success : function(response) {
 				console.log('답글 작성 성공:', response);
+				$('#replyContent').val('');
 				getBoardReply(board_id);
 			},
 			error : function(error) {
@@ -74,46 +81,66 @@
 		});
 	}
 
-	function putBoardReply(board_id, reply_id, content) {
-		$.ajax({
-			url : board_id+'/reply/'+reply_id,
-			type : 'PUT',
-			data : {
-				board_id : board_id,
-				reply_id : reply_id,
-				content : content
-			},
-			dataType : 'json',
-			success : function(response) {
-				console.log('답글 수정 성공:', response);
-			},
-			error : function(error) {
-				console.error('답글 수정 실패:', error);
-			}
-		});
-	}
+// 	function putBoardReply(board_id, reply_id, content) {
+// 		$.ajax({
+// 			url : board_id+'/reply/'+reply_id,
+// 			type : 'PUT',
+// 			data : {
+// 				board_id : board_id,
+// 				reply_id : reply_id,
+// 				reply : content
+// 			},
+// 			success : function(response) {
+// 				console.log('답글 수정 성공:', response);
+// 				getBoardReply(board_id);
+// 			},
+// 			error : function(error) {
+// 				console.error('답글 수정 실패:', error);
+// 				getBoardReply(board_id);
+// 			}
+// 		});
+// 	}
 
 	function softDeleteBoardReply(board_id, reply_id) {
 		$.ajax({
 			url : board_id+'/reply/'+reply_id,
 			type : 'DELETE',
-			dataType : 'json',
 			success : function(response) {
 				console.log('답글 삭제 성공:', response);
+				alert("답글 삭제 완료");
+				getBoardReply(board_id);
 			},
 			error : function(error) {
 				console.error('답글 삭제 실패:', error);
+				getBoardReply(board_id);
 			}
 		});
 	}
 	
+	function deleteConfirm(board_id, reply_id){
+		if(confirm("답글을 삭제하시겠습니까?")){
+			softDeleteBoardReply(board_id, reply_id);
+		}
+	}
+	
+// 	function insertTextArea(replyId, replyContent) {
+// 	    var textArea = $("<textarea>")
+// 	        .attr("id", "updateTextarea_" + replyId)
+// 	        .val(replyContent);
+	        
+// 	    var updateButton = $("<input>")
+// 	        .attr("type", "button")
+// 	        .val("수정 완료")
+// 	        .click(function() {
+// 	            var updatedContent = $("#" + textArea.attr("id")).val();
+// 	        });
+
+// 	    $("#updateReply").empty(); 
+// 	    $("#updateReply").append(textArea);
+// 	    $("#updateReply").append(updateButton);
+// 	}
+	
 	$(function(){
-		var token = $("meta[name='_csrf']").attr("content");
-		var header = $("meta[name='_csrf_header']").attr("content");
-		
-		$(document).ajaxSend(function(e, xhr, options) {
-	         xhr.setRequestHeader(header,token);
-	    });
 		getBoardReply('${boardContent.board_id }');
 	});
 </script>
@@ -123,8 +150,8 @@
 		<thead>
 		<sec:authorize access="isAuthenticated() && authentication.principal.username == '${boardContent.username}'">
 		<tr>
-			<td><input type="button" value="글 수정" onclick="location.href='edit'"></td>
-			<td>글 삭제</td>
+			<td><input type="button" value="글 수정" onclick="location.href='edit/${boardContent.board_id}'"></td>
+			<td><input type="button" value="글 삭제" onclick="location.href='delete/${boardContent.board_id}'"></td>
 		</tr>
 		</sec:authorize>
 		</thead>

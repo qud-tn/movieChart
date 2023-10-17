@@ -130,6 +130,18 @@
 			<br> <input type="button" value="상세 검색" onclick="submitForm()">
 		</form>
 	</div>
+	<div>
+		<table>
+			<tr>
+				<td>
+					<form action="/search">
+						영화 검색:<input type="text" name="query" id="query">
+						<input type="submit" value="영화 검색">
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>
 	<a href="board/list">자유게시판</a>
 </body>
 </html>

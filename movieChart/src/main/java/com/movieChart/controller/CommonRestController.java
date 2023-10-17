@@ -24,4 +24,5 @@ public class CommonRestController {
 			return cService.searchBoxOffice(bdto);
 		}
 	}
+
 }

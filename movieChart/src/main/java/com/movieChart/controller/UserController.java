@@ -45,6 +45,7 @@ public class UserController {
 		
 		return "redirect:/main";
 	}
+	
 	@GetMapping(value="/{member_id}")
 	public String GetMemberInfo(@PathVariable("member_id") String member_id) throws Exception{
 		return "/member/view";

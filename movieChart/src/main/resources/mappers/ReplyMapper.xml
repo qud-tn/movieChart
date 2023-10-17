@@ -13,8 +13,9 @@
   	</insert>
 	
 	<select id="selectReplys" resultType="com.movieChart.domain.ReplyDTO">
-		select reply, username, reply_id, reply_dt
-		from reply
+		select reply, r.username, reply_id, reply_dt, nickname
+		from reply r join users u
+		on r.username = u.username
 		where board_id=#{board_id} and deleted_dt is null
 	</select>
 	
