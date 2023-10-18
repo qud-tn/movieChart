@@ -49,12 +49,5 @@ public class CommonController {
 			model.addAttribute("dailyBoxOffice", cService.searchBoxOffice(bdto));
 		}
 	}
-	
-	@GetMapping(value="/search")
-	public String SearchMovie(Model model, MovieDTO mdto) throws Exception{
-		model.addAttribute("Search", cService.searchMovie(mdto));
-		return "/movie/search";
-	}
-	
 
 }

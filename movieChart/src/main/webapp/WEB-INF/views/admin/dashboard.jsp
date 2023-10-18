@@ -6,11 +6,39 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
+<script type="text/javascript">
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+
+$.ajaxSetup({
+    beforeSend: function(xhr) {
+        xhr.setRequestHeader(header, token);
+    }
+});
+
+function crawlMovieInfo(){
+	$.ajax({
+		url : '/movie/crawling',
+		type : 'POST',
+		success : function(response) {
+			alert("크롤링 성공!");
+		},
+		error : function(error) {
+			console.error('크롤링 실패:', error);
+		}
+	})
+}
+</script>
 </head>
 <body>
 	<h1>관리자 페이지</h1>
+	<input type="button" onclick="crawlMovieInfo()" value="크롤링하기">
 	<table border="1">
 		<thead>
 			<tr>
@@ -33,7 +61,6 @@
 					<td>${boardlist.view_cnt }</td>
 				</tr>
 			</c:forEach>
-
 		</tbody>
 	</table>
 </body>

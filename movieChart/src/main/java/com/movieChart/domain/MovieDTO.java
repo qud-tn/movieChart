@@ -1,27 +1,16 @@
 package com.movieChart.domain;
 
 public class MovieDTO {
-    private Integer listCount;
-    private Integer startCount;
-    private String collection;
-    private String query;
-    private String detail;
-    private String sort;
-    private String releaseDts;
-    private String title;
-    
-    public MovieDTO() {
-    	this.startCount=1;
-    	this.query="";
-    	this.detail="Y";
-    	this.sort="";
-    }
-    
-	public String getReleaseDts() {
-		return releaseDts;
+	private int code_no;
+	private String title;
+	private String image;
+	private String synopsis;
+	
+	public int getCode_no() {
+		return code_no;
 	}
-	public void setReleaseDts(String releaseDts) {
-		this.releaseDts = releaseDts;
+	public void setCode_no(int code_no) {
+		this.code_no = code_no;
 	}
 	public String getTitle() {
 		return title;
@@ -29,48 +18,24 @@ public class MovieDTO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Integer getListCount() {
-		return listCount;
+	public String getImage() {
+		return image;
 	}
-	public void setListCount(Integer listCount) {
-		this.listCount = listCount;
+	public void setImage(String image) {
+		this.image = image;
 	}
-	public Integer getStartCount() {
-		return startCount;
+	public String getSynopsis() {
+		return synopsis;
 	}
-	public void setStartCount(Integer startCount) {
-		this.startCount = startCount;
+	public void setSynopsis(String synopsis) {
+		this.synopsis = synopsis;
 	}
-	public String getCollection() {
-		return collection;
-	}
-	public void setCollection(String collection) {
-		this.collection = collection;
-	}
-	public String getQuery() {
-		return query;
-	}
-	public void setQuery(String query) {
-		this.query = query;
-	}
-	public String getDetail() {
-		return detail;
-	}
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
-	public String getSort() {
-		return sort;
-	}
-	public void setSort(String sort) {
-		this.sort = sort;
-	}
-
+	
 	@Override
 	public String toString() {
-		return "MovieDTO [listCount=" + listCount + ", startCount=" + startCount + ", collection=" + collection
-				+ ", query=" + query + ", detail=" + detail + ", sort=" + sort + ", releaseDts=" + releaseDts
-				+ ", title=" + title + "]";
+		return "MovieInfoDTO [code_no=" + code_no + ", title=" + title + ", image=" + image + ", synopsis=" + synopsis
+				+ "]";
 	}
+	
 	
 }

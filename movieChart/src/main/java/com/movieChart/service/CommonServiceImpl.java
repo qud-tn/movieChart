@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.movieChart.api.BoxOfficeAPI;
 import com.movieChart.api.MovieKmrbAPI;
 import com.movieChart.domain.BoxOfficeDTO;
-import com.movieChart.domain.MovieDTO;
 
 @Service
 public class CommonServiceImpl implements CommonService {
@@ -35,13 +34,6 @@ public class CommonServiceImpl implements CommonService {
 		return bapi.requestAPI(bdto);
 	}
 		
-	@Override
-	public String searchMovie(MovieDTO mdto) throws Exception {
-		MovieKmrbAPI mapi= new MovieKmrbAPI();
-		
-		mdto.setListCount(10);
-		
-		return mapi.requestAPI(mdto);
-	}
+	
 
 }

@@ -31,13 +31,13 @@ public class MovieKmrbAPI {
 	        //   - 요청(Request) 인터페이스 Map
 	        //   - 어제자 다양성 한국영화 10개 조회
 	        HashMap<String, Object> paramMap = new HashMap<>();
-	        paramMap.put("ServiceKey"          , KEY);                        
-	        paramMap.put("listCount"     , mdto.getListCount());  
-	        paramMap.put("startCount"  , mdto.getStartCount());                           
-	        paramMap.put("query" , URLEncoder.encode(mdto.getQuery(), "UTF-8"));                             
-	        paramMap.put("detail"  , mdto.getDetail());
-	        paramMap.put("sort", mdto.getSort());
-	        paramMap.put("collection", "kmdb_new2");
+//	        paramMap.put("ServiceKey"          , KEY);                        
+//	        paramMap.put("listCount"     , mdto.getListCount());  
+//	        paramMap.put("startCount"  , mdto.getStartCount());                           
+//	        paramMap.put("query" , URLEncoder.encode(mdto.getQuery(), "UTF-8"));                             
+//	        paramMap.put("detail"  , mdto.getDetail());
+//	        paramMap.put("title", URLEncoder.encode(mdto.getTitle(), "UTF-8"));
+//	        paramMap.put("collection", "kmdb_new2");
 	 
 	        try {
 	            // Request URL 연결 객체 생성

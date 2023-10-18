@@ -15,8 +15,8 @@ public class BoardFileDAOImpl implements BoardFileDAO {
 	private final String NAMESPACE="com.movieChart.mapper.BoardFileMapper";
 
 	@Override
-	public void insertBoardFile(BoardFileDTO bfdto) throws Exception {
-		sqlsession.insert(NAMESPACE+".insertBoardFile",bfdto);
+	public int insertBoardFile(BoardFileDTO bfdto) throws Exception {
+		return sqlsession.insert(NAMESPACE+".insertBoardFile",bfdto);
 	}
 	
 	

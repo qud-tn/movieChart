@@ -25,7 +25,7 @@
 		$.each(boxOfficeResult.dailyBoxOfficeList, function(index, dbox) {
 			var row = $("<tr>");
 			row.append("<td>" + dbox.rank + "</td>");
-			row.append("<td>" + dbox.movieNm + "</td>");
+			row.append("<td><a href='movie/movieCode/"+dbox.movieCd+"'>" + dbox.movieNm + "</a></td>");
 			dailyBoxOfficeList.append(row);
 		});
 	}
