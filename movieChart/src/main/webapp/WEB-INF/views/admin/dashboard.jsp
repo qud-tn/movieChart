@@ -1,45 +1,68 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
-<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header"
+	content="${_csrf.headerName}" />
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
 <script type="text/javascript">
-var token = $("meta[name='_csrf']").attr("content");
-var header = $("meta[name='_csrf_header']").attr("content");
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
 
-$.ajaxSetup({
-    beforeSend: function(xhr) {
-        xhr.setRequestHeader(header, token);
-    }
-});
-
-function crawlMovieInfo(){
-	$.ajax({
-		url : '/movie/crawling',
-		type : 'POST',
-		success : function(response) {
-			alert("크롤링 성공! db에 "+response+"개 저장");
-		},
-		error : function(error) {
-			console.error('크롤링 실패:', error);
-			alert('크롤링 실패');
+	$.ajaxSetup({
+		beforeSend : function(xhr) {
+			xhr.setRequestHeader(header, token);
 		}
-	})
-}
+	});
+
+	function crawlMovieInfo() {
+		$.ajax({
+			url : '/movie/crawling',
+			type : 'POST',
+			success : function(response) {
+				alert("크롤링 성공! db에 " + response + "개 저장");
+			},
+			error : function(error) {
+				console.error('크롤링 실패:', error);
+				alert('크롤링 실패');
+			}
+		})
+	}
+
+	$(function() {
+		$.ajax({
+			url : '/movie/crawlingInfo',
+			type : 'GET',
+			success : function(response) {
+				data = JSON.parse(response); 
+				$("#checkResult").html("마지막 크롤링 : "+data.maxDt+" 총 "+data.countMovie+"개 크롤링 됨.");
+				console.log('크롤링 성공:', response);
+			},
+			error : function(error) {
+				console.error('크롤링 실패:', error);
+				$("#checkResult").html("크롤링 정보 오류");
+			}
+		})
+	});
 </script>
 </head>
 <body>
 	<h1>관리자 페이지</h1>
-	<input type="button" onclick="crawlMovieInfo()" value="크롤링하기">
+	<table>
+		<tr>
+			<td><input type="button" onclick="crawlMovieInfo()"
+				value="크롤링하기"></td>
+			<td><span id="checkResult" style="color: red;"></span></td>
+		</tr>
+	</table>
 	<table border="1">
 		<thead>
 			<tr>

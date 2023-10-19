@@ -10,4 +10,8 @@ public interface MovieDAO {
 	public int insertMovie(List<MovieDTO> miList) throws Exception;
 	
 	public List<String> selectMovieNoAll() throws Exception; 
+	
+	public String selectMaxDt() throws Exception;
+	
+	public int selectCountMovie() throws Exception;
 }

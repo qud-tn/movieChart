@@ -35,4 +35,14 @@ public class MovieServiceImpl implements MovieService{
 	public int uploadMovie(List<MovieDTO> miList) throws Exception {
 		return midao.insertMovie(miList);
 	}
+
+	@Override
+	public String getMaxDt() throws Exception {
+		return midao.selectMaxDt();
+	}
+
+	@Override
+	public int getCountMovie() throws Exception {
+		return midao.selectCountMovie();
+	}
 }

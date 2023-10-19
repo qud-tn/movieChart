@@ -14,5 +14,7 @@ public interface MovieService {
 
 	public int uploadMovie(List<MovieDTO> milist) throws Exception;
 	
-
+	public String getMaxDt() throws Exception;
+	
+	public int getCountMovie() throws Exception;
 }

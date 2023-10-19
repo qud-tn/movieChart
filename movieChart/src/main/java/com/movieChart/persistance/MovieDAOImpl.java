@@ -31,4 +31,14 @@ public class MovieDAOImpl implements MovieDAO {
 		return sqlsession.selectList(NAMESPACE+".selectMovieNoAll");
 	}
 
+	@Override
+	public String selectMaxDt() throws Exception {
+		return sqlsession.selectOne(NAMESPACE+".selectMaxDt");
+	}
+
+	@Override
+	public int selectCountMovie() throws Exception {
+		return sqlsession.selectOne(NAMESPACE+".selectCountMovie");
+	}
+
 }

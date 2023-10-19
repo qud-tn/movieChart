@@ -32,4 +32,14 @@
   		select code_no
   		from movie
   	</select>
+  	
+  	<select id="selectMaxDt" resultType="String">
+  		select max(update_dt)
+  		from movie
+  	</select>
+  	
+  	<select id="selectCountMovie" resultType="int">
+  		select count(*)
+  		from movie
+  	</select>
   </mapper>
