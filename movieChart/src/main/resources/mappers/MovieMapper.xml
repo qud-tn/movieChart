@@ -13,21 +13,22 @@
 
   	<insert id="insertMovie">
   		insert into movie
-  		(code_no, title, image, synopsis)
+  		(code_no, title, image, synopsis, genre, director,prod_year)
   		values
-  		(#{code_no},#{title},#{image},#{synopsis})
+  		(#{code_no},#{title},#{image},#{synopsis}, #{genre},#{director},#{prod_year})
   	</insert>
 
   	<insert id="insertMovieList" parameterType="java.util.List">
   		insert into movie
-  		(code_no, title, image, synopsis)
+  		(code_no, title, image, synopsis,genre, director,prod_year)
   		values
   		<foreach collection="list" item="movie" separator=",">
-        	(#{movie.code_no}, #{movie.title}, #{movie.image},#{movie.synopsis})
+        	(#{movie.code_no}, #{movie.title}, #{movie.image},#{movie.synopsis},
+        	#{movie.genre},#{movie.director},#{movie.prod_year})
     	</foreach>
   	</insert>
   	
-  	<select id="selectMovieNoAll" resultType="int">
+  	<select id="selectMovieNoAll" resultType="String">
   		select code_no
   		from movie
   	</select>

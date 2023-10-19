@@ -59,85 +59,83 @@ public class MovieInfoCrawler {
 		return midto;
 	}
 
-	public List<MovieDTO> crawlAll(List<Integer> previousList) throws Exception {
+	public List<MovieDTO> crawl100Page(List<String> mList) throws Exception {
 		List<MovieDTO> miList = new ArrayList<MovieDTO>();
 
 		System.setProperty("webdriver.chrome.driver", "D:\\chromedriver-win32\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30)); // 대기 시간 늘리기
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30), Duration.ofSeconds(30));
 
 		driver.get(CRAWLER_URL2);
 
-		int startPage=1;
-		int endPage=10;
-		boolean hasNextPage = true;
-
 		try {
-			while (hasNextPage) {
-				for (int i = startPage; i <= endPage; i++) {
-					for (int j = 1; j < 11; j++) {
+			for (int i = 1;i<100; i++) {
+				for (int j = 1; j < 11; j++) {
+					((JavascriptExecutor) driver).executeScript("goPage(arguments[0]);", String.valueOf(i));
+					Thread.sleep(2000);
+					
+					String xpathExpressionMovieCode = "(//tr//td[3])[" + j + "]";
+					WebElement MovieCodeElement = wait
+							.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathExpressionMovieCode)));
+					String movieCode = MovieCodeElement.getText();
+
+					if (!mList.contains(movieCode)) {
 						String xpathExpressionView = "(//tr//td[1]//a[contains(@onclick, 'mstView')])[" + j + "]";
+						String xpathExpressionProdYear = "(//tr//td[4])[" + j + "]";
+						String xpathExpressionGenre = "(//tr//td[7])[" + j + "]";
+						String xpathExpressionDirector = "(//tr//td[9])[" + j + "]";
+
 						WebElement mstViewLink = wait
 								.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathExpressionView)));
+						WebElement prodYearElement = wait
+								.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathExpressionProdYear)));
+						WebElement GenreElement = wait
+								.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathExpressionGenre)));
+						WebElement DirectorElement = wait
+								.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathExpressionDirector)));
 
+						MovieDTO midto = new MovieDTO();
+
+						String title = mstViewLink.getText();
+						String genre = GenreElement.getText();
+						String director = DirectorElement.getText();
+
+						midto.setTitle(title);
+						midto.setCode_no(movieCode);
+						midto.setDirector(director);
+						midto.setGenre(genre);
+						if (!(prodYearElement.getText().equals("") || prodYearElement == null)) {
+							int prodYear = Integer.parseInt(prodYearElement.getText());
+							midto.setProd_year(prodYear);
+						}
 						mstViewLink.click();
 
 						// 페이지 로딩을 기다림
 						wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".fl.thumb")));
 						wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("p.desc_info")));
 						wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".tit")));
-						wait.until(ExpectedConditions
-								.presenceOfElementLocated(By.xpath("//dt[text()='코드']/following-sibling::dd")));
 
-						WebElement image = driver.findElement(By.cssSelector(".fl.thumb"));
+						WebElement aTag = driver.findElement(By.cssSelector(".fl.thumb"));
 						WebElement synopsis = driver.findElement(By.cssSelector(".desc_info"));
-						WebElement title = driver.findElement(By.cssSelector(".tit"));
-						WebElement movieCode = driver.findElement(By.xpath("//dt[text()='코드']/following-sibling::dd"));
+						WebElement imgTag = aTag.findElement(By.tagName("img"));
+						String imageUrl = imgTag.getAttribute("src");
 
-						String movieCodeText = movieCode.getText();
-						String imageUrl = image.getAttribute("src");
 						String synopsisText = synopsis.getText();
-						String titleText = title.getText();
 
-						int movieCd = Integer.parseInt(movieCodeText);
+						logger.debug(imageUrl);
+						logger.debug(synopsisText);
 
-						if (!previousList.contains(movieCd)) {
-							logger.debug(imageUrl);
-							logger.debug(synopsisText);
+						midto.setImage(imageUrl);
+						midto.setSynopsis(synopsisText);
+						miList.add(midto);
 
-							MovieDTO midto = new MovieDTO();
-							midto.setCode_no(movieCd);
-							midto.setImage(imageUrl);
-							midto.setSynopsis(synopsisText);
-							midto.setTitle(titleText);
-							miList.add(midto);
-						}
 						// JavaScript를 사용하여 "닫기" 버튼을 강제로 클릭
-						String scriptClose = "document.querySelector('.ico_comm').click();";
-						((JavascriptExecutor) driver).executeScript(scriptClose);
+						((JavascriptExecutor) driver).executeScript("dtlRmAll();");
 					}
-					if(startPage==1) {
-						startPage++;
-					}
-					String xpathExpressionPage = "//a[contains(@onclick, 'goPage(" + i + ")')]";
-					((JavascriptExecutor) driver).executeScript("arguments[0].click();", driver.findElement(By.xpath(xpathExpressionPage))); // 페이지 번호 링크 클릭
 				}
 
-				WebElement nextButton = driver.findElement(By.cssSelector(".btn.next"));
-				if (nextButton.isEnabled()) {
-					((JavascriptExecutor) driver).executeScript("arguments[0].click();", nextButton);
-					// 페이지 이동 후 잠시 대기
-					startPage+=10;
-					endPage+=10;
-					Thread.sleep(10000); 
-				} else {
-					logger.info("다음 페이지 없음");
-					hasNextPage = false;
-				}
 			}
-		} catch (
-
-		Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			driver.quit();

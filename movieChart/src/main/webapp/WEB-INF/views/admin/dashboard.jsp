@@ -27,10 +27,11 @@ function crawlMovieInfo(){
 		url : '/movie/crawling',
 		type : 'POST',
 		success : function(response) {
-			alert("크롤링 성공!");
+			alert("크롤링 성공! db에 "+response+"개 저장");
 		},
 		error : function(error) {
 			console.error('크롤링 실패:', error);
+			alert('크롤링 실패');
 		}
 	})
 }

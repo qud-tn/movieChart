@@ -27,7 +27,7 @@ public class MovieDAOImpl implements MovieDAO {
 	}
 
 	@Override
-	public List<Integer> selectMovieNoAll() throws Exception {
+	public List<String> selectMovieNoAll() throws Exception {
 		return sqlsession.selectList(NAMESPACE+".selectMovieNoAll");
 	}
 
