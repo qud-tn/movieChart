@@ -42,16 +42,14 @@ public class CommonController {
 	}
 	// http://localhost:8088/main
 	@RequestMapping(value="/main", method=RequestMethod.GET)
-	public void mainGET(Model model,BoxOfficeDTO bdto) throws Exception {
+	public String mainGET(Model model,BoxOfficeDTO bdto) throws Exception {
 		if(bdto.getTargetDt()==null&&bdto.getMultiMovieYn()==null&&bdto.getRepNationCd()==null) {
 			model.addAttribute("dailyBoxOffice", cService.dailyBoxOffice(bdto));
 		}else {
 			model.addAttribute("dailyBoxOffice", cService.searchBoxOffice(bdto));
 		}
+		
+		return "/index";
 	}
 	
-	@GetMapping(value="/")
-	public String redirectMain() {
-		return "redirect:/main";
-	}
 }
