@@ -62,7 +62,7 @@ public class MovieInfoCrawler {
 	public List<MovieDTO> crawl100Page(List<String> mList) throws Exception {
 		List<MovieDTO> miList = new ArrayList<MovieDTO>();
 
-		System.setProperty("webdriver.chrome.driver", "D:\\chromedriver-win32\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "D:\\chromedriver-win32\\chromedriver.exe");//version: 118.0.5993.70
 		WebDriver driver = new ChromeDriver();
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30), Duration.ofSeconds(30));
 

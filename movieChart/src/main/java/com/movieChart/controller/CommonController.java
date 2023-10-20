@@ -49,5 +49,9 @@ public class CommonController {
 			model.addAttribute("dailyBoxOffice", cService.searchBoxOffice(bdto));
 		}
 	}
-
+	
+	@GetMapping(value="/")
+	public String redirectMain() {
+		return "redirect:/main";
+	}
 }
