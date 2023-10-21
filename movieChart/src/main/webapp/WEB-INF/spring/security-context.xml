@@ -33,6 +33,7 @@
 		<security:intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/board/list" access="permitAll" />
 		<security:intercept-url pattern="/board/write" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/board/write" access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/main" access="permitAll" />
 		<!-- 시큐리티 로그인페이지(기본값) -->
 <!-- 		<security:form-login/> -->

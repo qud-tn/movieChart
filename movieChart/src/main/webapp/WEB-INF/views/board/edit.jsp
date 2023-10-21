@@ -36,6 +36,7 @@
 		<input type="hidden" name="username"
 			value='${pageContext.request.userPrincipal.name}'>
 		<input type="submit" value="글 수정하기">
+		<input type="button" value="취소하기" onclick="href='/board/${boardContent.board_id}'">
 	</form>
 </body>
 </html>

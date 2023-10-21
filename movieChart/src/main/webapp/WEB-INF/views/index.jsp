@@ -25,17 +25,18 @@
 		$.each(boxOfficeResult.dailyBoxOfficeList, function(index, dbox) {
 			var row = $("<tr>");
 			row.append("<td>" + dbox.rank + "</td>");
-			row.append("<td><a href='movie/movieCode/"+dbox.movieCd+"'>" + dbox.movieNm + "</a></td>");
+			row.append("<td><a href='movie/"+dbox.movieCd+"'>" + dbox.movieNm + "</a></td>");
 			dailyBoxOfficeList.append(row);
 		});
 	}
 
 	$(function() {
+		submitForm();
 		var parsed_dBox = JSON.parse('${dailyBoxOffice}');
 		var range = parsed_dBox.showRange;
 
 		$("#historyOfBoxOffice").html(dateFMT(range) + "자 박스오피스 순위");
-
+		
 		updateMovieList(parsed_dBox);
 	});
 

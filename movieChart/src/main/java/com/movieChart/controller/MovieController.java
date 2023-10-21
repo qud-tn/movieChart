@@ -26,9 +26,9 @@ public class MovieController {
 	@Autowired
 	private MovieService mService;
 	
-	@GetMapping(value = "/search")
-	public void movieSearchGET() {
-		
+	@GetMapping(value = "/{movieCode}")
+	public String movieSearchGET(@PathVariable("movieCode") String movieCode) {
+		return "/movie/view";
 	}
 	
 }

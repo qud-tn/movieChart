@@ -75,6 +75,7 @@
 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 		<input type="hidden" name="username" value='<sec:authentication property="principal.udto.username" />'>
 		<input type="submit" value="글쓰기">
+		<input type="button" value="취소하기" onclick="href='/board/list'">
 	</form>
 </body>
 </html>

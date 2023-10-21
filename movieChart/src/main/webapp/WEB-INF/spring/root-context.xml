@@ -13,11 +13,11 @@
 			<property name="driverClassName" 
 						value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
 			<property name="jdbcUrl"
-						value="jdbc:log4jdbc:mysql://localhost:3306/movie" />
+						value="jdbc:log4jdbc:mysql://database-1.cwbgkee1kvco.ap-northeast-2.rds.amazonaws.com:3306/movie" />
 			<property name="username"
 						value="root" />
 			<property name="password"
-						value="1234" />
+						value="rkdqudtn1" />
 	</bean>
 	<!-- HikariCP - 설정정보 -->
 	

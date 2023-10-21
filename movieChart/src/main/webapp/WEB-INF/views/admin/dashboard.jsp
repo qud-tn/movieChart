@@ -29,6 +29,7 @@
 			type : 'POST',
 			success : function(response) {
 				alert("크롤링 성공! db에 " + response + "개 저장");
+				crawlingInfo();
 			},
 			error : function(error) {
 				console.error('크롤링 실패:', error);
@@ -36,21 +37,25 @@
 			}
 		})
 	}
-
-	$(function() {
+	
+	function crawlingInfo(){
 		$.ajax({
 			url : '/movie/crawlingInfo',
 			type : 'GET',
 			success : function(response) {
 				data = JSON.parse(response); 
 				$("#checkResult").html("마지막 크롤링 : "+data.maxDt+" 총 "+data.countMovie+"개 크롤링 됨.");
-				console.log('크롤링 성공:', response);
+				console.log('크롤링 정보 조회 성공:', response);
 			},
 			error : function(error) {
 				console.error('크롤링 실패:', error);
-				$("#checkResult").html("크롤링 정보 오류");
+				$("#checkResult").html("크롤링 정보 조회 오류");
 			}
 		})
+	}
+
+	$(function() {
+		crawlingInfo();
 	});
 </script>
 </head>

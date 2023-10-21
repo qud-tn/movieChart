@@ -64,18 +64,4 @@ public class BoardController {
 		return "/board/edit";
 	}
 
-	@RequestMapping(value = "edit/{board_id}", method = RequestMethod.POST)
-	public String editBoardPOST(Model model, @PathVariable("board_id") Integer board_id, BoardDTO bdto)
-			throws Exception {
-		bdto.setBoard_id(board_id);
-		bService.modifyBoard(bdto);
-		return "redirect:/board/list";
-	}
-	
-	@GetMapping(value = "delete/{board_id}")
-	public String softDeleteBoard(@PathVariable("board_id") Integer board_id) throws Exception {
-		bService.softDeleteBoard(board_id);
-		
-		return "redirct:board/list";
-	}
 }

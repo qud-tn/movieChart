@@ -68,5 +68,11 @@
 		from board
 		where deleted_dt is not null
 	</select>
+	
+	<update id="softDeleteBoard">
+		update board
+		set (deleted_dt = now())
+		where board_id=#{board_id}
+	</update>
 
   </mapper>
