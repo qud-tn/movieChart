@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.movieChart.domain.BoardDTO;
 import com.movieChart.domain.PageDTO;
+import com.movieChart.domain.PageMaker;
 
 public interface BoardDAO {
 	public void insertBoard(BoardDTO bdto) throws Exception;

@@ -27,30 +27,15 @@ public class BoardRestController {
 	@Inject
 	private BoardService bService;
 	
-	@Autowired
-	private BoardFileService bfService;
-	
-	@RequestMapping(value = "/board/{board_id}", method = RequestMethod.PUT)
-	public String editBoardPOST(Model model, @PathVariable("board_id") Integer board_id, BoardDTO bdto)
-			throws Exception {
-		bdto.setBoard_id(board_id);
-		bService.modifyBoard(bdto);
-		return "redirect:/board/list";
-	}
-	
 	@RequestMapping(value = "/board/{board_id}", method=RequestMethod.DELETE)
-	public String softDeleteBoard(@PathVariable("board_id") Integer board_id) throws Exception {
-		bService.softDeleteBoard(board_id);
+	public boolean softDeleteBoard(@PathVariable("board_id") Integer board_id) throws Exception {
+		if(bService.softDeleteBoard(board_id)==1) {
+			return true; 
+		}else {
+			return false;
+		}
 		
-		return "redirct:board/list";
 	}
 	
-	@RequestMapping(value = "/boards", method = RequestMethod.POST)
-	public String writePOST(BoardDTO bdto, @RequestParam("file") MultipartFile[] files) throws Exception {
-
-		bService.writeBoard(bdto);
-		bfService.uploadFile(files);
-		return "redirect:/board/list";
-	}
 	
 }

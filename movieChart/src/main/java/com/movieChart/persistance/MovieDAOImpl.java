@@ -41,4 +41,9 @@ public class MovieDAOImpl implements MovieDAO {
 		return sqlsession.selectOne(NAMESPACE+".selectCountMovie");
 	}
 
+	@Override
+	public MovieDTO selectMovie(String code_no) throws Exception {
+		return sqlsession.selectOne(NAMESPACE+".selectMovie",code_no);
+	}
+
 }

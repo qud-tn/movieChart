@@ -140,8 +140,24 @@
 // 	    $("#updateReply").append(updateButton);
 // 	}
 	
+		function deleteBoard(boardId){		        
+		        $.ajax({
+		            type: "DELETE",
+		            url: "/board/" + boardId, 
+		            success: function(response) {
+		            	if(response){
+		               		alert("게시물이 성공적으로 삭제되었습니다.");
+		            		location.href="/board/list";
+		            	}
+		            },
+		            error: function(error) {
+		                console.error("게시물 삭제에 실패하였습니다.");
+		            }
+		        });
+		}
 	$(function(){
 		getBoardReply('${boardContent.board_id }');
+		
 	});
 </script>
 </head>
@@ -151,7 +167,7 @@
 		<sec:authorize access="isAuthenticated() && authentication.principal.username == '${boardContent.username}'">
 		<tr>
 			<td><input type="button" value="글 수정" onclick="location.href='edit/${boardContent.board_id}'"></td>
-			<td><input type="button" value="글 삭제" onclick="location.href='delete/${boardContent.board_id}'"></td>
+			<td><input type="button" value="글 삭제" onclick="deleteBoard(${boardContent.board_id})"></td>
 		</tr>
 		</sec:authorize>
 		</thead>
@@ -196,5 +212,6 @@
 			</sec:authorize>	
 		</table>
 	</div>
+	<input type="button" value="목록으로" onclick="location.href='/board/list';">
 </body>
 </html>

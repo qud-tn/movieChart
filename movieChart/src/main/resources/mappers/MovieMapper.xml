@@ -5,7 +5,7 @@
 
   
   <mapper namespace="com.movieChart.mapper.MovieMapper">
-  	<select id="selectMovie">
+  	<select id="selectMovie" resultType="com.movieChart.domain.MovieDTO">
   		select *
   		from movie
   		where code_no= #{code_no}

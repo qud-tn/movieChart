@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.movieChart.domain.BoardDTO;
 import com.movieChart.domain.PageDTO;
+import com.movieChart.domain.PageMaker;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {

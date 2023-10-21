@@ -45,4 +45,9 @@ public class MovieServiceImpl implements MovieService{
 	public int getCountMovie() throws Exception {
 		return midao.selectCountMovie();
 	}
+
+	@Override
+	public MovieDTO getMovie(String code_no) throws Exception {
+		return midao.selectMovie(code_no);
+	}
 }

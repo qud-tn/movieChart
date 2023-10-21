@@ -8,11 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
+	src="https://cdn.jsdelivr.net/npage/jquery@3.7.0/dist/jquery.min.js"></script>
 <title>자유게시판</title>
 </head>
 <body>
-	<h1>자유게시판</h1>
+	<h1><a href="/main">자유게시판</a></h1>
 	<table border="1">
 		<thead>
 			<tr>
@@ -38,6 +38,21 @@
 
 		</tbody>
 	</table>
+	
+				<div>
+						<c:if test="${page.prev }">						
+							<li><a href="/board/list?page=${page.startPage-1 }">«</a></li>
+						</c:if>
+						<c:forEach begin="${page.startPage }" end="${page.endPage}" step="1" var="idx">						
+							
+								<a href="/board/list?page=${idx }">${idx }</a>
+							
+						</c:forEach>
+						<c:if test="${page.next && page.endPage > 0 }">
+							<li><a href="/board/list?page=${page.endPage + 1}">»</a></li>
+						</c:if>
+				</div>
+	
 	<sec:authorize access="isAuthenticated()">
 		<a href="/board/write">글쓰기</a>
 	</sec:authorize>

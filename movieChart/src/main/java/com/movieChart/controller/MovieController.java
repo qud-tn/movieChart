@@ -26,8 +26,9 @@ public class MovieController {
 	@Autowired
 	private MovieService mService;
 	
-	@GetMapping(value = "/{movieCode}")
-	public String movieSearchGET(@PathVariable("movieCode") String movieCode) {
+	@GetMapping(value = "/{code_no}")
+	public String movieSearchGET(@PathVariable("code_no") String code_no, Model model) throws Exception {
+		model.addAttribute("movie",mService.getMovie(code_no));
 		return "/movie/view";
 	}
 	

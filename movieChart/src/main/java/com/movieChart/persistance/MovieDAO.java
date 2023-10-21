@@ -14,4 +14,6 @@ public interface MovieDAO {
 	public String selectMaxDt() throws Exception;
 	
 	public int selectCountMovie() throws Exception;
+	
+	public MovieDTO selectMovie(String code_no) throws Exception;
 }

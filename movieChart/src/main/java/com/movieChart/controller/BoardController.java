@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.movieChart.domain.BoardDTO;
 import com.movieChart.domain.BoardFileDTO;
 import com.movieChart.domain.PageDTO;
+import com.movieChart.domain.PageMaker;
 import com.movieChart.service.BoardFileService;
 import com.movieChart.service.BoardService;
 
@@ -32,8 +33,10 @@ public class BoardController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void boardListGET(Model model, PageDTO pdto) throws Exception {
-		pdto.setTotalCount(bService.countBoard_id());
-		model.addAttribute("page", pdto);
+		PageMaker pm = new PageMaker();
+		pm.setPageDTO(pdto);
+		pm.setTotalCount(bService.countBoard_id());
+		model.addAttribute("page", pm);
 		model.addAttribute("boardList", bService.getBoardList(pdto));
 	}
 
@@ -62,6 +65,14 @@ public class BoardController {
 	public String editBoardGET(Model model, @PathVariable("board_id") Integer board_id, BoardDTO bdto) throws Exception {
 		model.addAttribute("boardContent", bService.readBoardContent(board_id));
 		return "/board/edit";
+	}
+	
+	@RequestMapping(value = "edit/{board_id}", method = RequestMethod.POST)
+	public String editBoardPOST(Model model, @PathVariable("board_id") Integer board_id, BoardDTO bdto)
+			throws Exception {
+		bdto.setBoard_id(board_id);
+		bService.modifyBoard(bdto);
+		return "redirect:/board/list";
 	}
 
 }

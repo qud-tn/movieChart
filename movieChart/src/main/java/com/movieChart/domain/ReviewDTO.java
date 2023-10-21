@@ -7,7 +7,9 @@ public class ReviewDTO {
 	private Integer score;
 	private Integer review_id;
 	private String review_dt;
-	private Integer movieCode;
+	private String code_no;
+	
+	
 	public String getNickname() {
 		return nickname;
 	}
@@ -44,18 +46,17 @@ public class ReviewDTO {
 	public void setReview_dt(String review_dt) {
 		this.review_dt = review_dt;
 	}
-	public Integer getMovieCode() {
-		return movieCode;
+	public String getCode_no() {
+		return code_no;
 	}
-	public void setMovieCode(Integer movieCode) {
-		this.movieCode = movieCode;
+	public void setCode_no(String code_no) {
+		this.code_no = code_no;
 	}
 	
 	@Override
 	public String toString() {
 		return "ReviewDTO [nickname=" + nickname + ", username=" + username + ", review=" + review + ", score=" + score
-				+ ", review_id=" + review_id + ", review_dt=" + review_dt + ", movieCode=" + movieCode + "]";
+				+ ", review_id=" + review_id + ", review_dt=" + review_dt + ", code_no=" + code_no + "]";
 	}
-
 	
 }

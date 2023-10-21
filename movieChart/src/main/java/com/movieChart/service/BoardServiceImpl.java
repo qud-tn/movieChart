@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -18,6 +19,7 @@ import com.movieChart.controller.BoardRestController;
 import com.movieChart.domain.BoardDTO;
 import com.movieChart.domain.BoardFileDTO;
 import com.movieChart.domain.PageDTO;
+import com.movieChart.domain.PageMaker;
 import com.movieChart.persistance.BoardDAO;
 
 @Service
@@ -38,8 +40,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public HashMap<String, Object> readBoardContent(Integer board_id) throws Exception {
-		HashMap<String, Object> boardMap = bdao.selectBoard(board_id).toHashMap();
+	public Map<String, Object> readBoardContent(Integer board_id) throws Exception {
+		Map<String, Object> boardMap = bdao.selectBoard(board_id).toHashMap();
 		List<BoardDTO> SurroundingList = bdao.selectSurroundingBoard(board_id);
 		boardMap.put("SurroundingList", SurroundingList);
 		

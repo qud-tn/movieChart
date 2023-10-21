@@ -71,7 +71,7 @@
 	
 	<update id="softDeleteBoard">
 		update board
-		set (deleted_dt = now())
+		set deleted_dt = now()
 		where board_id=#{board_id}
 	</update>
 

@@ -17,4 +17,6 @@ public interface MovieService {
 	public String getMaxDt() throws Exception;
 	
 	public int getCountMovie() throws Exception;
+	
+	public MovieDTO getMovie(String code_no) throws Exception;
 }
