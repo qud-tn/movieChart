@@ -7,7 +7,6 @@ public class UserDTO {
 	private String password;
 	private boolean enabled;
 	private String nickname;
-	private Integer user_id;
 	private String email;
 	private String reg_date;
 	private List<AuthoritiesDTO> authList;
@@ -42,12 +41,6 @@ public class UserDTO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public Integer getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -63,7 +56,7 @@ public class UserDTO {
 	@Override
 	public String toString() {
 		return "UsersDTO [username=" + username + ", password=" + password + ", enabled=" + enabled + ", nickname="
-				+ nickname + ", user_id=" + user_id + ", email=" + email + ", reg_date=" + reg_date + "]";
+				+ nickname + ", email=" + email + ", reg_date=" + reg_date + "]";
 	}
 	
 	

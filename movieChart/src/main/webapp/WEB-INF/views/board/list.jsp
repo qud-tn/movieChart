@@ -13,6 +13,21 @@
 </head>
 <body>
 	<h1><a href="/main">자유게시판</a></h1>
+	<form action="">
+		게시물 검색:<input type="text" name="syntax" id="syntax" placeholder="내용, 제목">
+		<br>
+		유저 검색:<input type="text" name="nickname" placeholder="닉네임">
+		<br>
+		카테고리 구분:<select name="category">
+							<option></option>
+							<option>공지사항</option>
+							<option>이벤트</option>
+							<option>잡담</option>
+							<option>리뷰/감상문</option>
+							<option>질문</option>
+				</select>
+		<input type="submit" value="게시물 검색">
+	</form>
 	<table border="1">
 		<thead>
 			<tr>

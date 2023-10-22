@@ -31,22 +31,30 @@
   	<select id="searchMovie" resultType="com.movieChart.domain.MovieDTO">
   		select *
   		from movie
-  		where title like concat('%', #{syntax}, '%')
-  		or synopsis like concat('%', #{syntax}, '%')
-  		or genre like concat('%', #{syntax}, '%')
-  		or director like concat('%', #{syntax}, '%')
-  		or prod_year = #{syntax}
+  		<where>
+   	 		<if test="syntax != null and syntax != ''">
+		        (title like concat('%', #{syntax}, '%')
+		        or synopsis like concat('%', #{syntax}, '%')
+		        or genre like concat('%', #{syntax}, '%')
+		        or director like concat('%', #{syntax}, '%')
+		        or prod_year = #{syntax})
+		    </if>
+		</where>
   		limit #{startPage},#{pageSize}
   	</select>
 
   	<select id="countCode_no" resultType="int">
   		select count(*)
   		from movie
-  		where title like concat('%', #{syntax}, '%')
-  		or synopsis like concat('%', #{syntax}, '%')
-  		or genre like concat('%', #{syntax}, '%')
-  		or director like concat('%', #{syntax}, '%')
-  		or prod_year = #{syntax}
+  		<where>
+   	 		<if test="syntax != null and syntax != ''">
+		        (title like concat('%', #{syntax}, '%')
+		        or synopsis like concat('%', #{syntax}, '%')
+		        or genre like concat('%', #{syntax}, '%')
+		        or director like concat('%', #{syntax}, '%')
+		        or prod_year = #{syntax})
+		    </if>
+		</where>
   	</select>
   	
   	<select id="selectMovieNoAll" resultType="String">

@@ -35,8 +35,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardDTO> getBoardList(PageDTO pdto) throws Exception {
-		return bdao.selectBoardList(pdto);
+	public List<BoardDTO> getBoardList(Map<String, Object> paramMap) throws Exception {
+		return bdao.selectBoardList(paramMap);
 	}
 
 	@Override

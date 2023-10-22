@@ -16,7 +16,7 @@
 	<h1>
 		<a href="/main">영화 목록</a>
 	</h1>
-	<form action="/movie/list">
+	<form action="">
 		영화 검색:<input type="text" name="syntax" id="syntax" value="${syntax }"
 			placeholder="제목, 감독, 제작년도, 시놉시스, 장르"> <input type="submit"
 			value="영화 검색">

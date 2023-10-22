@@ -1,6 +1,7 @@
 package com.movieChart.persistance;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -25,8 +26,8 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardDTO> selectBoardList(PageDTO pdto) throws Exception {
-		return sqlsession.selectList(NAMESPACE+".selectBoardList",pdto);
+	public List<BoardDTO> selectBoardList(Map<String, Object> paramMap) throws Exception {
+		return sqlsession.selectList(NAMESPACE+".selectBoardList",paramMap);
 	}
 
 	@Override

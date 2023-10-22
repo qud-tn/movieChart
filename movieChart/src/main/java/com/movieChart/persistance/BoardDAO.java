@@ -1,15 +1,15 @@
 package com.movieChart.persistance;
 
 import java.util.List;
+import java.util.Map;
 
 import com.movieChart.domain.BoardDTO;
 import com.movieChart.domain.PageDTO;
-import com.movieChart.domain.PageMaker;
 
 public interface BoardDAO {
 	public void insertBoard(BoardDTO bdto) throws Exception;
 
-	public List<BoardDTO> selectBoardList(PageDTO pdto) throws Exception;
+	public List<BoardDTO> selectBoardList(Map<String, Object> paramMap) throws Exception;
 
 	public BoardDTO selectBoard(Integer board_id) throws Exception;
 

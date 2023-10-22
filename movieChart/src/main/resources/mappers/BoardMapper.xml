@@ -11,12 +11,23 @@
   	</insert>
   	
   	<select id="selectBoardList" resultType="com.movieChart.domain.BoardDTO">
-	  	select title, category, nickname, board_id ,write_date, view_cnt
-	  	from board b join users u
-	  	on u.username=b.username
-	  	where deleted_dt is null
-	  	order by board_id desc
-	  	limit #{startPage},#{pageSize}
+		select title, category, nickname, board_id, write_date, view_cnt
+		from board b
+		join users u on u.username = b.username
+		<where>
+		deleted_dt is null
+			<if test="syntax != null and syntax != ''">
+       			and (content like concat('%', #{syntax}, '%') or title like concat('%', #{syntax}, '%'))
+    		</if>
+   			<if test="nickname != null and nickname != ''">
+        		and nickname = #{nickname}
+    		</if>
+    		<if test="category != null and category != ''">
+        		and category = #{category}
+    		</if>
+		</where>
+		order by board_id desc
+		limit #{startPage}, #{pageSize}
   	</select>
   	
   	<select id="selectBoard" resultType="com.movieChart.domain.BoardDTO">
@@ -59,8 +70,20 @@
 	
 	<select id="selectCountBoard_id" resultType="int">
 	   select count(board_id) 
-	   from board
-	   where deleted_dt is null
+	   from board b join users u
+	   on u.username=b.username
+	   <where>
+	   deleted_dt is null
+			<if test="syntax != null and syntax != ''">
+       			and (content like concat('%', #{syntax}, '%') or title like concat('%', #{syntax}, '%'))
+    		</if>
+   			<if test="nickname != null and nickname != ''">
+        		and nickname = #{nickname}
+    		</if>
+    		<if test="category != null and category != ''">
+        		and category = #{category}
+    		</if>
+		</where>
 	</select>
 	
 	<select id="selectDeletedBoards" resultType="com.movieChart.domain.BoardDTO">

@@ -24,10 +24,10 @@
 	</resultMap>
 
 	<insert id="insertUser">
-		insert users (username, password, nickname, user_id,
+		insert users (username, password, nickname,
 		email,reg_date)
 		values (#{username}, #{password}, #{nickname},
-		#{user_id},#{email},#{reg_date})
+		#{email},#{reg_date})
 	</insert>
 
 	<select id="selectUsername" resultType="String">

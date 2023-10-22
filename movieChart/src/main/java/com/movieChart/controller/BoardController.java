@@ -1,23 +1,20 @@
 package com.movieChart.controller;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.movieChart.domain.BoardDTO;
-import com.movieChart.domain.BoardFileDTO;
 import com.movieChart.domain.PageDTO;
 import com.movieChart.domain.PageMaker;
 import com.movieChart.service.BoardFileService;
@@ -32,12 +29,21 @@ public class BoardController {
 	private BoardFileService bfService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void boardListGET(Model model, PageDTO pdto) throws Exception {
+	public void boardListGET(Model model, PageDTO pdto,String syntax,BoardDTO bdto) throws Exception {
 		PageMaker pm = new PageMaker();
 		pm.setPageDTO(pdto);
 		pm.setTotalCount(bService.countBoard_id());
+
+		Map<String, Object> paramMap= new HashMap<String, Object>();
+		paramMap.put("syntax",syntax);
+		paramMap.put("startPage",pm.getPageDTO().getStartPage());
+		paramMap.put("pageSize",pm.getPageDTO().getPageSize());
+		paramMap.put("category",bdto.getCategory());
+		paramMap.put("nickname",bdto.getNickname());
+		
 		model.addAttribute("page", pm);
-		model.addAttribute("boardList", bService.getBoardList(pdto));
+		model.addAttribute("boardList", bService.getBoardList(paramMap));
+		model.addAttribute("syntax",syntax);
 	}
 
 	@RequestMapping(value = "/write", method = RequestMethod.GET)

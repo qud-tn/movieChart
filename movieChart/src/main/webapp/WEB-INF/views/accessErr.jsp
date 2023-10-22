@@ -21,10 +21,6 @@
 		
 		<hr>
 		
-		${auth }
-		
-		<hr>
-		
 		${SPRING_SECURITY_403_EXCEPTION.getMessage() }
 		
 		

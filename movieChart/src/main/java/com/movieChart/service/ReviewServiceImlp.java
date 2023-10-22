@@ -6,7 +6,6 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.movieChart.api.MovieListAPI;
 import com.movieChart.domain.ReviewDTO;
 import com.movieChart.persistance.ReviewDAO;
 

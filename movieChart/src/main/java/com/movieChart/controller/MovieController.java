@@ -40,15 +40,11 @@ public class MovieController {
 		PageMaker pm = new PageMaker();
 		pm.setPageDTO(pdto);
 		pm.setTotalCount(mService.countCode_no(syntax));
-		
+
 		Map<String, Object> paramMap= new HashMap<String, Object>();
 		paramMap.put("syntax",syntax);
 		paramMap.put("startPage",pm.getPageDTO().getStartPage());
 		paramMap.put("pageSize",pm.getPageDTO().getPageSize());
-		
-		if(syntax==null) {
-			syntax="";
-		}
 		
 		model.addAttribute("page", pm);
 		model.addAttribute("movieList",mService.searchMovie(paramMap));

@@ -27,34 +27,11 @@ public class UserServiceImpl implements UserService {
 	public void joinMember(UserDTO userdto, AuthoritiesDTO authdto) throws Exception {
 		BCryptPasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
 		
-		userdto.setUser_id(checkUserId(buildUserId()));
 		userdto.setPassword(passwordEncoder.encode(userdto.getPassword()));
 		userdto.setReg_date(LocalDate.now().toString());
 
 		uDao.insertUser(userdto);
 		aDao.insertAuth(authdto);
-	}
-
-	private Integer buildUserId() {
-		Random random = new Random();
-
-		int min = 10000000;
-		int max = 99999999;
-		int randomNumber = random.nextInt(max - min + 1) + min;
-
-		return randomNumber;
-	}
-
-	private Integer checkUserId(Integer userId) throws Exception {
-		List<Integer> userIdList = uDao.selectUserIdAll();
-		
-		if (userIdList.contains(userId)) {
-			Integer newUserId = buildUserId();
-			return checkUserId(newUserId);
-		} else {
-			return userId;
-		}
-		
 	}
 
 	@Override

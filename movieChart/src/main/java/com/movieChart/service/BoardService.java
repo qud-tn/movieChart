@@ -14,7 +14,7 @@ import com.movieChart.domain.PageMaker;
 public interface BoardService {
 	public void writeBoard(BoardDTO bdto) throws Exception;
 
-	public List<BoardDTO> getBoardList(PageDTO pdto) throws Exception;
+	public List<BoardDTO> getBoardList(Map<String, Object> paramMap) throws Exception;
 
 	public Map<String, Object> readBoardContent(Integer board_id)throws Exception;
 
