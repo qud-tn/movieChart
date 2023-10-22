@@ -17,28 +17,27 @@ public class ReviewServiceImlp implements ReviewService {
 	private ReviewDAO rvdao;
 
 	@Override
-	public void postComment(ReviewDTO cdto) throws Exception {
-		rvdao.insertComment(cdto);
-		
+	public void postReview(ReviewDTO rvdto) throws Exception {
+		rvdao.insertReview(rvdto);
 	}
 
 	@Override
 	public Integer softDeleteReview(ReviewDTO rvdto) throws Exception {
-		return null;
+		return rvdao.softDeleteReview(rvdto);
 	}
 
 	@Override
-	public Integer modifyReview(ReviewDTO rpdto) throws Exception {
-		return null;
+	public Integer modifyReview(ReviewDTO rvdto) throws Exception {
+		return rvdao.updateReview(rvdto);
 	}
 
 	@Override
-	public Integer writeReview(ReviewDTO rpdto) throws Exception {
-		return null;
+	public Integer writeReview(ReviewDTO rvdto) throws Exception {
+		return rvdao.insertReview(rvdto);
 	}
 
 	@Override
 	public List<ReviewDTO> findReviews(String code_no) throws Exception {
-		return null;
+		return rvdao.selectReviews(code_no);
 	}
 }

@@ -34,7 +34,7 @@ public class ReviewRestController {
 			String resultJson = objectMapper.writeValueAsString(resultMap);
 			return ResponseEntity.ok().body(resultJson);
 		} else {
-			return ResponseEntity.badRequest().body("답글 갱신 오류");
+			return ResponseEntity.badRequest().body("리뷰 갱신 오류");
 		}
 	}
 
@@ -44,9 +44,9 @@ public class ReviewRestController {
 		rpdto.setCode_no(code_no);
 		Integer result = rvService.writeReview(rpdto);
 		if (result == 1) {
-			return ResponseEntity.ok().body("답글 작성 성공");
+			return ResponseEntity.ok().body("리뷰 작성 성공");
 		} else {
-			return ResponseEntity.badRequest().body("답글 작성 실패");
+			return ResponseEntity.badRequest().body("리뷰 작성 실패");
 		}
 	}
 	
@@ -58,9 +58,9 @@ public class ReviewRestController {
 		Integer result = rvService.modifyReview(rpdto);
 		
 		if (result == 1) {
-			return ResponseEntity.ok().body("답글 수정 성공");
+			return ResponseEntity.ok().body("리뷰 수정 성공");
 		} else {
-			return ResponseEntity.badRequest().body("답글 수정 실패");
+			return ResponseEntity.badRequest().body("리뷰 수정 실패");
 		}
 	}
 
@@ -72,9 +72,9 @@ public class ReviewRestController {
 		Integer result = rvService.softDeleteReview(rvdto);
 		
 		if (result == 1) {
-			return ResponseEntity.ok().body("답글 삭제 성공");
+			return ResponseEntity.ok().body("리뷰 삭제 성공");
 		} else {
-			return ResponseEntity.badRequest().body("답글 삭제 실패");
+			return ResponseEntity.badRequest().body("리뷰 삭제 실패");
 		}
 	}
 }

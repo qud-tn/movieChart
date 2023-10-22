@@ -1,6 +1,7 @@
 package com.movieChart.persistance;
 
 import java.util.List;
+import java.util.Map;
 
 import com.movieChart.domain.MovieDTO;
 
@@ -16,4 +17,8 @@ public interface MovieDAO {
 	public int selectCountMovie() throws Exception;
 	
 	public MovieDTO selectMovie(String code_no) throws Exception;
+	
+	public List<MovieDTO> searchMovie(Map<String, Object> paramMap) throws Exception;
+
+	public int countCode_no(String syntex) throws Exception;
 }

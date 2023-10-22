@@ -44,7 +44,6 @@
 	                }));
 
 	                listItem.append(usernameCell);
-	                listItem.append(replyCell);
 	                listItem.append(dateCell);
 // 	                listItem.append("<td><input type='button' value='수정' onclick='appendTextarea("+data.reply_id+","+data.reply+")'></td>");
 // 	                listItem.append("<td><div id='updateReply'></div></td>");
@@ -52,6 +51,9 @@
 	                listItem.append(insertDeleteButton);
 	                }
 	                repliesList.append(listItem);
+	                
+	                var replyTr=$("<tr>").append($("<td>").attr("colspan", "4").append(replyCell));
+					repliesList.append(replyTr);
 	            });
 			},
 			error : function(error) {

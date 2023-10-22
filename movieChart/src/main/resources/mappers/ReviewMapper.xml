@@ -6,6 +6,28 @@
   
   <mapper namespace="com.movieChart.mapper.ReviewMapper">
   	<insert id="insertReview">
-  	
+  		insert into review (code_no, review, username, review_id, score)
+		select #{code_no}, #{review}, #{username}, coalesce(max(review_id), 0) + 1,#{score}
+		from review
+		where code_no = #{code_no}
   	</insert>
+	
+	<select id="selectReviews" resultType="com.movieChart.domain.ReviewDTO">
+		select review, r.username, review_id, review_dt, nickname, score
+		from review r join users u
+		on r.username = u.username
+		where code_no=#{code_no} and deleted_dt is null
+	</select>
+	
+	<update id="updateReview">
+		update review
+		set review=#{review}
+		where code_no=#{code_no} and review_id= #{review_id}
+	</update>
+	
+	<update id="softDeleteReview">
+		update review
+		set deleted_dt = now()
+		where code_no=#{code_no} and review_id = #{review_id}
+	</update>
   </mapper>

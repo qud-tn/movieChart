@@ -19,4 +19,9 @@ public interface MovieService {
 	public int getCountMovie() throws Exception;
 	
 	public MovieDTO getMovie(String code_no) throws Exception;
+	
+	public List<MovieDTO> searchMovie(Map<String, Object> paramMap) throws Exception;
+
+	public int countCode_no(String syntex) throws Exception;
+
 }

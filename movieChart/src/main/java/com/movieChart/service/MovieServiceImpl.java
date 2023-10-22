@@ -50,4 +50,14 @@ public class MovieServiceImpl implements MovieService{
 	public MovieDTO getMovie(String code_no) throws Exception {
 		return midao.selectMovie(code_no);
 	}
+
+	@Override
+	public List<MovieDTO> searchMovie(Map<String, Object> paramMap) throws Exception {
+		return midao.searchMovie(paramMap);
+	}
+
+	@Override
+	public int countCode_no(String syntex) throws Exception {
+		return midao.countCode_no(syntex);
+	}
 }

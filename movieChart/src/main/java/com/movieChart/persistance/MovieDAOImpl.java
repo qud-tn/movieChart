@@ -1,6 +1,7 @@
 package com.movieChart.persistance;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,16 @@ public class MovieDAOImpl implements MovieDAO {
 	@Override
 	public MovieDTO selectMovie(String code_no) throws Exception {
 		return sqlsession.selectOne(NAMESPACE+".selectMovie",code_no);
+	}
+
+	@Override
+	public List<MovieDTO> searchMovie(Map<String, Object> paramMap) throws Exception {
+		return sqlsession.selectList(NAMESPACE+".searchMovie",paramMap);
+	}
+
+	@Override
+	public int countCode_no(String syntex) throws Exception {
+		return sqlsession.selectOne(NAMESPACE+".countCode_no",syntex);
 	}
 
 }

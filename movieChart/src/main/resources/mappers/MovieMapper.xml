@@ -28,6 +28,27 @@
     	</foreach>
   	</insert>
   	
+  	<select id="searchMovie" resultType="com.movieChart.domain.MovieDTO">
+  		select *
+  		from movie
+  		where title like concat('%', #{syntax}, '%')
+  		or synopsis like concat('%', #{syntax}, '%')
+  		or genre like concat('%', #{syntax}, '%')
+  		or director like concat('%', #{syntax}, '%')
+  		or prod_year = #{syntax}
+  		limit #{startPage},#{pageSize}
+  	</select>
+
+  	<select id="countCode_no" resultType="int">
+  		select count(*)
+  		from movie
+  		where title like concat('%', #{syntax}, '%')
+  		or synopsis like concat('%', #{syntax}, '%')
+  		or genre like concat('%', #{syntax}, '%')
+  		or director like concat('%', #{syntax}, '%')
+  		or prod_year = #{syntax}
+  	</select>
+  	
   	<select id="selectMovieNoAll" resultType="String">
   		select code_no
   		from movie

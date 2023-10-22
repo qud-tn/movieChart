@@ -1,5 +1,7 @@
 package com.movieChart.persistance;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,8 +17,23 @@ public class ReviewDAOImpl implements ReviewDAO{
 	private final String NAMESPACE="com.movieChart.mapper.ReviewMapper";
 	
 	@Override
-	public void insertComment(ReviewDTO cdto) throws Exception {
-		
+	public Integer insertReview(ReviewDTO rvdto) throws Exception {
+		return sqlsession.insert(NAMESPACE+".insertReview",rvdto);
+	}
+
+	@Override
+	public List<ReviewDTO> selectReviews(String code_no) throws Exception {
+		return sqlsession.selectList(NAMESPACE+".selectReviews",code_no);
+	}
+
+	@Override
+	public Integer updateReview(ReviewDTO rvdto) throws Exception {
+		return sqlsession.update(NAMESPACE+".updateReview",rvdto);
+	}
+
+	@Override
+	public Integer softDeleteReview(ReviewDTO rvdto) throws Exception {
+		return sqlsession.update(NAMESPACE+".softDeleteReview",rvdto);
 	}
 	
 }

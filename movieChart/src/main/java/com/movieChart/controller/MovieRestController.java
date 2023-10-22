@@ -44,4 +44,5 @@ public class MovieRestController {
 			return ResponseEntity.badRequest().body("api 오류");
 		}
 	}
+	
 }

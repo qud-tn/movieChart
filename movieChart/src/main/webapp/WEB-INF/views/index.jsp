@@ -135,14 +135,15 @@
 		<table>
 			<tr>
 				<td>
-					<form action="/search">
-						영화 검색:<input type="text" name="query" id="query">
+					<form action="/movie/list">
+						영화 검색:<input type="text" name="syntax" id="syntex" placeholder="제목, 감독, 제작년도, 장르, 시놉시스">
 						<input type="submit" value="영화 검색">
 					</form>
 				</td>
 			</tr>
 		</table>
 	</div>
-	<a href="board/list">자유게시판</a>
+	<a href="board/list">자유게시판</a><br>
+	<a href="movie/list">영화 정보</a>
 </body>
 </html>
