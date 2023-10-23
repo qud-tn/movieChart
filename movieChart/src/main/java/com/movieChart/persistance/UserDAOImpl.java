@@ -41,6 +41,31 @@ public class UserDAOImpl implements UserDAO {
 	public String selectEmail(String email) throws Exception {
 		return sqlsession.selectOne(NAMESPACE+".selectEmail",email);
 	}
+
+	@Override
+	public String selectPassword(UserDTO udto) throws Exception {
+		return sqlsession.selectOne(NAMESPACE+".selectPassword",udto);
+	}
+
+	@Override
+	public int updateUserInfo(UserDTO udto) throws Exception {
+		return sqlsession.update(NAMESPACE+".updateUserInfo",udto);
+	}
+
+	@Override
+	public String checkEmail(String email) throws Exception {
+		return sqlsession.selectOne(NAMESPACE+".checkEmail", email);
+	}
+
+	@Override
+	public int updatePassword(UserDTO udto) throws Exception {
+		return sqlsession.update(NAMESPACE+".updatePassword",udto);
+	}
+
+	@Override
+	public String checkingForPassword(UserDTO udto) throws Exception {
+		return sqlsession.selectOne(NAMESPACE+".checkingForPassword",udto);
+	}
 	
 	
 

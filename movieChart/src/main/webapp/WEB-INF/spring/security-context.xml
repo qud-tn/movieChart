@@ -27,20 +27,19 @@
 	<security:http>
 		
 		<security:intercept-url pattern="/movie/*" access="permitAll" />
-		<security:intercept-url pattern="/member/join" access="permitAll" />
-		<security:intercept-url pattern="/member/login" access="permitAll" />
-		<security:intercept-url pattern="/member/*" access="hasRole('ROLE_USER','ROLE_ADMIN')" />
+		<security:intercept-url pattern="/user/*" access="permitAll" />
+		<security:intercept-url pattern="/user/info" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
 		<security:intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/board/list" access="permitAll" />
 		<security:intercept-url pattern="/board/write" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
 		<security:intercept-url pattern="/main" access="permitAll" />
 		<!-- 시큐리티 로그인페이지(기본값) -->
 <!-- 		<security:form-login/> -->
-		<security:form-login login-page="/member/login" 
+		<security:form-login login-page="/user/login" 
 		       authentication-success-handler-ref="customLoginSuccess" />
 		
 		<!-- 로그아웃  -->
-		<security:logout logout-url="/member/logout" invalidate-session="true" />
+		<security:logout logout-url="/user/logout" logout-success-url="/main" invalidate-session="true" />
 		
 		
 		<!-- 에러발생(접근권한) 처리 페이지 -->

@@ -7,17 +7,22 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.movieChart.domain.AuthoritiesDTO;
 import com.movieChart.domain.UserDTO;
 import com.movieChart.service.UserService;
 
 @Controller
-@RequestMapping(value="member/*")
+@RequestMapping(value="user/*")
 public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
@@ -46,8 +51,29 @@ public class UserController {
 		return "redirect:/main";
 	}
 	
-	@GetMapping(value="/{member_id}")
-	public String GetMemberInfo(@PathVariable("member_id") String member_id) throws Exception{
-		return "/member/view";
+	@GetMapping(value="/info")
+	public String userInfoGET() throws Exception{
+		return "/user/view";
+	}
+
+	@PostMapping(value="/info")
+	public String userInfoPOST(UserDTO udto,RedirectAttributes rttr) throws Exception{
+		uService.modifyUserInfo(udto);
+		rttr.addFlashAttribute("message","updateInfoOk");
+		return "redirect:/main";
+	}
+
+	@GetMapping(value="/checkPassword")
+	public void checkPasswordGET() throws Exception{
+	}
+
+	@GetMapping(value="/helpLogin")
+	public void helpLoginGET() throws Exception{
+	}
+	@GetMapping(value="/findID")
+	public void findIDGET() throws Exception{
+	}
+	@GetMapping(value="/changePassword")
+	public void changePasswordGET() throws Exception{
 	}
 }

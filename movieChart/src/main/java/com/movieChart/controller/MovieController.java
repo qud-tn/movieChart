@@ -30,13 +30,13 @@ public class MovieController {
 	private MovieService mService;
 	
 	@GetMapping(value = "/{code_no}")
-	public String getMovieInfo(@PathVariable("code_no") String code_no, Model model) throws Exception {
+	public String movieInfoGET(@PathVariable("code_no") String code_no, Model model) throws Exception {
 		model.addAttribute("movie",mService.getMovie(code_no));
 		return "/movie/view";
 	}
 	
 	@GetMapping(value="/list")
-	public void searchMovie(Model model, String syntax,PageDTO pdto) throws Exception{
+	public void movieListGET(Model model, String syntax,PageDTO pdto) throws Exception{
 		PageMaker pm = new PageMaker();
 		pm.setPageDTO(pdto);
 		pm.setTotalCount(mService.countCode_no(syntax));

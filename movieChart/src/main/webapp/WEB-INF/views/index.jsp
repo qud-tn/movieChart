@@ -9,6 +9,7 @@
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
 <title>무비차트</title>
 <script>
+
 	function dateFMT(range) {
 		var dateArray = range.split("~");
 		var startDate = dateArray[0];
@@ -31,16 +32,18 @@
 	}
 
 	$(function() {
-		submitForm();
-		var parsed_dBox = JSON.parse('${dailyBoxOffice}');
-		var range = parsed_dBox.showRange;
-
-		$("#historyOfBoxOffice").html(dateFMT(range) + "자 박스오피스 순위");
 		
-		updateMovieList(parsed_dBox);
+		var message= "${message}";
+		
+		if (message == "updateInfoOk") {
+		    alert('회원정보가 변경되었습니다. 다시 로그인 해주세요');
+		    location.href = '/user/logout?message='+message;
+		}
+
+		viewBoxOffice();
 	});
 
-	function submitForm() {
+	function viewBoxOffice() {
 		var formData = $('#boxOfficeForm').serialize();
 		$.ajax({
 			url : '/boxOffice',
@@ -77,8 +80,7 @@
 		<tr>
 		<td>
 			<input type="button" value="마이페이지"
-				onclick="location.href='member/
-				<sec:authentication property="principal.udto.username" />'">
+				onclick="location.href='user/checkPassword';">
 		</table>
 		</sec:authorize>
 	</div>
@@ -91,15 +93,15 @@
 						환영합니다.</td>
 				</tr>
 				<tr>
-					<td><input type="button" value="로그아웃" onclick=""></td>
+					<td><input type="button" value="로그아웃" onclick="location.href='/user/logout';"></td>
 				</tr>
 			</sec:authorize>
 			<sec:authorize access="isAnonymous()">
 				<tr>
 					<td><input type="button" value="회원가입"
-						onclick="location.href='/member/join'"></td>
+						onclick="location.href='/user/join'"></td>
 					<td><input type="button" value="로그인"
-						onclick="location.href='/member/login'"></td>
+						onclick="location.href='/user/login'"></td>
 				</tr>
 			</sec:authorize>
 		</table>

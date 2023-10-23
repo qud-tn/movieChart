@@ -23,7 +23,7 @@ public class MovieServiceImpl implements MovieService{
 	public List<MovieDTO> crawlMovie() throws Exception{
 		List<String> mList=midao.selectMovieNoAll();
 		
-		return mCrawler.crawl100Page(mList);
+		return mCrawler.crawlMovie(mList);
 	}
 
 	@Override

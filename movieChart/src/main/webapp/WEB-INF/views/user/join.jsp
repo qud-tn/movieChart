@@ -36,7 +36,7 @@
 		function checkUsername() {
 			var username = document.getElementById("username").value;
 			$.ajax({
-				url : "/member/username/" + username,
+				url : "/user/username/" + username,
 				method : "GET",
 				success : function(data) {
 					if (data) {
@@ -56,7 +56,7 @@
 		function checkNickname() {
 			var nickname = document.getElementById("nickname").value;
 			$.ajax({
-				url : "/member/nickname/" + nickname,
+				url : "/user/nickname/" + nickname,
 				method : "GET",
 				success : function(data) {
 					if (data) {
@@ -76,23 +76,25 @@
 		$("#nicknamechk").on("click", checkNickname);
 
 		function checkform() {
-			var passwordchk = document.getElementById("checkPasswordResult").innerText;
-			var nicknamechk = document.getElementById("checkNicknameResult").innerText;
-			var usernamechk = document.getElementById("checkUsernameResult").innerText;
-			var emailchk = document.getElementById("checkEmailResult").innerText;
-			if (!nicknamechk.includes("하실") || !usernamechk.includes("하실")
-					|| passwordchk !== "" || !emailchk.includes("하실")) {
-				alert("비밀번호 확인 및 중복 체크 오류");
-				event.preventDefault();
-			}
+		    var passwordchk = $("#checkPasswordResult").text();
+		    var nicknamechk = $("#checkNicknameResult").text();
+		    var usernamechk = $("#checkUsernameResult").text();
+		    var emailchk = $("#checkEmailResult").text();
+
+		    if (!nicknamechk.includes("하실") || !usernamechk.includes("하실")
+		            || passwordchk !== "" || !emailchk.includes("하실")) {
+		        alert("비밀번호 확인 및 중복 체크 오류");
+		        event.preventDefault();
+		    }
 		}
+
 
 		$("#submitForm").on("submit", checkform);
 
 		function checkEmail() {
 			var email = document.getElementById("email").value;
 			$.ajax({
-				url : "/member/email/" + email,
+				url : "/user/email/" + email,
 				method : "GET",
 				success : function(data) {
 					if (data) {

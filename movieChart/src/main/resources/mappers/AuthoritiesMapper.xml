@@ -3,9 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-  
-  <mapper namespace="com.movieChart.mapper.AuthoritiesMapper">
-  <insert id="insertAuth">
-  insert authorities (username) values(#{username})
-  </insert>
-  </mapper>
+
+<mapper namespace="com.movieChart.mapper.AuthoritiesMapper">
+	<insert id="insertAuth">
+		insert authorities (username) values(#{username})
+	</insert>
+	
+	<update id="updateAuth">
+		update authorities
+		set authority = #{authority}
+		where username=#{username}
+	</update>
+</mapper>

@@ -21,4 +21,9 @@ public class AuthoritiesDAOImpl implements AuthoritiesDAO {
 		
 	}
 
+	@Override
+	public int updateAuth(AuthoritiesDTO audto) throws Exception {
+		return sqlsession.update(NAMESPACE+".updateAuth",audto);
+	}
+
 }

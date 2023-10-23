@@ -30,46 +30,26 @@
 		#{email},#{reg_date})
 	</insert>
 
-	<select id="selectUsername" resultType="String">
+	<select id="checkEmail" resultType="String">
 		select username
 		from users
-		<where>
-			<choose>
-				<when test="password != null and password != ''">
-					and password=#{password}
-				</when>
-			</choose>
-			<choose>
-				<when test="username != null and username != ''">
-					and username=#{username}
-				</when>
-			</choose>
-			<choose>
-				<when test="email != null and email != ''">
-					and email=#{email}
-				</when>
-			</choose>
-		</where>
+		where email=#{email}
 	</select>
 
 	<select id="read" resultMap="userMap">
 		select u.username, password,
-		nickname, user_id, email, authority, enabled,
+		nickname, email, authority, enabled,
 		reg_date
 		from users u left
-		join authorities a
+		join
+		authorities a
 		on u.username = a.username
 		where
 		u.username=#{username}
 	</select>
 
-	<select id="selectUserIdAll" resultType="Integer">
-		select user_id
-		from users
-	</select>
-
 	<select id="selectNickname" resultType="String">
-		select nickname 
+		select nickname
 		from users
 		where nickname = #{nickname}
 	</select>
@@ -77,6 +57,35 @@
 	<select id="selectEmail" resultType="String">
 		select email
 		from users
-		where email = #{email}
+		where
+		email = #{email}
+	</select>
+
+	<select id="selectPassword" resultType="String">
+		select password
+		from users
+		where username=#{username}
+	</select>
+
+	<update id="updateUserInfo" >
+		update users
+		<set>
+			<if test="password != null and password != ''">password = #{password},</if>
+			<if test="nickname != null and nickname != ''">nickname = #{nickname},</if>
+			<if test="email != null and email != ''">email = #{email},</if>
+		</set>
+		where username=#{username}
+	</update>
+	
+	<update id="updatePassword">
+		update users
+		set password=#{password}
+		where username=#{username}
+	</update>
+	
+	<select id="checkingForPassword" resultType="String">
+		select username
+		from users
+		where username=#{username} and email=#{email}
 	</select>
 </mapper>

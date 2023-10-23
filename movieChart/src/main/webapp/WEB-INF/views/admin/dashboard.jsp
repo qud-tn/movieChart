@@ -35,7 +35,7 @@
 				console.error('크롤링 실패:', error);
 				alert('크롤링 실패');
 			}
-		})
+		});
 	}
 	
 	function crawlingInfo(){
@@ -54,6 +54,56 @@
 		})
 	}
 
+	function makeAdmin(){
+		var username = $("#username").val();
+		var data = {
+		        username: username,
+		        authority: 'ROLE_ADMIN'
+		    };
+
+		$.ajax({
+			url : '/admin/changingAuth',
+			type : 'PUT',
+			contentType: 'application/json',
+			data: JSON.stringify(data),
+			success : function(response) {
+				if(response){
+					alert(username+" : 운영자 권한 부여 성공");
+				}else{
+					alert(username+" : 운영자 관한 부여 실패");
+				}
+			},
+			error : function(error) {
+				console.error(error);
+			}
+		});
+	}
+
+	function revokeAdmin(){
+		var username = $("#username").val();
+		var data = {
+		        username: username,
+		        authority: 'ROLE_ADMIN'
+		    };
+
+		$.ajax({
+			url : '/admin/changingAuth',
+			type : 'PUT',
+			contentType : 'application/json',
+			data : JSON.stringify(data),
+			success : function(response) {
+				if(response){
+					alert(username+" : 운영자 권한 취소 성공");
+				}else{
+					alert(username+" : 운영자 관한 취소 실패");
+				}
+			},
+			error : function(error) {
+				console.error(error);
+			}
+		});
+	}
+	
 	$(function() {
 		crawlingInfo();
 	});
@@ -67,6 +117,13 @@
 				value="크롤링하기"></td>
 			<td><span id="checkResult" style="color: red;"></span></td>
 		</tr>
+		<tr>
+			<td><input type="text" name="username" id="username" placeholder="아이디를 적으세요">
+			</td>
+			<td>
+			<input type="button" value="운영자 권한 부여" onclick="makeAdmin();">
+			<input type="button" value="운영자 권한 취소" onclick="revokeAdmin();">
+			</td>
 	</table>
 	<table border="1">
 		<thead>
