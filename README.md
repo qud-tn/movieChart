@@ -24,3 +24,4 @@ JSON 관련 : Jackson Databind, JSON
 6. 지속적인 리팩토링
 7. AWS(EC2, RDS)를 활용하여 배포
 
+wiki에 erd도 올려놓았으니 참고바랍니다.
