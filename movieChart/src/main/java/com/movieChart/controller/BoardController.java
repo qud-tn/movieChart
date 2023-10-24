@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,18 +53,26 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String writePOST(BoardDTO bdto, @RequestParam("file") MultipartFile[] files) throws Exception {
-
+	public String writePOST(BoardDTO bdto, @RequestParam("file") MultipartFile[] files, HttpServletRequest request) throws Exception {
+		
+		String UPLOADPATH = request.getSession().getServletContext().getRealPath("/resources/upload/");
+		
 		bService.writeBoard(bdto);
-		bfService.uploadFile(files);
+		if(files.length!=0) {
+		bfService.uploadFile(UPLOADPATH,files);
+		}
 		return "redirect:/board/list";
 	}
 
 	@RequestMapping(value = "/{board_id}", method = RequestMethod.GET)
-	public String readBoardGET(Model model, @PathVariable("board_id") Integer board_id, BoardDTO bdto)
+	public String readBoardGET(Model model, @PathVariable("board_id") Integer board_id, BoardDTO bdto, HttpServletRequest request)
 			throws Exception {
+		
+		String UPLOADPATH = "/resources/upload";
+		
 		bService.upViewcnt(board_id);
 		model.addAttribute("boardContent", bService.readBoardContent(board_id));
+		model.addAttribute("boardFileList",bfService.buildFilePath(UPLOADPATH,board_id));
 		return "/board/view";
 	}
 

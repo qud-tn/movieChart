@@ -7,7 +7,7 @@ public class BoardDTO {
 	private String title;
 	private String content;
 	private String category;
-	private String user_id;
+	private String username;
 	private String nickname;
 	private String write_date;
 	private Integer view_cnt;
@@ -18,7 +18,7 @@ public class BoardDTO {
 	        BoardMap.put("title", this.getTitle());
 	        BoardMap.put("content", this.getContent());
 	        BoardMap.put("category", this.getCategory());
-	        BoardMap.put("user_id", this.getUser_id());
+	        BoardMap.put("username", this.getUsername());
 	        BoardMap.put("nickname", this.getNickname());
 	        BoardMap.put("write_date", this.getWrite_date());
 	        BoardMap.put("view_cnt", this.getView_cnt());
@@ -61,11 +61,11 @@ public class BoardDTO {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public String getUser_id() {
-		return user_id;
+	public String getUsername() {
+		return username;
 	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getNickname() {
 		return nickname;
@@ -77,7 +77,7 @@ public class BoardDTO {
 	@Override
 	public String toString() {
 		return "BoardDTO [board_id=" + board_id + ", title=" + title + ", content=" + content + ", category=" + category
-				+ ", user_id=" + user_id + ", nickname=" + nickname + "]";
+				+ ", username=" + username + ", nickname=" + nickname + "]";
 	}
 	
 	

@@ -24,4 +24,6 @@ public interface BoardDAO {
 	public int selectCountBoard_id() throws Exception;
 
 	public List<BoardDTO> selectDeletedBoards(PageDTO pdto) throws Exception;
+	
+	public int selectCountDeletedBoards() throws Exception;
 }

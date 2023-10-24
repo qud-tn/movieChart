@@ -181,7 +181,11 @@
 			<td>${boardContent.category }</td>
 		</tr>
 		<tr>
-			<td colspan="6">${boardContent.content }</td>
+			<td colspan="6">
+			<c:forEach var="file" items="${boardFileList}">
+    			<img src="../..${file}" alt="이미지" width="200" height="150"><br>
+			</c:forEach>
+			${boardContent.content }</td>
 		</tr>
 		</tbody>
 		<tfoot>

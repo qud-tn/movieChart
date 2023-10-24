@@ -56,15 +56,13 @@
 	
 				<div>
 						<c:if test="${page.prev }">						
-							<li><a href="/board/list?page=${page.startPage-1 }">«</a></li>
+							<a href="/board/list?page=${page.startPage - 1}&syntax=${syntax}&nickname=${nickname}&category=${category}">«</a>
 						</c:if>
 						<c:forEach begin="${page.startPage }" end="${page.endPage}" step="1" var="idx">						
-							
-								<a href="/board/list?page=${idx }">${idx }</a>
-							
+								 <a href="/board/list?page=${idx}&syntax=${syntax}&nickname=${nickname}&category=${category}">${idx }</a>
 						</c:forEach>
 						<c:if test="${page.next && page.endPage > 0 }">
-							<li><a href="/board/list?page=${page.endPage + 1}">»</a></li>
+							<a href="/board/list?page=${page.endPage + 1}&syntax=${syntax}&nickname=${nickname}&category=${category}">»</a>
 						</c:if>
 				</div>
 	

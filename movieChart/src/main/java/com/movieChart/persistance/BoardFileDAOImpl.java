@@ -1,5 +1,7 @@
 package com.movieChart.persistance;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,8 +17,13 @@ public class BoardFileDAOImpl implements BoardFileDAO {
 	private final String NAMESPACE="com.movieChart.mapper.BoardFileMapper";
 
 	@Override
-	public int insertBoardFile(BoardFileDTO bfdto) throws Exception {
-		return sqlsession.insert(NAMESPACE+".insertBoardFile",bfdto);
+	public int insertBoardFiles(BoardFileDTO bfdto) throws Exception {
+		return sqlsession.insert(NAMESPACE+".insertBoardFiles",bfdto);
+	}
+
+	@Override
+	public List<BoardFileDTO> selectBoardFiles(int board_id) throws Exception {
+		return sqlsession.selectList(NAMESPACE+".selectBoardFiles",board_id);
 	}
 	
 	

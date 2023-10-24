@@ -5,6 +5,7 @@ public class BoardFileDTO {
 	private String uploadPath;
 	private String fileName;
 	private int board_id;
+	
 	public String getUuid() {
 		return uuid;
 	}

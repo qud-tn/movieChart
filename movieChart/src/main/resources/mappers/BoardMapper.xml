@@ -97,5 +97,10 @@
 		set deleted_dt = now()
 		where board_id=#{board_id}
 	</update>
-
+	
+	<select id="selectCountDeketedBoards" resultType="int">
+		select count(*)
+		from board
+		where deleted_dt is not null
+	</select>
   </mapper>

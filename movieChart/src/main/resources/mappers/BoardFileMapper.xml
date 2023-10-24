@@ -5,11 +5,17 @@
 
   
   <mapper namespace="com.movieChart.mapper.BoardFileMapper">
-  	<insert id="insertBoardFile">
+  	<insert id="insertBoardFiles">
   		insert into boardfile
   		(board_id, uuid, filename)
   		values
   		((select max(board_id)
   		from board),#{uuid},#{fileName})
   	</insert>
+  	
+  	<select id="selectBoardFiles" resultType="com.movieChart.domain.BoardFileDTO">
+  		select *
+  		from boardfile
+  		where board_id = #{board_id}
+  	</select>
   </mapper>

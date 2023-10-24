@@ -49,6 +49,7 @@
 			},
 			error : function(error) {
 				console.error('크롤링 실패:', error);
+				alert("개발 환경에서는 잘 되었는데 배포 후 이상이 있습니다. 수정 중입니다.");
 				$("#checkResult").html("크롤링 정보 조회 오류");
 			}
 		})
@@ -137,7 +138,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="boardlist" items="${boardList}">
+			<c:forEach var="boardlist" items="${boardlist}">
 				<tr>
 					<td>${boardlist.board_id }</td>
 					<td>${boardlist.category }</td>
@@ -149,5 +150,16 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<div>
+		<c:if test="${page.prev }">						
+			<a href="/admin/dashboard?page=${page.startPage-1 }">«</a>
+		</c:if>
+		<c:forEach begin="${page.startPage }" end="${page.endPage}" step="1" var="idx">						
+			<a href="/admin/dashboard?page=${idx }">${idx }</a>
+		</c:forEach>
+		<c:if test="${page.next && page.endPage > 0 }">
+			<a href="/admin/dashboard?page=${page.endPage + 1}">»</a>
+		</c:if>
+	</div>
 </body>
 </html>

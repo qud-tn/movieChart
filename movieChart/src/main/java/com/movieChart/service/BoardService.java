@@ -27,5 +27,6 @@ public interface BoardService {
 	public int countBoard_id() throws Exception;
 
 	public List<BoardDTO> getDeletedBoardList(PageDTO pdto) throws Exception;
-
+	
+	public int countDeletedBoards() throws Exception;
 }

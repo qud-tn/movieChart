@@ -2,8 +2,12 @@ package com.movieChart.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +26,8 @@ public class BoardFileServiceImpl implements BoardFileService {
 	private BoardFileDAO bdao;
 	
 	@Override
-	public void uploadFile(MultipartFile[] files) throws Exception {
+	public void uploadFile(String UPLOADPATH, MultipartFile[] files) throws Exception {
 		BoardFileDTO bfdto=new BoardFileDTO();
-		final String UPLOADPATH = "D:\\upload";
 		
 		bfdto.setUploadPath(UPLOADPATH);
 		
@@ -41,7 +44,7 @@ public class BoardFileServiceImpl implements BoardFileService {
 	        logger.info("사이즈: " + size);
 
 	        File saveFile = new File(UPLOADPATH + "\\" + savedFileName);
-	        bdao.insertBoardFile(bfdto);
+	        bdao.insertBoardFiles(bfdto);
 	        try {
 	        	files[i].transferTo(saveFile);
 	        } catch (IllegalStateException e) {
@@ -50,5 +53,21 @@ public class BoardFileServiceImpl implements BoardFileService {
 	            e.printStackTrace();
 	        }
 	    }
+	}
+
+	@Override
+	public List<String> buildFilePath(String UPLOADPATH, int board_id) throws Exception {
+		List<BoardFileDTO> boardFileList= bdao.selectBoardFiles(board_id);
+		List<String> boardFileStringList=new ArrayList<String>();
+		
+		for(int i=0;i<boardFileList.size();i++) {
+			String uuid= boardFileList.get(i).getUuid();
+			String filename=boardFileList.get(i).getFileName();
+			
+			String filePath= UPLOADPATH + "\\" +uuid + "_" + filename;
+			boardFileStringList.add(filePath);
+		}
+		
+		return boardFileStringList;
 	}
 }

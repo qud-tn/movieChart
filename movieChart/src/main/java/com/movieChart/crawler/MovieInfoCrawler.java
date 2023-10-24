@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Stack;
 
 import org.openqa.selenium.By;
@@ -62,7 +64,7 @@ public class MovieInfoCrawler {
 
 	public List<MovieDTO> crawlMovie(List<String> mList) throws Exception {
 		List<MovieDTO> miList = new ArrayList<MovieDTO>();
-		Stack<String> alreadyCrawledStack= new Stack<>();
+		Queue<String> alreadyCrawledQueue= new LinkedList<>();
 
 		System.setProperty("webdriver.chrome.driver", "D:\\chromedriver-win32\\chromedriver.exe");//version: 118.0.5993.70
 		WebDriver driver = new ChromeDriver();
@@ -74,7 +76,7 @@ public class MovieInfoCrawler {
 			loop:
 			for (int i = 1;; i++) {
 				for (int j = 1; j < 11; j++) {
-					if(alreadyCrawledStack.size()==10) {
+					if(alreadyCrawledQueue.size()==10) {
 						break loop;
 					}
 					((JavascriptExecutor) driver).executeScript("goPage(arguments[0]);", String.valueOf(i));
@@ -86,9 +88,8 @@ public class MovieInfoCrawler {
 					String movieCode = MovieCodeElement.getText();
 
 					if (!mList.contains(movieCode)) {
-						if(alreadyCrawledStack.size()>0) {
-						alreadyCrawledStack.pop();
-						}
+						alreadyCrawledQueue.poll();
+						
 						String xpathExpressionView = "(//tr//td[1]//a[contains(@onclick, 'mstView')])[" + j + "]";
 						String xpathExpressionProdYear = "(//tr//td[4])[" + j + "]";
 						String xpathExpressionGenre = "(//tr//td[7])[" + j + "]";
@@ -141,7 +142,7 @@ public class MovieInfoCrawler {
 						// JavaScript를 사용하여 "닫기" 버튼을 강제로 클릭
 						((JavascriptExecutor) driver).executeScript("dtlRmAll();");
 					}else {
-						alreadyCrawledStack.push(movieCode);
+						alreadyCrawledQueue.add(movieCode);
 					}
 				}
 

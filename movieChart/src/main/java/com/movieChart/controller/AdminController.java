@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.movieChart.domain.AuthoritiesDTO;
 import com.movieChart.domain.PageDTO;
+import com.movieChart.domain.PageMaker;
 import com.movieChart.service.AdminService;
 import com.movieChart.service.BoardService;
 
@@ -27,7 +28,11 @@ public class AdminController {
 	
 	@GetMapping("/dashboard")
 	public void dashboardGET(Model model,PageDTO pdto) throws Exception {
+		PageMaker pm = new PageMaker();
+		pm.setPageDTO(pdto);
+		pm.setTotalCount(bService.countDeletedBoards());
 		model.addAttribute("boardlist",bService.getDeletedBoardList(pdto));
+		model.addAttribute("page", pm);
 	}
 	
 	@PutMapping("/changingAuth")
