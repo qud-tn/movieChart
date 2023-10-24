@@ -33,7 +33,7 @@
 			},
 			error : function(error) {
 				console.error('크롤링 실패:', error);
-				alert('크롤링 실패');
+				alert("개발 환경에서는 잘 되었는데 배포 후 이상이 있습니다. 수정 중입니다.");
 			}
 		});
 	}
@@ -49,7 +49,6 @@
 			},
 			error : function(error) {
 				console.error('크롤링 실패:', error);
-				alert("개발 환경에서는 잘 되었는데 배포 후 이상이 있습니다. 수정 중입니다.");
 				$("#checkResult").html("크롤링 정보 조회 오류");
 			}
 		})
