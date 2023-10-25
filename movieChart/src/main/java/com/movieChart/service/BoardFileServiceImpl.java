@@ -31,8 +31,9 @@ public class BoardFileServiceImpl implements BoardFileService {
 		for(int i = 0; i < files.length; i++) {
 	        String originalFileName = files[i].getOriginalFilename();
 	        String uuid = UUID.randomUUID().toString();
+	        StringBuilder savedFileNameSb= new StringBuilder();
 	        
-	        StringBuilder savedFileNameSb= new StringBuilder(uuid+"_"+originalFileName);
+	        savedFileNameSb.append(uuid).append("_").append(originalFileName);
 	        String savedFileName = savedFileNameSb.toString();
 	        
 	        bfdto.setFileName(originalFileName);
@@ -42,7 +43,8 @@ public class BoardFileServiceImpl implements BoardFileService {
 	        long size = files[i].getSize();
 	        logger.info("사이즈: " + size);
 	        
-	        StringBuilder saveFilePathSb=new StringBuilder(UPLOADPATH + "/" + savedFileName);
+	        StringBuilder saveFilePathSb=new StringBuilder();
+	        saveFilePathSb.append(UPLOADPATH).append("/").append(savedFileName);
 	        String saveFilePath=saveFilePathSb.toString();
 	        
 	        File saveFile = new File(saveFilePath);
@@ -66,8 +68,9 @@ public class BoardFileServiceImpl implements BoardFileService {
 		for(int i=0;i<boardFileList.size();i++) {
 			String uuid= boardFileList.get(i).getUuid();
 			String filename=boardFileList.get(i).getFileName();
-
-			StringBuilder sb= new StringBuilder(UPLOADPATH+"/"+uuid+"_"+filename);
+			StringBuilder sb= new StringBuilder();
+			
+			sb.append(UPLOADPATH).append("/").append(uuid).append("_").append(filename);
 			String filePath= sb.toString();
 			
 			boardFileStringList.add(filePath);
