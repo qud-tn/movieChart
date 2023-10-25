@@ -1,14 +1,10 @@
 package com.movieChart.crawler;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
-import java.util.Stack;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -21,9 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.movieChart.domain.MovieDTO;
-import com.movieChart.persistance.MovieDAO;
-import com.movieChart.persistance.MovieDAOImpl;
-import com.mysql.cj.xdevapi.JsonArray;
 
 public class MovieInfoCrawler {
 	private static final Logger logger = LoggerFactory.getLogger(MovieInfoCrawler.class);
@@ -31,45 +24,45 @@ public class MovieInfoCrawler {
 	private static final String CRAWLER_URL = "http://kobis.or.kr/kobis/business/mast/mvie/searchMovieList.do?dtTp=movie&dtCd=";
 	private static final String CRAWLER_URL2 = "http://kobis.or.kr/kobis/business/mast/mvie/searchMovieList.do";
 
-	public MovieDTO crawlWeb(String parameter) {
-
-		MovieDTO midto = new MovieDTO();
-
-		System.setProperty("webdriver.chrome.driver", "D:\\chromedriver-win32\\chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
-
-		driver.get(CRAWLER_URL + parameter);
-
-		try {
-			WebElement image = driver.findElement(By.cssSelector(".fl.thumb"));
-			WebElement synopsis = driver.findElement(By.cssSelector(".desc_info"));
-
-			String imageUrl = image.getAttribute("src");
-			String synopsisText = synopsis.getText();
-
-			logger.debug(imageUrl);
-			logger.debug(synopsisText);
-
-			midto.setImage(imageUrl);
-			midto.setSynopsis(synopsisText);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			driver.quit();
-		}
-
-		return midto;
-	}
+//	public MovieDTO crawlWeb(String parameter) {
+//
+//		MovieDTO midto = new MovieDTO();
+//
+//		System.setProperty("webdriver.chrome.driver", "D:\\chromedriver-win32\\chromedriver.exe");
+//		WebDriver driver = new ChromeDriver();
+//
+//		driver.get(CRAWLER_URL + parameter);
+//
+//		try {
+//			WebElement image = driver.findElement(By.cssSelector(".fl.thumb"));
+//			WebElement synopsis = driver.findElement(By.cssSelector(".desc_info"));
+//
+//			String imageUrl = image.getAttribute("src");
+//			String synopsisText = synopsis.getText();
+//
+//			logger.debug(imageUrl);
+//			logger.debug(synopsisText);
+//
+//			midto.setImage(imageUrl);
+//			midto.setSynopsis(synopsisText);
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			driver.quit();
+//		}
+//
+//		return midto;
+//	}
 
 	public List<MovieDTO> crawlMovie(List<String> mList) throws Exception {
 		List<MovieDTO> miList = new ArrayList<MovieDTO>();
 		Queue<String> alreadyCrawledQueue= new LinkedList<>();
 
-		System.setProperty("webdriver.chrome.driver", "D:\\chromedriver-win32\\chromedriver.exe");//version: 118.0.5993.70
+		System.setProperty("webdriver.chrome.driver", "D:\\chromedriver-win32\\chromedriver.exe");//window 118.0.5993.70
+//		System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");//lunix 2.37.544315 
 		WebDriver driver = new ChromeDriver();
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30), Duration.ofSeconds(30));
-
 		driver.get(CRAWLER_URL2);
 
 		try {

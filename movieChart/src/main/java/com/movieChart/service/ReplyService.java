@@ -1,6 +1,5 @@
 package com.movieChart.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import com.movieChart.domain.ReplyDTO;

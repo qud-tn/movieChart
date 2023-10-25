@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +31,9 @@ public class BoardFileServiceImpl implements BoardFileService {
 		for(int i = 0; i < files.length; i++) {
 	        String originalFileName = files[i].getOriginalFilename();
 	        String uuid = UUID.randomUUID().toString();
-	        String savedFileName = uuid + "_" + originalFileName;
+	        
+	        StringBuilder savedFileNameSb= new StringBuilder(uuid+"_"+originalFileName);
+	        String savedFileName = savedFileNameSb.toString();
 	        
 	        bfdto.setFileName(originalFileName);
 	        bfdto.setUuid(uuid);
@@ -42,8 +41,12 @@ public class BoardFileServiceImpl implements BoardFileService {
 	        logger.info("파일명: " + savedFileName);
 	        long size = files[i].getSize();
 	        logger.info("사이즈: " + size);
-
-	        File saveFile = new File(UPLOADPATH + "\\" + savedFileName);
+	        
+	        StringBuilder saveFilePathSb=new StringBuilder(UPLOADPATH + "/" + savedFileName);
+	        String saveFilePath=saveFilePathSb.toString();
+	        
+	        File saveFile = new File(saveFilePath);
+	        
 	        bdao.insertBoardFiles(bfdto);
 	        try {
 	        	files[i].transferTo(saveFile);
@@ -63,8 +66,10 @@ public class BoardFileServiceImpl implements BoardFileService {
 		for(int i=0;i<boardFileList.size();i++) {
 			String uuid= boardFileList.get(i).getUuid();
 			String filename=boardFileList.get(i).getFileName();
+
+			StringBuilder sb= new StringBuilder(UPLOADPATH+"/"+uuid+"_"+filename);
+			String filePath= sb.toString();
 			
-			String filePath= UPLOADPATH + "\\" +uuid + "_" + filename;
 			boardFileStringList.add(filePath);
 		}
 		

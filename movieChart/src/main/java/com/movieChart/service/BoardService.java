@@ -1,15 +1,10 @@
 package com.movieChart.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import com.movieChart.domain.BoardDTO;
 import com.movieChart.domain.PageDTO;
-import com.movieChart.domain.PageMaker;
 
 public interface BoardService {
 	public void writeBoard(BoardDTO bdto) throws Exception;

@@ -1,8 +1,6 @@
 package com.movieChart.service;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Random;
 
 import javax.inject.Inject;
 

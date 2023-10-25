@@ -2,10 +2,6 @@ package com.movieChart.service;
 
 import java.time.LocalDate;
 
-import javax.inject.Inject;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import com.movieChart.api.BoxOfficeAPI;

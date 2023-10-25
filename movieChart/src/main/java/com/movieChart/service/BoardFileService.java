@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.movieChart.domain.BoardDTO;
-
 public interface BoardFileService {
 	public void uploadFile(String UPLOADPATH, MultipartFile[] files) throws Exception;
 	
