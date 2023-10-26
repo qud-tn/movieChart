@@ -7,8 +7,19 @@
 <head>
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header"
+	content="${_csrf.headerName}" />
 <title>무비차트</title>
 <script>
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+
+$.ajaxSetup({
+	beforeSend : function(xhr) {
+		xhr.setRequestHeader(header, token);
+	}
+});
 
 	function dateFMT(range) {
 		var dateArray = range.split("~");
@@ -37,7 +48,19 @@
 		
 		if (message == "updateInfoOk") {
 		    alert('회원정보가 변경되었습니다. 다시 로그인 해주세요');
-		    location.href = '/user/logout?message='+message;
+		    
+		    $.ajax({
+		    	url : '/user/logout',
+		    	type : 'POST',
+		    	success : function(response) {
+		    		console.log("로그아웃 성공");
+					location.reload();
+		    	},
+		    	error : function(error) {
+					console.error("로그아웃 실패",error);
+				}
+		    	
+		    });
 		}
 
 		viewBoxOffice();

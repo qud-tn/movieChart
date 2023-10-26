@@ -60,7 +60,10 @@ public class UserServiceImpl implements UserService {
 	public int modifyUserInfo(UserDTO udto) throws Exception {
 		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
 		
-		udto.setPassword(pe.encode(udto.getPassword()));
+		if(!(udto.getPassword()==null || udto.getPassword().equals(""))) {
+			udto.setPassword(pe.encode(udto.getPassword()));
+		}
+		
 		return udao.updateUserInfo(udto);
 	}
 
@@ -72,7 +75,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean modifyPassword(UserDTO udto) throws Exception {
 		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
-		
 		udto.setPassword(pe.encode(udto.getPassword()));
 		return udao.updatePassword(udto) == 1 ;
 	}

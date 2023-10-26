@@ -78,7 +78,7 @@
 
 		$("#emailchk").on("click", checkEmail);
 
-		function checkform() {
+		function checkform(event) {
 			var passwordchk = $("#checkPasswordResult").text();
 		    var nicknamechk = $("#checkNicknameResult").text();
 		    var emailchk = $("#checkEmailResult").text();
@@ -87,17 +87,18 @@
 		    var nicknameInput = $("#nickname");
 		    var emailInput = $("#email");
 
-		    if ((!nicknamechk.includes("하실") || (nicknameInput.val() === "" || nicknameInput.val() === null))
-		            && (!usernamechk.includes("하실") || (usernameInput.val() === "" || usernameInput.val() === null))
-		            && passwordchk !== ""
-		            && (!emailchk.includes("하실") || (emailInput.val() === "" || emailInput.val() === null))) {
-		            alert("비밀번호 확인 및 중복 체크 오류");
-		            event.preventDefault();
-		        }
+		    if ((!nicknamechk.includes("하실") || (nicknameInput.val() === ""))
+		    	&&passwordchk !== ""
+		    	&&(!emailchk.includes("하실") || (emailInput.val() === ""))) {
+		    	alert("비밀번호 확인 및 중복 체크 오류");
+		    	event.preventDefault();
+		  	}else if(nicknameInput.val() === "" && passwordInput.val() === "" && emailInput.val() === ""){
+		  		alert("정보 변경 없음");
+		    	event.preventDefault();
+		  	}
 		}
 
 		$("#submitForm").on("submit", checkform);
-
 	});
 </script>
 </head>
