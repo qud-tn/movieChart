@@ -7,7 +7,7 @@
   <mapper namespace="com.movieChart.mapper.BoardMapper">
   	<insert id="insertBoard">
   		insert board (title,content,category,username) 
-  		values(#{title},#{content},#{category},#{username})
+  		values(trim(#{title}),trim(#{content}),#{category},#{username})
   	</insert>
   	
   	<select id="selectBoardList" resultType="com.movieChart.domain.BoardDTO">

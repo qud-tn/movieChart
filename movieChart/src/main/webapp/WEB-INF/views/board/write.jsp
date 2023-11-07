@@ -6,6 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>글쓰기</title>
 <script type="text/javascript">
@@ -44,14 +46,29 @@
 		}
 		return true;
 	}
+	
+		function checkTitle(){
+			var titleVal= $("#title").val().trim();
+			
+			if(titleVal.length===0){
+				alert("제목을 입력해주세요");
+				event.preventDefault();
+				$("#title").val('');
+			}
+		}
+
+	$(function(){
+		$("#submitForm").on("submit",checkTitle);
+	});
+	
 </script>
 </head>
 <body>
 	<h1>글쓰기</h1>
-	<form action="" method="post" enctype="multipart/form-data">
+	<form action="" method="post" enctype="multipart/form-data" id="submitForm">
 		<table>
 			<tr>
-				<td><input type="text" name="title" placeholder="제목을 입력하세요"><br>
+				<td><input type="text" name="title" id="title" placeholder="제목을 입력하세요"><br>
 				</td>
 				<td><select name="category">
 						<sec:authorize access="hasRole('ROLE_ADMIN')">
