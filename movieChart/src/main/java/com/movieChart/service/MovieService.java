@@ -2,16 +2,17 @@ package com.movieChart.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.movieChart.domain.MovieDTO;
 
 public interface MovieService {
 
-	public List<MovieDTO> crawlMovie() throws Exception;
+	public Set<MovieDTO> crawlMovie() throws Exception;
 	
 	public int uploadMovie(MovieDTO midto) throws Exception;
 
-	public int uploadMovie(List<MovieDTO> milist) throws Exception;
+	public int uploadMovie(Set<MovieDTO> miSet) throws Exception;
 	
 	public String getMaxDt() throws Exception;
 	

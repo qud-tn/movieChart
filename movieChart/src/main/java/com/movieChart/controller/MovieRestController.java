@@ -3,6 +3,7 @@ package com.movieChart.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,8 @@ public class MovieRestController {
 
 	@PostMapping(value = "/crawling")
 	public int crawlMovie() throws Exception {
-		List<MovieDTO> resultList = mService.crawlMovie();
-		return mService.uploadMovie(resultList);
+		Set<MovieDTO> resultSet = mService.crawlMovie();
+		return mService.uploadMovie(resultSet);
 	}
 
 	@GetMapping(value = "/crawlingInfo")

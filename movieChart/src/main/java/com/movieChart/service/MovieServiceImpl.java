@@ -2,6 +2,7 @@ package com.movieChart.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class MovieServiceImpl implements MovieService{
 	private MovieInfoCrawler mCrawler= new MovieInfoCrawler();
 	
 	@Override
-	public List<MovieDTO> crawlMovie() throws Exception{
+	public Set<MovieDTO> crawlMovie() throws Exception{
 		List<String> mList=midao.selectMovieNoAll();
 		
 		return mCrawler.crawlMovie(mList);
@@ -31,8 +32,8 @@ public class MovieServiceImpl implements MovieService{
 	}
 
 	@Override
-	public int uploadMovie(List<MovieDTO> miList) throws Exception {
-		return midao.insertMovie(miList);
+	public int uploadMovie(Set<MovieDTO> miSet) throws Exception {
+		return midao.insertMovie(miSet);
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package com.movieChart.persistance;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,8 @@ public class MovieDAOImpl implements MovieDAO {
 	}
 
 	@Override
-	public int insertMovie(List<MovieDTO> miList) throws Exception {
-		return sqlsession.insert(NAMESPACE+".insertMovieList",miList);
+	public int insertMovie(Set<MovieDTO> miSet) throws Exception {
+		return sqlsession.insert(NAMESPACE+".insertMovieSet",miSet);
 	}
 
 	@Override

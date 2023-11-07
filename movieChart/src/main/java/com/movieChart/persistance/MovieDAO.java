@@ -2,13 +2,14 @@ package com.movieChart.persistance;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.movieChart.domain.MovieDTO;
 
 public interface MovieDAO {
 	public int insertMovie(MovieDTO midto) throws Exception;
 
-	public int insertMovie(List<MovieDTO> miList) throws Exception;
+	public int insertMovie(Set<MovieDTO> miSet) throws Exception;
 	
 	public List<String> selectMovieNoAll() throws Exception; 
 	

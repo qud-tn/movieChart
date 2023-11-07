@@ -2,9 +2,11 @@ package com.movieChart.crawler;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -55,11 +57,11 @@ public class MovieInfoCrawler {
 //		return midto;
 //	}
 
-	public List<MovieDTO> crawlMovie(List<String> mList) throws Exception {
-		List<MovieDTO> miList = new ArrayList<MovieDTO>();
+	public Set<MovieDTO> crawlMovie(List<String> mList) throws Exception {
+		Set<MovieDTO> miSet = new HashSet<MovieDTO>();
 		Queue<String> alreadyCrawledQueue= new LinkedList<>();
 
-		System.setProperty("webdriver.chrome.driver", "D:\\chromedriver-win32\\chromedriver.exe");//window 118.0.5993.70
+		System.setProperty("webdriver.chrome.driver", "D:\\chromedriver-win32\\chromedriver.exe");//window 119.0.6045.105
 //		System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");//lunix 2.37.544315 
 		WebDriver driver = new ChromeDriver();
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30), Duration.ofSeconds(30));
@@ -130,7 +132,7 @@ public class MovieInfoCrawler {
 
 						midto.setImage(imageUrl);
 						midto.setSynopsis(synopsisText);
-						miList.add(midto);
+						miSet.add(midto);
 
 						// JavaScript를 사용하여 "닫기" 버튼을 강제로 클릭
 						((JavascriptExecutor) driver).executeScript("dtlRmAll();");
@@ -145,7 +147,7 @@ public class MovieInfoCrawler {
 		} finally {
 			driver.quit();
 		}
-		return miList;
+		return miSet;
 	}
 
 }
