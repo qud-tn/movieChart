@@ -58,9 +58,20 @@ public class BoardController {
 		String UPLOADPATH = request.getSession().getServletContext().getRealPath("/resources/upload/");
 		
 		bService.writeBoard(bdto);
-		if(files.length!=0) {
-		bfService.uploadFile(UPLOADPATH,files);
+		
+		boolean fileCheck = false;
+
+		for (MultipartFile file : files) {
+			if (!file.isEmpty()) {
+				fileCheck = true;
+				break;
+			}
 		}
+
+		if (fileCheck == true) {
+			bfService.uploadFile(UPLOADPATH, files);
+		}
+		 
 		return "redirect:/board/list";
 	}
 
